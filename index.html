@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Burger Club | Hamburguesas Artesanales & Delivery</title>
+  <title>El Caserito | Hamburguesas & Sánguches al Paso y Delivery</title>
   
   <!-- Leaflet CSS para Mapas -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -69,13 +69,13 @@
     .brand-icon {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: #fff;
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 26px;
       box-shadow: 0 4px 10px rgba(218, 41, 28, 0.3);
     }
 
@@ -327,11 +327,11 @@
       z-index: 10;
     }
 
-    /* ICONO MOTORIZADO */
+    /* ICONO HOMBRECITO CON CANASTA */
     .custom-gps-marker {
       position: relative;
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -339,38 +339,59 @@
 
     .gps-radar-pulse {
       position: absolute;
-      width: 58px;
-      height: 58px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
-      background: rgba(218, 41, 28, 0.3);
+      background: rgba(218, 41, 28, 0.28);
       animation: radarPulse 2s ease-out infinite;
       z-index: 1;
     }
 
     @keyframes radarPulse {
       0% { transform: scale(0.6); opacity: 0.9; }
-      100% { transform: scale(1.8); opacity: 0; }
+      100% { transform: scale(1.9); opacity: 0; }
     }
 
-    .moto-badge-circle {
+    .walker-badge-circle {
       position: relative;
-      width: 42px;
-      height: 42px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #da291c 0%, #b81d13 100%);
       border: 2.5px solid #ffffff;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
-      box-shadow: 0 4px 12px rgba(218, 41, 28, 0.4);
+      font-size: 21px;
+      box-shadow: 0 4px 12px rgba(218, 41, 28, 0.45);
       z-index: 2;
     }
 
-    .custom-gps-marker.offline .moto-badge-circle {
+    .basket-mini-icon {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      background: #ffc72c;
+      border: 1.5px solid #ffffff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 3;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    }
+
+    .custom-gps-marker.offline .walker-badge-circle {
       background: #64748b;
-      filter: grayscale(0.8);
+      filter: grayscale(0.85);
       box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .custom-gps-marker.offline .basket-mini-icon {
+      background: #94a3b8;
     }
 
     .custom-gps-marker.offline .gps-radar-pulse { display: none; }
@@ -499,7 +520,7 @@
     .btn-add:hover { background: var(--primary-dark); }
     .btn-add:disabled { background: #94a3b8; cursor: not-allowed; }
 
-    /* BOTÓN FLOTANTE */
+    /* BOTÓN FLOTANTE CANASTA */
     .chat-bubble-container {
       position: fixed;
       bottom: 24px;
@@ -534,8 +555,8 @@
 
     .chat-bubble-btn {
       position: relative;
-      width: 62px;
-      height: 62px;
+      width: 64px;
+      height: 64px;
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       border-radius: 50%;
       box-shadow: 0 6px 20px rgba(218, 41, 28, 0.4);
@@ -904,15 +925,15 @@
   <header>
     <div class="nav-container">
       <a href="#" class="brand">
-        <div class="brand-icon">🍔</div>
+        <div class="brand-icon">🧑‍🍳🧺</div>
         <div class="brand-text">
-          <h1>BURGER CLUB</h1>
-          <span>Smash & Artesanal • Delivery Cusco</span>
+          <h1>EL CASERITO</h1>
+          <span>Hamburguesas & Sánguches de Pollo y Carne • Cusco</span>
         </div>
       </a>
 
       <div class="nav-actions">
-        <a href="#menu" class="nav-cta">Ver Carta 🔥</a>
+        <a href="#menu" class="nav-cta">Ver Carta 🥪</a>
       </div>
     </div>
   </header>
@@ -920,13 +941,13 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-container">
-      <span class="badge-hero">🔥 Carne 100% Angus & Pan Brioche Artesanal</span>
-      <h2>¡Las Hamburguesas Más Brutales de Cusco!</h2>
-      <p>Pídelas calientes y jugosas directo a tu puerta en minutos con seguimiento en tiempo real.</p>
+      <span class="badge-hero">🧺 Calientitos y al Paso directos a tu puerta</span>
+      <h2>¡Hamburguesas y Sánguches con Sabor Casero!</h2>
+      <p>Sánguches de pollo deshilachado, hamburguesas caseras de carne y cremas artesanales en tu punto exacto.</p>
       
       <div class="hero-features">
-        <div class="feature-pill">🛵 Delivery Rápido</div>
-        <div class="feature-pill">🥓 Tocino Ahumado & Cheddar Real</div>
+        <div class="feature-pill">🚶‍♂️ Repartidor con Canasta en Ruta</div>
+        <div class="feature-pill">🍗 Pollo & Carne Jugosa</div>
         <div class="feature-pill">💵 Yape, Plin y Efectivo con Vuelto</div>
       </div>
     </div>
@@ -936,17 +957,17 @@
   <section class="promo-section">
     <div class="promo-card">
       <div class="promo-img-container" onclick="abrirLightboxPromo()">
-        <img id="imgPromoOficial" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&auto=format&fit=crop&q=80" alt="Promo Burger Club">
+        <img id="imgPromoOficial" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&auto=format&fit=crop&q=80" alt="Promo Hamburguesas y Sánguches">
       </div>
       <div class="promo-info">
-        <span class="badge-hero" style="background: var(--navy); margin-bottom:8px;">Combo Destacado</span>
-        <h3>Promo Brutal: Burger Doble + Papas Rústicas</h3>
-        <p class="promo-slogan">"Sabor auténtico con salsas de la casa y papas nativas crocantes"</p>
+        <span class="badge-hero" style="background: var(--navy); margin-bottom:8px;">Especial de la Canasta</span>
+        <h3>Hamburguesas Caseras & Sánguches al Instante</h3>
+        <p class="promo-slogan">"Llevamos tu pedido fresco, calientito y bien envuelto estés donde estés"</p>
         <p style="font-size:14px; color: var(--text-muted); margin-bottom: 14px;">
-          Pide por aquí y recibe el mensaje formateado directamente a nuestra cocina para despacho express.
+          Pide por aquí y te llegará el mensaje directo al WhatsApp de nuestro vendedor para que te busque de inmediato.
         </p>
 
-        <div class="popup-section-label">Líneas de Atención & Pedidos:</div>
+        <div class="popup-section-label">Teléfonos para pedidos y llamadas:</div>
         <div class="contact-grid" id="contenedorTelefonos">
           <!-- Renderizado dinámico desde productos.json -->
         </div>
@@ -954,21 +975,21 @@
     </div>
   </section>
 
-  <!-- SEGUIMIENTO DE REPARTIDORES -->
+  <!-- SEGUIMIENTO DEL VENDEDOR EN RUTA -->
   <section class="map-section">
     <div class="map-card">
       <div class="map-header">
-        <h3>🛵 Repartidores en Ruta - Cusco</h3>
+        <h3>🚶‍♂️ Vendedor con Canasta en Ruta - Cusco</h3>
         
         <div class="gps-legend-box">
           <div class="legend-item online" id="legendOnline">
-            <span style="font-size:14px;">🛵💨</span>
-            <span>En Ruta</span>
+            <span style="font-size:14px;">🚶‍♂️🧺</span>
+            <span>Caminando en Ruta</span>
           </div>
           <span style="color: #cbd5e1;">|</span>
           <div class="legend-item offline activo" id="legendOffline">
-            <span style="font-size:14px;">🛵💤</span>
-            <span>En Local</span>
+            <span style="font-size:14px;">🧍💤</span>
+            <span>En Puesto / Local</span>
           </div>
         </div>
       </div>
@@ -979,27 +1000,27 @@
     </div>
   </section>
 
-  <!-- CARTA DE HAMBURGUESAS -->
+  <!-- CARTA DE PRODUCTOS -->
   <section class="section-menu" id="menu">
     <div class="menu-header">
-      <h3>Nuestra Carta</h3>
-      <p style="font-size: 13px; color: var(--text-muted);">Elige tus productos y arma tu pedido al instante.</p>
+      <h3>Nuestra Carta de Hamburguesas y Sánguches</h3>
+      <p style="font-size: 13px; color: var(--text-muted);">Elige tus sánguches favoritos de la canasta y ordénalos aquí.</p>
     </div>
     <div class="grid-burgers" id="contenedorBurgers"></div>
   </section>
 
   <!-- LIGHTBOX -->
   <div class="lightbox-overlay" id="lightboxModal" onclick="cerrarLightboxPromo()">
-    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&auto=format&fit=crop&q=80" alt="Promo Full">
+    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&auto=format&fit=crop&q=80" alt="Promo Canasta">
   </div>
 
-  <!-- BOTÓN FLOTANTE PEDIDO -->
+  <!-- BOTÓN FLOTANTE CANASTA -->
   <div class="chat-bubble-container" onclick="abrirModalCarrito()">
     <div class="chat-bubble-label">
-      <span>🍔 Tu Pedido</span>
+      <span>🧺 Tu Canastita</span>
     </div>
     <div class="chat-bubble-btn">
-      <span>🛍️</span>
+      <span>🧺</span>
       <div class="chat-badge" id="badgeContador">0</div>
     </div>
   </div>
@@ -1008,21 +1029,21 @@
   <div class="cart-modal-overlay" id="cartModalOverlay" onclick="cerrarSiClickAfuera(event)">
     <div class="cart-modal-card">
       <div class="cart-modal-header">
-        <h3 style="font-size:17px;">🛒 Resumen de tu Pedido</h3>
+        <h3 style="font-size:17px;">🧺 Tu Pedido al Vendedor</h3>
         <button class="btn-close-cart" onclick="cerrarModalCarrito()">&times;</button>
       </div>
 
       <div class="cart-modal-body">
         <div>
           <div class="cart-header-actions">
-            <span class="popup-section-label">Platos seleccionados:</span>
+            <span class="popup-section-label">Sánguches y hamburguesas elegidos:</span>
             <button type="button" class="btn-vaciar-cart" onclick="vaciarPedidoConConfirmacion()">Vaciar</button>
           </div>
           <div class="cart-items-box" id="popupItemsList"></div>
         </div>
 
         <div>
-          <span class="popup-section-label">Método de Pago:</span>
+          <span class="popup-section-label">Forma de Pago:</span>
           <div class="grid-payments">
             <button type="button" class="btn-pay-option active" onclick="elegirPago('Efectivo', this)">💵 Efectivo</button>
             <button type="button" class="btn-pay-option" onclick="elegirPago('Yape', this)">🟣 Yape</button>
@@ -1034,10 +1055,11 @@
             <div style="font-size: 12px; font-weight: 800; color: #b45309;">💵 ¿Con cuánto en efectivo pagarás?</div>
             <div class="cash-input-row">
               <span style="font-weight: 800; font-size: 15px; color: #b45309;">S/</span>
-              <input type="number" id="montoEfectivoIngresado" class="cash-input" placeholder="Ej. 50" min="0" step="5" oninput="calcularVueltoEfectivo()"/>
+              <input type="number" id="montoEfectivoIngresado" class="cash-input" placeholder="Ej. 20" min="0" step="5" oninput="calcularVueltoEfectivo()"/>
             </div>
             <div class="cash-quick-btns">
               <button type="button" class="btn-quick-cash" onclick="setMontoEfectivoRapido('exacto')">Pago Exacto</button>
+              <button type="button" class="btn-quick-cash" onclick="setMontoEfectivoRapido(20)">S/ 20</button>
               <button type="button" class="btn-quick-cash" onclick="setMontoEfectivoRapido(50)">S/ 50</button>
               <button type="button" class="btn-quick-cash" onclick="setMontoEfectivoRapido(100)">S/ 100</button>
             </div>
@@ -1049,12 +1071,12 @@
         </div>
 
         <div>
-          <span class="popup-section-label">Dirección o Referencia:</span>
+          <span class="popup-section-label">¿Dónde te encuentras?:</span>
           <div class="geo-box">
             <button type="button" class="btn-geo" onclick="capturarGPSCliente()">📍 Compartir mi ubicación exacta</button>
-            <span class="geo-status" id="geoStatus">Activa el GPS para calcular tu ruta de entrega rápida</span>
+            <span class="geo-status" id="geoStatus">Activa el GPS para que el vendedor te ubique rápido</span>
           </div>
-          <input type="text" id="direccionDetalleInput" class="client-input" placeholder="Calle, número de casa, piso, depto o referencia"/>
+          <input type="text" id="direccionDetalleInput" class="client-input" placeholder="Calle, esquina, tienda, piso o referencia"/>
         </div>
 
         <div>
@@ -1069,7 +1091,7 @@
           <span class="cart-total-amount" id="cartTotalMonto">S/ 0.00</span>
         </div>
         <button class="btn-order-wsp" onclick="enviarPedidoWhatsApp()">
-          <span>Enviar Pedido a WhatsApp</span> 💬
+          <span>Pedir al Vendedor por WhatsApp</span> 💬
         </button>
       </div>
     </div>
@@ -1089,12 +1111,21 @@
     let catalogo = [
       {
         id: "burger-classic",
-        nombre: "Hamburguesa Clásica Artesanal",
+        nombre: "Hamburguesa Clásica Casera",
         tag: "La Más Pedida",
-        descripcion: "Carne de 150g, queso cheddar fundido, lechuga, tomate y papas fritas.",
-        precio: 15.00,
+        descripcion: "Carne de res sazonada, queso fundido, lechuga, tomate y cremas caseras.",
+        precio: 10.00,
         disponible: true,
         imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "sand-pollo",
+        nombre: "Sánguche de Pollo Deshilachado",
+        tag: "Recomendado",
+        descripcion: "Pechuga de pollo jugosa deshilachada con mayonesa casera, apio y papitas al hilo.",
+        precio: 8.00,
+        disponible: true,
+        imagen: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&auto=format&fit=crop&q=80"
       }
     ];
 
@@ -1141,10 +1172,11 @@
       }).addTo(map);
 
       actualizarVisualizadorGPS([
-        { id: "moto-1", nombre: "Motorizado 1", online: false, lat: cuscoLat, lng: cuscoLng }
+        { id: "rep-1", nombre: "Vendedor con Canasta", online: false, lat: cuscoLat, lng: cuscoLng }
       ]);
     }
 
+    // ICONO HOMBRECITO CON CANASTA
     function actualizarVisualizadorGPS(flota) {
       if (!Array.isArray(flota) || !map) return;
       let hayOnline = false;
@@ -1156,22 +1188,24 @@
         const iconoHTML = estaOnline ? `
           <div class="custom-gps-marker">
             <div class="gps-radar-pulse"></div>
-            <div class="moto-badge-circle">🛵</div>
+            <div class="walker-badge-circle">🚶‍♂️</div>
+            <div class="basket-mini-icon">🧺</div>
           </div>
         ` : `
           <div class="custom-gps-marker offline">
-            <div class="moto-badge-circle">🛵</div>
+            <div class="walker-badge-circle">🧍</div>
+            <div class="basket-mini-icon">🧺</div>
           </div>
         `;
 
         const icono = L.divIcon({
-          className: 'custom-moto-icon',
+          className: 'custom-walker-icon',
           html: iconoHTML,
-          iconSize: [48, 48],
-          iconAnchor: [24, 24]
+          iconSize: [52, 52],
+          iconAnchor: [26, 26]
         });
 
-        const popupTexto = `<b>🛵 ${rep.nombre}</b><br>${estaOnline ? 'En Ruta de Entrega 🔥' : 'En Sede Principal 💤'}`;
+        const popupTexto = `<b>🧺 ${rep.nombre}</b><br>${estaOnline ? 'Caminando con la canasta calientita 🔥' : 'En puesto o recargando canasta 💤'}`;
 
         if (!marcadoresFlota[rep.id]) {
           marcadoresFlota[rep.id] = L.marker([rep.lat || -13.5167, rep.lng || -71.9788], { icon: icono })
@@ -1208,7 +1242,7 @@
         card.className = `card ${estaDisponible ? '' : 'agotado'}`;
         card.innerHTML = `
           <div class="card-img-wrapper">
-            <span class="card-tag">${estaDisponible ? (item.tag || 'Artesanal') : 'Agotado'}</span>
+            <span class="card-tag">${estaDisponible ? (item.tag || 'En Canasta') : 'Agotado'}</span>
             <img src="${item.imagen}" alt="${item.nombre}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80'">
           </div>
           <div class="card-body">
@@ -1217,7 +1251,7 @@
             <div class="card-footer">
               <span class="price">S/ ${parseFloat(item.precio).toFixed(2)}</span>
               <button class="btn-add" ${estaDisponible ? '' : 'disabled'} onclick="agregarAlPedido('${item.id}')">
-                ${estaDisponible ? '+ Agregar' : 'Sin Stock'}
+                ${estaDisponible ? '+ A la Canasta' : 'Agotado'}
               </button>
             </div>
           </div>
@@ -1252,7 +1286,7 @@
     }
 
     function vaciarPedidoConConfirmacion() {
-      if (confirm("¿Vaciar tu pedido actual?")) {
+      if (confirm("¿Vaciar tu canasta de compras?")) {
         for (const k in pedido) pedido[k].cantidad = 0;
         actualizarVistaPopup();
       }
@@ -1314,12 +1348,12 @@
       });
 
       if (totalUnidades === 0) {
-        listContainer.innerHTML = '<div style="text-align:center; color:#94a3b8; font-size:13px; padding:12px;">Tu carrito está vacío. ¡Elige tus hamburguesas favoritas!</div>';
+        listContainer.innerHTML = '<div style="text-align:center; color:#94a3b8; font-size:13px; padding:12px;">Tu canasta está vacía. ¡Elige tus hamburguesas o sánguches!</div>';
       }
 
       ultimoTotalPagar = totalMonto;
       document.getElementById('badgeContador').innerText = `${totalUnidades}`;
-      document.getElementById('cartLabelTotalConCantidad').innerText = `Total (${totalUnidades} ${totalUnidades === 1 ? 'producto' : 'productos'}):`;
+      document.getElementById('cartLabelTotalConCantidad').innerText = `Total (${totalUnidades} ${totalUnidades === 1 ? 'sánguche' : 'sánguches'}):`;
       document.getElementById('cartTotalMonto').innerText = `S/ ${totalMonto.toFixed(2)}`;
 
       if (metodoPago === 'Efectivo') calcularVueltoEfectivo();
@@ -1355,7 +1389,7 @@
 
       if (ultimoTotalPagar <= 0) {
         box.className = "vuelto-badge-box";
-        txt.innerText = "Selecciona al menos una hamburguesa";
+        txt.innerText = "Selecciona al menos un producto";
         montoTxt.innerText = "";
         return;
       }
@@ -1371,7 +1405,7 @@
         montoTxt.innerText = "S/ 0.00";
       } else {
         box.className = "vuelto-badge-box";
-        txt.innerText = "💵 Vuelto:";
+        txt.innerText = "💵 Vuelto a entregar:";
         montoTxt.innerText = `S/ ${vuelto.toFixed(2)}`;
       }
     }
@@ -1384,7 +1418,7 @@
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           ubicacionClienteCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-          status.innerText = "✔ Ubicación fijada correctamente";
+          status.innerText = "✔ Ubicación fijada para que el casero te encuentre";
           status.classList.add('ready');
         },
         () => { status.innerText = "No se pudo acceder a tu ubicación."; },
@@ -1397,7 +1431,7 @@
       const seleccionados = Object.values(pedido).filter(item => item.cantidad > 0);
 
       if (seleccionados.length === 0) {
-        alert("Agrega al menos una hamburguesa a tu pedido.");
+        alert("Agrega al menos una hamburguesa o sánguche a tu canasta.");
         return;
       }
 
@@ -1423,18 +1457,18 @@
         }
       }
 
-      let mensaje = `*🍔 ¡HOLA BURGER CLUB! DESEO REALIZAR UN PEDIDO:*\n\n`;
+      let mensaje = `*🧺 ¡HOLA CASERO! DESEO HACER UN PEDIDO:*\n\n`;
       if (nombreCliente) mensaje += `*👤 Cliente:* ${nombreCliente}\n`;
-      if (direccionDetalle) mensaje += `*🏠 Dirección/Ref:* ${direccionDetalle}\n`;
-      mensaje += `*📦 Detalle del Pedido:*\n${detalleTexto}\n`;
+      if (direccionDetalle) mensaje += `*📍 Ubicación/Ref:* ${direccionDetalle}\n`;
+      mensaje += `*🍔 Detalle del Pedido:*\n${detalleTexto}\n`;
       mensaje += `*💰 Total a Pagar:* S/ ${total.toFixed(2)}\n`;
       mensaje += `*💳 Forma de Pago:* ${pagoDetalle}\n`;
 
       if (ubicacionClienteCoords) {
-        mensaje += `*📍 GPS de Entrega:* https://www.google.com/maps?q=${ubicacionClienteCoords.lat},${ubicacionClienteCoords.lng}\n`;
+        mensaje += `*📌 Mi ubicación en Google Maps:* https://www.google.com/maps?q=${ubicacionClienteCoords.lat},${ubicacionClienteCoords.lng}\n`;
       }
 
-      mensaje += `\n¿Cuánto tiempo aprox demorará en llegar?`;
+      mensaje += `\n¿Por dónde estás pasando con la canasta para encontrarnos?`;
 
       const destino = (telefonos.whatsapp || whatsappNumero).replace(/\D/g,'');
       window.open(`https://wa.me/${destino}?text=${encodeURIComponent(mensaje)}`, '_blank');
@@ -1447,7 +1481,7 @@
       cerrarModalCarrito();
     }
 
-    // SINCRONIZACIÓN CON PRODUCTOS.JSON EN TIEMPO REAL
+    // SINCRONIZACIÓN AUTOMÁTICA CON PRODUCTOS.JSON
     async function cargarCatalogoDesdeGitHub() {
       try {
         const res = await fetch('productos.json?v=' + Date.now());
@@ -1484,7 +1518,7 @@
       iniciarMapaCusco();
       actualizarVistaPopup();
       
-      // Conexión con productos.json
+      // Conexión en vivo con GitHub
       cargarCatalogoDesdeGitHub();
       setInterval(cargarCatalogoDesdeGitHub, 20000);
     });
