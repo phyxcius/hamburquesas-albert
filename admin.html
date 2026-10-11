@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Control | Albert's Sandwiches Cusco</title>
+  <style>
+    :root {
+      --primary: #da291c;
+      --primary-dark: #b81d13;
+      --accent: #f59e0b;
+      --navy: #002f6c;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --radius: 12px;
+      --shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      padding: 20px 16px;
+      max-width: 860px;
+      margin: auto;
+      line-height: 1.5;
+    }
+
+    /* HEADER */
+    .header-admin {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-title-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .admin-avatar-mini {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2px solid var(--primary);
+      box-shadow: 0 2px 8px rgba(218, 41, 28, 0.2);
+      background: #fff;
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 21px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* TABS */
+    .dashboard-tabs {
+      display: flex;
+      gap: 8px;
+      margin: 18px 0;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 10px;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      font-weight: 800;
+      font-size: 13px;
+      padding: 9px 16px;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 10px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover {
+      background: #f1f5f9;
+      color: var(--navy);
+    }
+
+    .tab-btn.active {
+      background: #fef2f2;
+      color: var(--primary);
+      border-color: #fca5a5;
+      box-shadow: 0 2px 6px rgba(218, 41, 28, 0.12);
+    }
+
+    /* TARJETAS */
+    .card {
+      background: var(--card-bg);
+      padding: 18px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border-color);
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+
+    label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--navy);
+      display: block;
+      margin-top: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 4px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: #f8fafc;
+      color: var(--text);
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      background: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(218, 41, 28, 0.12);
+    }
+
+    /* BOTONES */
+    .btn {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-save {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      width: 100%;
+      font-size: 15px;
+      padding: 14px;
+      margin-top: 12px;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(218, 41, 28, 0.25);
+    }
+
+    .btn-save:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .btn-save:disabled { opacity: 0.65; cursor: not-allowed; }
+
+    .btn-add {
+      background: #16a34a;
+      color: white;
+      margin-bottom: 14px;
+      width: 100%;
+      font-size: 14px;
+      padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(22, 163, 74, 0.2);
+    }
+    .btn-add:hover { background: #15803d; }
+
+    .btn-del {
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      margin-top: 12px;
+      font-size: 12px;
+    }
+    .btn-del:hover { background: #fca5a5; color: #7f1d1d; }
+
+    .admin-img-preview-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
+      background: #f8fafc;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .admin-thumb {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+    }
+
+    /* ACORDEÓN PROTEGIDO PARA TOKEN */
+    .token-accordion-wrapper {
+      background: #fffbeb;
+      border: 1.5px dashed #f59e0b;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .token-accordion-trigger {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 800;
+      color: #b45309;
+      font-size: 13px;
+    }
+
+    .token-accordion-trigger:hover { background: #fef3c7; }
+
+    .token-accordion-content {
+      display: none;
+      padding: 14px 16px;
+      background: #ffffff;
+      border-top: 1px solid #fef08a;
+    }
+
+    /* TARJETAS VENDEDOR / REPARTIDOR */
+    .repartidor-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: var(--shadow);
+    }
+
+    .repartidor-card.activo {
+      border-color: #86efac;
+      background: #f0fdf4;
+    }
+
+    .repartidor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge-status {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 14px;
+      background: #f1f5f9;
+      color: var(--text-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .badge-status.online {
+      background: #dcfce7;
+      color: #15803d;
+      border-color: #86efac;
+    }
+
+    .btn-toggle-gps {
+      background: #16a34a;
+      color: #fff;
+      border: none;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .btn-toggle-gps:hover { background: #15803d; }
+    .btn-toggle-gps.off { background: #dc2626; }
+    .btn-toggle-gps.off:hover { background: #b91c1c; }
+
+    /* LOGIN */
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80vh;
+    }
+
+    .login-card {
+      background: var(--card-bg);
+      padding: 30px 26px;
+      border-radius: 16px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    .login-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2.5px solid var(--primary);
+      margin-bottom: 10px;
+      box-shadow: 0 4px 12px rgba(218, 41, 28, 0.25);
+    }
+
+    .btn-logout {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .btn-logout:hover { background: #fee2e2; }
+
+    /* TABLA REPORTES */
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+      margin-top: 10px;
+      background: #fff;
+    }
+
+    .custom-table th, .custom-table td {
+      border: 1px solid var(--border-color);
+      padding: 10px 12px;
+    }
+
+    .custom-table th {
+      background: #f8fafc;
+      color: var(--navy);
+      font-weight: 800;
+    }
+
+    .btn-print {
+      background: var(--navy);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      #areaImpresion, #areaImpresion * { visibility: visible; }
+      #areaImpresion { position: absolute; left: 0; top: 0; width: 100%; background: #fff; color: #000; }
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PANTALLA LOGIN -->
+  <div id="pantallaLogin" class="login-container">
+    <div class="login-card">
+      <img src="FB_IMG_1791694120487.jpg" alt="Albert" class="login-avatar" onerror="this.src='albert.png'">
+      <h3 style="color:var(--primary); font-size:20px; font-weight:900; margin-bottom:2px;">Albert's Sandwiches</h3>
+      <p style="font-size:12px; color:var(--text-muted); margin-bottom:18px;">Panel de Control y Reparto en Canasta</p>
+      
+      <form onsubmit="verificarLoginAdmin(event)" style="text-align:left;">
+        <label>Usuario</label>
+        <input type="text" id="loginUsuario" placeholder="admin" required autofocus>
+        
+        <label>Contraseña</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required>
+        
+        <button type="submit" class="btn btn-save" style="margin-top:16px;">Ingresar al Panel</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- PANEL PRINCIPAL -->
+  <div id="panelAdminPrincipal" style="display: none;">
+
+    <div class="header-admin no-print">
+      <div class="brand-title-box">
+        <img src="FB_IMG_1791694120487.jpg" alt="Albert" class="admin-avatar-mini" onerror="this.src='albert.png'">
+        <div>
+          <h2>Albert's Sandwiches</h2>
+          <span style="font-size:12px; color:var(--navy); font-weight:700;">Panel de Administración & Despacho</span>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="cerrarSesionAdmin()">🚪 Salir</button>
+    </div>
+    <p style="font-size: 13px; color: var(--text-muted); margin-top:4px;" class="no-print">
+      Actualiza los sándwiches, precios, teléfonos de pedido y la ubicación GPS de la canasta.
+    </p>
+
+    <!-- ACORDEÓN PROTEGIDO PARA GITHUB TOKEN -->
+    <div class="token-accordion-wrapper no-print" style="margin-top:12px;">
+      <button class="token-accordion-trigger" type="button" onclick="alternarAcordeonToken()">
+        <span>🔐 Token de GitHub (Acceso Desarrollador)</span>
+        <span id="accordionIcon">🔒 Desplegar</span>
+      </button>
+
+      <div class="token-accordion-content" id="contenidoAcordeonToken">
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">
+          Ingresa tu Personal Access Token con permisos para actualizar la tienda en GitHub.
+        </p>
+        <label for="ghTokenInput">Token de GitHub (ghp_... o github_pat_...):</label>
+        <input type="password" id="ghTokenInput" placeholder="Pega tu token aquí">
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button class="btn" style="background:#16a34a; color:#fff; font-size:12px;" onclick="guardarTokenManual()">💾 Guardar Llave</button>
+          <button class="btn" style="background:#fee2e2; color:#b91c1c; font-size:12px;" onclick="borrarTokenManual()">🗑️ Limpiar Llave</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="dashboard-tabs no-print">
+      <button class="tab-btn active" id="tabBtnProductos" onclick="cambiarTab('productos')">🥪 Carta de Sándwiches</button>
+      <button class="tab-btn" id="tabBtnTelefonos" onclick="cambiarTab('telefonos')">📞 Teléfonos & WhatsApp</button>
+      <button class="tab-btn" id="tabBtnGPS" onclick="cambiarTab('gps')">🧺 Albert en Ruta (GPS)</button>
+      <button class="tab-btn" id="tabBtnReportes" onclick="cambiarTab('reportes')">📋 Reportes de Pedidos</button>
+    </div>
+
+    <!-- PESTAÑA 1: SÁNDWICHES -->
+    <div id="seccionProductos">
+      <button class="btn btn-add no-print" onclick="agregarNuevoProducto()">➕ Agregar Nuevo Sándwich</button>
+      <div id="listaProductos">Cargando carta de sándwiches...</div>
+      <button class="btn btn-save no-print" id="btnPublicar" onclick="sincronizarConGitHub()">🚀 Guardar y Publicar en GitHub</button>
+      <div id="statusMsg" style="text-align:center; margin-top:8px; font-weight:bold;"></div>
+    </div>
+
+    <!-- PESTAÑA 2: TELÉFONOS -->
+    <div id="seccionTelefonos" style="display: none;">
+      <div class="card">
+        <h3 style="color:var(--primary); font-size:16px; margin-bottom:12px;">📞 Números de Pedido y Contacto de Albert</h3>
+        
+        <label>WhatsApp Principal de Pedidos (con código de país, ej: 51984886488):</label>
+        <input type="text" id="telWhatsApp" placeholder="51984886488">
+
+        <label>Teléfono 1 (Llamadas Directas):</label>
+        <input type="text" id="telFijo1" placeholder="984 886 488">
+
+        <label>Teléfono 2 (Línea Alterna / Apoyo):</label>
+        <input type="text" id="telFijo2" placeholder="947 369 879">
+
+        <button class="btn btn-save" onclick="sincronizarConGitHub()" style="margin-top:16px;">💾 Guardar Teléfonos en GitHub</button>
+      </div>
+    </div>
+
+    <!-- PESTAÑA 3: MOTORIZADOS / GPS ALBERT -->
+    <div id="seccionGPS" style="display: none;">
+      <button class="btn btn-add" onclick="agregarNuevoRepartidor()">➕ Agregar Persona a la Flota</button>
+      <p style="font-size:12px; color:var(--text-muted); margin-bottom:14px;">
+        💡 Albert puede abrir este panel desde su celular, ubicar su nombre y activar su GPS en tiempo real para que los clientes vean por dónde camina la canasta.
+      </p>
+      <div id="listaRepartidores">Cargando ubicación...</div>
+      <button class="btn btn-save" onclick="sincronizarConGitHub()">💾 Guardar Estado en GitHub</button>
+    </div>
+
+    <!-- PESTAÑA 4: REPORTES -->
+    <div id="seccionReportes" style="display: none;">
+      <div id="areaImpresion">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <h3 style="color:var(--navy);">📋 Registro de Entregas & Ventas</h3>
+          <button class="btn-print no-print" onclick="window.print()">🖨️ Imprimir Hoja</button>
+        </div>
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>Hora</th>
+              <th>Cliente</th>
+              <th>Sándwiches</th>
+              <th>Total</th>
+              <th>Pago</th>
+            </tr>
+          </thead>
+          <tbody id="tablaVentasBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const USUARIO = "phyxcius";
+    const REPOSITORIO = "hamburguesas-albert";
+    const ARCHIVO = "productos.json";
+    
+    // CÓDIGOS DE SEGURIDAD
+    const CODIGO_CREADOR_TOKEN = "42423549";
+    const STORAGE_KEY_SECRETA = "albert_vault_secret_token";
+    const STORAGE_KEY_AUTH = "albert_admin_sesion_activa";
+
+    let productos = [];
+    let telefonos = {
+      whatsapp: "51984886488",
+      tel1: "984 886 488",
+      tel2: "947 369 879"
+    };
+
+    let repartidores = [
+      { id: "rep-1", nombre: "Albert con la Canasta", online: false, lat: -13.5167, lng: -71.9788 }
+    ];
+
+    let watchIdGPS = null;
+    let repartidorActivoId = null;
+    let tokenDesbloqueado = false;
+
+    // LOGIN
+    function verificarLoginAdmin(e) {
+      e.preventDefault();
+      const u = document.getElementById('loginUsuario').value.trim();
+      const p = document.getElementById('loginPassword').value.trim();
+
+      if (u === 'admin' && p === 'regocijo123') {
+        sessionStorage.setItem(STORAGE_KEY_AUTH, "true");
+        mostrarPanelAdmin();
+      } else {
+        alert("Credenciales incorrectas. Verifique usuario y contraseña.");
+      }
+    }
+
+    function mostrarPanelAdmin() {
+      document.getElementById('pantallaLogin').style.display = 'none';
+      document.getElementById('panelAdminPrincipal').style.display = 'block';
+      cargarDesdeGitHub();
+    }
+
+    function cerrarSesionAdmin() {
+      sessionStorage.removeItem(STORAGE_KEY_AUTH);
+      document.getElementById('panelAdminPrincipal').style.display = 'none';
+      document.getElementById('pantallaLogin').style.display = 'flex';
+      document.getElementById('loginPassword').value = '';
+    }
+
+    // ACORDEÓN PROTEGIDO
+    function alternarAcordeonToken() {
+      const contenido = document.getElementById('contenidoAcordeonToken');
+      const icono = document.getElementById('accordionIcon');
+
+      if (contenido.style.display === 'block') {
+        contenido.style.display = 'none';
+        icono.innerText = "🔒 Desplegar";
+        return;
+      }
+
+      if (!tokenDesbloqueado) {
+        const pass = prompt("🔐 CÓDIGO MAESTRO:\n\nIngresa la clave para acceder al Token de GitHub:");
+        if (pass === CODIGO_CREADOR_TOKEN) {
+          tokenDesbloqueado = true;
+          abrirAcordeonToken();
+        } else if (pass !== null) {
+          alert("⛔ Código incorrecto. Acceso denegado.");
+        }
+      } else {
+        abrirAcordeonToken();
+      }
+    }
+
+    function abrirAcordeonToken() {
+      const contenido = document.getElementById('contenidoAcordeonToken');
+      const icono = document.getElementById('accordionIcon');
+      contenido.style.display = 'block';
+      icono.innerText = "🔓 Ocultar";
+      document.getElementById('ghTokenInput').value = obtenerTokenSecreto();
+    }
+
+    function obtenerTokenSecreto() {
+      return localStorage.getItem(STORAGE_KEY_SECRETA) || "";
+    }
+
+    function guardarTokenManual() {
+      const t = document.getElementById('ghTokenInput').value.trim();
+      if (!t) return alert("Por favor ingresa un token válido.");
+      localStorage.setItem(STORAGE_KEY_SECRETA, t);
+      alert("✔ Token guardado correctamente.");
+      cargarDesdeGitHub();
+    }
+
+    function borrarTokenManual() {
+      if (confirm("¿Deseas eliminar el token guardado?")) {
+        localStorage.removeItem(STORAGE_KEY_SECRETA);
+        document.getElementById('ghTokenInput').value = '';
+        alert("Token eliminado.");
+      }
+    }
+
+    function cambiarTab(tab) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('seccionProductos').style.display = 'none';
+      document.getElementById('seccionTelefonos').style.display = 'none';
+      document.getElementById('seccionGPS').style.display = 'none';
+      document.getElementById('seccionReportes').style.display = 'none';
+
+      if (tab === 'productos') {
+        document.getElementById('tabBtnProductos').classList.add('active');
+        document.getElementById('seccionProductos').style.display = 'block';
+      } else if (tab === 'telefonos') {
+        document.getElementById('tabBtnTelefonos').classList.add('active');
+        document.getElementById('seccionTelefonos').style.display = 'block';
+        cargarValoresTelefonosEnFormulario();
+      } else if (tab === 'gps') {
+        document.getElementById('tabBtnGPS').classList.add('active');
+        document.getElementById('seccionGPS').style.display = 'block';
+        renderizarRepartidores();
+      } else if (tab === 'reportes') {
+        document.getElementById('tabBtnReportes').classList.add('active');
+        document.getElementById('seccionReportes').style.display = 'block';
+        renderizarReporte();
+      }
+    }
+
+    // CARGA DE DATOS DESDE GITHUB (CORREGIDA CON RESPALDO DE RUTA PÚBLICA DIRECTA)
+    async function cargarDesdeGitHub() {
+      const token = obtenerTokenSecreto();
+      const headers = token ? { "Authorization": `token ${token}` } : {};
+
+      try {
+        const res = await fetch(`https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${ARCHIVO}?ref=main&_nocache=${Date.now()}`, {
+          headers: headers
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const datos = JSON.parse(decodeURIComponent(escape(atob(data.content))));
+
+          if (Array.isArray(datos)) {
+            productos = datos;
+          } else {
+            productos = datos.productos || [];
+            if (datos.telefonos) telefonos = datos.telefonos;
+            if (datos.repartidores) repartidores = datos.repartidores;
+          }
+        } else {
+          throw new Error("API Limitada, cargando por canal público");
+        }
+      } catch (e) {
+        console.warn("Intentando cargar por canal alternativo público:", e);
+        try {
+          const resPublic = await fetch(`productos.json?v=${Date.now()}`);
+          if (resPublic.ok) {
+            const datos = await resPublic.json();
+            if (Array.isArray(datos)) {
+              productos = datos;
+            } else {
+              productos = datos.productos || [];
+              if (datos.telefonos) telefonos = datos.telefonos;
+              if (datos.repartidores) repartidores = datos.repartidores;
+            }
+          }
+        } catch (errPublic) {
+          console.error("No se pudo cargar la data por ninguna vía:", errPublic);
+        }
+      }
+      renderizarProductos();
+      cargarValoresTelefonosEnFormulario();
+      renderizarRepartidores();
+    }
+
+    function cargarValoresTelefonosEnFormulario() {
+      document.getElementById('telWhatsApp').value = telefonos.whatsapp || "51984886488";
+      document.getElementById('telFijo1').value = telefonos.tel1 || "984 886 488";
+      document.getElementById('telFijo2').value = telefonos.tel2 || "947 369 879";
+    }
+
+    // GESTIÓN DE PRODUCTOS
+    function renderizarProductos() {
+      const cont = document.getElementById('listaProductos');
+      if (!cont) return;
+      cont.innerHTML = '';
+
+      if (productos.length === 0) {
+        cont.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">Sin productos cargados. Intenta guardar o agregar uno nuevo.</div>';
+        return;
+      }
+
+      productos.forEach((p, i) => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        div.innerHTML = `
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+            <div style="flex:2;">
+              <label>Nombre del Sándwich:</label>
+              <input type="text" value="${p.nombre}" onchange="productos[${i}].nombre = this.value">
+            </div>
+            <div style="flex:1;">
+              <label>Etiqueta / Badge:</label>
+              <input type="text" value="${p.tag || 'En Canasta'}" onchange="productos[${i}].tag = this.value">
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <div style="flex:1;">
+              <label>Precio (S/):</label>
+              <input type="number" step="0.5" value="${p.precio}" onchange="productos[${i}].precio = parseFloat(this.value) || 0">
+            </div>
+            <div style="flex:1;">
+              <label>Disponibilidad:</label>
+              <select onchange="productos[${i}].disponible = (this.value === 'true')">
+                <option value="true" ${p.disponible !== false ? 'selected' : ''}>🟢 Disponible (En Canasta)</option>
+                <option value="false" ${p.disponible === false ? 'selected' : ''}>🔴 Agotado</option>
+              </select>
+            </div>
+          </div>
+
+          <label>Descripción / Ingredientes:</label>
+          <input type="text" value="${p.descripcion || ''}" onchange="productos[${i}].descripcion = this.value">
+
+          <label>Foto del Sándwich:</label>
+          <div class="admin-img-preview-box">
+            <img id="prev-${i}" class="admin-thumb" src="${p.imagen}" onerror="this.src='https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&auto=format&fit=crop&q=80'">
+            <div style="flex:1;">
+              <input type="file" accept="image/*" onchange="subirImagen(event, ${i})" style="font-size:12px;">
+              <input type="text" value="${p.imagen}" placeholder="o URL externa de la foto" onchange="productos[${i}].imagen = this.value; document.getElementById('prev-${i}').src = this.value;" style="margin-top:4px;">
+            </div>
+          </div>
+
+          <button class="btn btn-del" onclick="eliminarProducto(${i})">🗑️ Eliminar Sándwich</button>
+        `;
+        cont.appendChild(div);
+      });
+    }
+
+    function subirImagen(event, index) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        productos[index].imagen = e.target.result;
+        document.getElementById(`prev-${index}`).src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function agregarNuevoProducto() {
+      productos.push({
+        id: "sand-" + Date.now(),
+        nombre: "Nuevo Sándwich Casero",
+        tag: "Recién Salido",
+        descripcion: "Pan fresco, relleno calientito y salsas de la casa.",
+        precio: 8.00,
+        disponible: true,
+        imagen: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&auto=format&fit=crop&q=80"
+      });
+      renderizarProductos();
+    }
+
+    function eliminarProducto(i) {
+      if (confirm(`¿Deseas eliminar "${productos[i].nombre}"?`)) {
+        productos.splice(i, 1);
+        renderizarProductos();
+      }
+    }
+
+    // GESTIÓN DE REPARTIDORES
+    function renderizarRepartidores() {
+      const cont = document.getElementById('listaRepartidores');
+      if (!cont) return;
+      cont.innerHTML = '';
+
+      if (repartidores.length === 0) {
+        cont.innerHTML = '<p style="color:var(--text-muted); font-size:13px;">No hay personas registradas.</p>';
+        return;
+      }
+
+      repartidores.forEach((rep, i) => {
+        const estaOnline = rep.online === true;
+        const div = document.createElement('div');
+        div.className = `repartidor-card ${estaOnline ? 'activo' : ''}`;
+        div.innerHTML = `
+          <div class="repartidor-header">
+            <div>
+              <input type="text" value="${rep.nombre}" onchange="repartidores[${i}].nombre = this.value" style="font-weight:bold; font-size:14px; max-width:280px; display:inline-block;">
+            </div>
+            <span class="badge-status ${estaOnline ? 'online' : ''}">
+              ${estaOnline ? 'Online 🚶‍♂️🔥 En Ruta' : 'Offline 🧍💤 En Descanso'}
+            </span>
+          </div>
+          
+          <div style="font-size:11px; color:var(--text-muted);">
+            Últimas coordenadas: Lat ${rep.lat ? rep.lat.toFixed(4) : '--'}, Lng ${rep.lng ? rep.lng.toFixed(4) : '--'}
+          </div>
+
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
+            ${estaOnline 
+              ? `<button class="btn-toggle-gps off" onclick="desconectarGPSRepartidor(${i})">⏹️ Desactivar mi GPS</button>` 
+              : `<button class="btn-toggle-gps" onclick="conectarGPSRepartidor(${i})">▶️ Conectar mi GPS (Desde este móvil)</button>`
+            }
+            <button class="btn btn-del" style="margin-top:0; padding:8px 12px;" onclick="eliminarRepartidor(${i})">🗑️ Eliminar</button>
+          </div>
+        `;
+        cont.appendChild(div);
+      });
+    }
+
+    function agregarNuevoRepartidor() {
+      const nombre = prompt("Nombre o identificación de la persona (ej. Albert - Canasta 1):");
+      if (!nombre) return;
+      repartidores.push({
+        id: "rep-" + Date.now(),
+        nombre: nombre.trim(),
+        online: false,
+        lat: -13.5167,
+        lng: -71.9788
+      });
+      renderizarRepartidores();
+    }
+
+    function eliminarRepartidor(i) {
+      if (confirm(`¿Eliminar a "${repartidores[i].nombre}"?`)) {
+        if (repartidorActivoId === repartidores[i].id && watchIdGPS) {
+          navigator.geolocation.clearWatch(watchIdGPS);
+        }
+        repartidores.splice(i, 1);
+        renderizarRepartidores();
+      }
+    }
+
+    function conectarGPSRepartidor(index) {
+      if (!navigator.geolocation) return alert("Geolocalización no disponible.");
+
+      navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+          repartidores[index].online = true;
+          repartidores[index].lat = pos.coords.latitude;
+          repartidores[index].lng = pos.coords.longitude;
+          repartidorActivoId = repartidores[index].id;
+
+          if (watchIdGPS) navigator.geolocation.clearWatch(watchIdGPS);
+          watchIdGPS = navigator.geolocation.watchPosition((p) => {
+            repartidores[index].lat = p.coords.latitude;
+            repartidores[index].lng = p.coords.longitude;
+          }, null, { enableHighAccuracy: true });
+
+          renderizarRepartidores();
+          alert(`✔ GPS activado para "${repartidores[index].nombre}". Sincronizando con GitHub...`);
+          await sincronizarConGitHub();
+        },
+        (err) => { alert("No se pudo obtener GPS: " + err.message); },
+        { enableHighAccuracy: true }
+      );
+    }
+
+    async function desconectarGPSRepartidor(index) {
+      if (watchIdGPS && repartidorActivoId === repartidores[index].id) {
+        navigator.geolocation.clearWatch(watchIdGPS);
+        watchIdGPS = null;
+        repartidorActivoId = null;
+      }
+      repartidores[index].online = false;
+      renderizarRepartidores();
+      await sincronizarConGitHub();
+    }
+
+    // SINCRONIZACIÓN CON GITHUB MEJORADA Y DIAGNÓSTICO DE ERRORES (CORREGIDO)
+    async function sincronizarConGitHub() {
+      const token = obtenerTokenSecreto() || document.getElementById('ghTokenInput').value.trim();
+      
+      if (!token) {
+        alert("⚠️ No tienes un Token guardado en este dispositivo.\n\nPor favor, despliega la pestaña 'Token de GitHub' e ingresa tu clave secreta de GitHub para poder guardar.");
+        // Abrir automáticamente el acordeón del token para facilitarle al usuario su inserción
+        tokenDesbloqueado = true;
+        abrirAcordeonToken();
+        return;
+      }
+
+      const btn = document.getElementById('btnPublicar');
+      const msg = document.getElementById('statusMsg');
+      if (btn) { btn.disabled = true; btn.innerText = "⏳ Publicando en GitHub..."; }
+      if (msg) { msg.innerText = "Preparando datos..."; msg.style.color = "var(--navy)"; }
+
+      telefonos.whatsapp = document.getElementById('telWhatsApp').value.trim();
+      telefonos.tel1 = document.getElementById('telFijo1').value.trim();
+      telefonos.tel2 = document.getElementById('telFijo2').value.trim();
+
+      const objetoCompleto = {
+        productos: productos,
+        telefonos: telefonos,
+        repartidores: repartidores
+      };
+
+      let shaActual = "";
+      
+      try {
+        if (msg) msg.innerText = "Validando archivo con GitHub...";
+        const check = await fetch(`https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${ARCHIVO}?ref=main&_t=${Date.now()}`, {
+          headers: {
+            "Authorization": `token ${token}`,
+            "Accept": "application/vnd.github.v3+json"
+          }
+        });
+
+        if (check.ok) {
+          const d = await check.json();
+          shaActual = d.sha;
+        } else if (check.status === 401 || check.status === 403) {
+          throw new Error("El token de GitHub no es válido, ha expirado o no tiene permisos de escritura.");
+        } else if (check.status === 404) {
+          console.warn("El archivo no existe. Se intentará crear de cero.");
+        }
+      } catch (e) {
+        if (e.message.includes("token")) {
+          alert(`🔒 Error de Acceso:\n${e.message}`);
+          if (btn) { btn.disabled = false; btn.innerText = "🚀 Guardar y Publicar en GitHub"; }
+          return;
+        }
+      }
+
+      const payload = {
+        message: "Actualización de carta, teléfonos y flota Albert's Sandwiches",
+        content: btoa(unescape(encodeURIComponent(JSON.stringify(objetoCompleto, null, 2)))),
+        branch: "main"
+      };
+      if (shaActual) payload.sha = shaActual;
+
+      try {
+        if (msg) msg.innerText = "Subiendo cambios...";
+        const res = await fetch(`https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${ARCHIVO}`, {
+          method: "PUT",
+          headers: {
+            "Authorization": `token ${token}`,
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const resData = await res.json();
+
+        if (!res.ok) {
+          if (res.status === 404) {
+            throw new Error(`Ruta o archivo no encontrado. Verifica si el repositorio "${REPOSITORIO}" es público/privado y que la cuenta de usuario "${USUARIO}" sea la correcta.`);
+          } else {
+            throw new Error(resData.message || "Error al actualizar repositorio");
+          }
+        }
+
+        if (msg) {
+          msg.style.color = "#15803d";
+          msg.innerText = "✔ ¡Carta y datos actualizados en GitHub!";
+        }
+        alert("✔ ¡Guardado exitoso! Los cambios estarán listos en la web en unos segundos.");
+        
+        // Guardar preventivamente por si se recarga
+        localStorage.setItem(STORAGE_KEY_SECRETA, token);
+      } catch (err) {
+        if (msg) {
+          msg.style.color = "#b91c1c";
+          msg.innerText = "Fallo: " + err.message;
+        }
+        alert("⚠️ Error al publicar:\n\n" + err.message + "\n\nSugerencia: Vuelve a ingresar tu Token en la parte superior y asegúrate de que tiene permisos para este repositorio.");
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = "🚀 Guardar y Publicar en GitHub";
+        }
+      }
+    }
+
+    // REPORTE DE VENTAS
+    function renderizarReporte() {
+      const ventas = JSON.parse(localStorage.getItem('albert_ventas')) || [];
+      const tbody = document.getElementById('tablaVentasBody');
+      tbody.innerHTML = '';
+
+      if (ventas.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:14px; color:var(--text-muted);">No hay pedidos registrados en este turno.</td></tr>';
+        return;
+      }
+
+      ventas.forEach(v => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${v.fecha}</td>
+          <td>${v.cliente || 'Particular'}</td>
+          <td>${v.productos}</td>
+          <td><strong style="color:var(--primary);">S/ ${parseFloat(v.total).toFixed(2)}</strong></td>
+          <td>${v.pago}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.onload = () => {
+      const sesionActiva = sessionStorage.getItem(STORAGE_KEY_AUTH);
+      if (sesionActiva === "true") {
+        mostrarPanelAdmin();
+      }
+    };
+  </script>
+</body>
+</html>
