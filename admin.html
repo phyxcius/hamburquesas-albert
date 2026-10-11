@@ -644,7 +644,6 @@
       const headers = token ? { "Authorization": `token ${token}` } : {};
 
       try {
-        // Intento directo a la API de GitHub (Para administradores con token que desean editar)
         const res = await fetch(`https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${ARCHIVO}?ref=main&_nocache=${Date.now()}`, {
           headers: headers
         });
@@ -661,13 +660,11 @@
             if (datos.repartidores) repartidores = datos.repartidores;
           }
         } else {
-          // Si la API falla (Ej. Limites de consulta o sin token), usamos la misma ruta del index.html para rescatar la información pública
           throw new Error("API Limitada, cargando por canal público");
         }
       } catch (e) {
         console.warn("Intentando cargar por canal alternativo público:", e);
         try {
-          // Obtener los datos usando Fetch directo, exactamente como hace tu Index o tu Github Pages
           const resPublic = await fetch(`productos.json?v=${Date.now()}`);
           if (resPublic.ok) {
             const datos = await resPublic.json();
@@ -883,17 +880,22 @@
       await sincronizarConGitHub();
     }
 
-    // SINCRONIZACIÓN CON GITHUB (SIN ERRORES SHA)
+    // SINCRONIZACIÓN CON GITHUB MEJORADA Y DIAGNÓSTICO DE ERRORES (CORREGIDO)
     async function sincronizarConGitHub() {
-      const token = obtenerTokenSecreto();
+      const token = obtenerTokenSecreto() || document.getElementById('ghTokenInput').value.trim();
+      
       if (!token) {
-        alert("⚠️ Falta configurar el Token de GitHub. Despliega el acordeón con tu código maestro y guárdalo.");
+        alert("⚠️ No tienes un Token guardado en este dispositivo.\n\nPor favor, despliega la pestaña 'Token de GitHub' e ingresa tu clave secreta de GitHub para poder guardar.");
+        // Abrir automáticamente el acordeón del token para facilitarle al usuario su inserción
+        tokenDesbloqueado = true;
+        abrirAcordeonToken();
         return;
       }
 
-      const btn = document.getElementById('btnPublicar') || event?.target;
+      const btn = document.getElementById('btnPublicar');
       const msg = document.getElementById('statusMsg');
       if (btn) { btn.disabled = true; btn.innerText = "⏳ Publicando en GitHub..."; }
+      if (msg) { msg.innerText = "Preparando datos..."; msg.style.color = "var(--navy)"; }
 
       telefonos.whatsapp = document.getElementById('telWhatsApp').value.trim();
       telefonos.tel1 = document.getElementById('telFijo1').value.trim();
@@ -906,19 +908,30 @@
       };
 
       let shaActual = "";
+      
       try {
+        if (msg) msg.innerText = "Validando archivo con GitHub...";
         const check = await fetch(`https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${ARCHIVO}?ref=main&_t=${Date.now()}`, {
           headers: {
             "Authorization": `token ${token}`,
             "Accept": "application/vnd.github.v3+json"
           }
         });
+
         if (check.ok) {
           const d = await check.json();
           shaActual = d.sha;
+        } else if (check.status === 401 || check.status === 403) {
+          throw new Error("El token de GitHub no es válido, ha expirado o no tiene permisos de escritura.");
+        } else if (check.status === 404) {
+          console.warn("El archivo no existe. Se intentará crear de cero.");
         }
       } catch (e) {
-        console.warn("No se pudo consultar SHA previo:", e);
+        if (e.message.includes("token")) {
+          alert(`🔒 Error de Acceso:\n${e.message}`);
+          if (btn) { btn.disabled = false; btn.innerText = "🚀 Guardar y Publicar en GitHub"; }
+          return;
+        }
       }
 
       const payload = {
@@ -929,6 +942,7 @@
       if (shaActual) payload.sha = shaActual;
 
       try {
+        if (msg) msg.innerText = "Subiendo cambios...";
         const res = await fetch(`https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${ARCHIVO}`, {
           method: "PUT",
           headers: {
@@ -938,26 +952,34 @@
           body: JSON.stringify(payload)
         });
 
+        const resData = await res.json();
+
         if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.message || "Error al actualizar repositorio");
+          if (res.status === 404) {
+            throw new Error(`Ruta o archivo no encontrado. Verifica si el repositorio "${REPOSITORIO}" es público/privado y que la cuenta de usuario "${USUARIO}" sea la correcta.`);
+          } else {
+            throw new Error(resData.message || "Error al actualizar repositorio");
+          }
         }
 
         if (msg) {
           msg.style.color = "#15803d";
           msg.innerText = "✔ ¡Carta y datos actualizados en GitHub!";
         }
-        alert("✔ ¡Guardado exitoso! Estará en vivo en pocos segundos.");
+        alert("✔ ¡Guardado exitoso! Los cambios estarán listos en la web en unos segundos.");
+        
+        // Guardar preventivamente por si se recarga
+        localStorage.setItem(STORAGE_KEY_SECRETA, token);
       } catch (err) {
         if (msg) {
           msg.style.color = "#b91c1c";
-          msg.innerText = "Error: " + err.message;
+          msg.innerText = "Fallo: " + err.message;
         }
-        alert("Error de GitHub: " + err.message);
+        alert("⚠️ Error al publicar:\n\n" + err.message + "\n\nSugerencia: Vuelve a ingresar tu Token en la parte superior y asegúrate de que tiene permisos para este repositorio.");
       } finally {
         if (btn) {
           btn.disabled = false;
-          btn.innerText = "🚀 Guardar Cambios en GitHub";
+          btn.innerText = "🚀 Guardar y Publicar en GitHub";
         }
       }
     }
