@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Caserito | Hamburguesas & Sánguches al Paso y Delivery</title>
+  <title>Albert's Sandwiches | Los Mejores Sandwiches del Cusco</title>
   
   <!-- Leaflet CSS para Mapas -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -51,11 +51,18 @@
     .nav-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 12px 20px;
+      padding: 10px 18px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
@@ -66,17 +73,15 @@
       text-decoration: none;
     }
 
-    .brand-icon {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: #fff;
+    .brand-avatar {
       width: 48px;
       height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 26px;
-      box-shadow: 0 4px 10px rgba(218, 41, 28, 0.3);
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2px solid var(--primary);
+      background: #f1f5f9;
+      box-shadow: 0 3px 8px rgba(218, 41, 28, 0.25);
     }
 
     .brand-text h1 {
@@ -93,6 +98,53 @@
       letter-spacing: 1px;
       color: var(--navy);
       font-weight: 800;
+    }
+
+    /* BADGE LA CHUSPA TECH */
+    .chuspa-nav-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #fffbeb;
+      border: 1.5px solid #f59e0b;
+      padding: 5px 12px 5px 6px;
+      border-radius: 26px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(245, 158, 11, 0.2);
+    }
+
+    .chuspa-nav-badge:hover {
+      transform: scale(1.04);
+      background: #ffffff;
+      box-shadow: 0 4px 10px rgba(218, 41, 28, 0.25);
+    }
+
+    .chuspa-nav-img {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1.5px solid #d97706;
+      background: #fff;
+    }
+
+    .chuspa-nav-info {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .chuspa-nav-title {
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .chuspa-nav-sub {
+      font-size: 9.5px;
+      font-weight: 800;
+      color: #b45309;
     }
 
     .nav-cta {
@@ -175,7 +227,7 @@
       border: 1px solid #fed7aa;
     }
 
-    /* PROMO / VOLANTE */
+    /* PROMO */
     .promo-section {
       max-width: 1200px;
       margin: 28px auto;
@@ -197,34 +249,34 @@
     .promo-img-container {
       flex: 1;
       min-width: 250px;
-      max-width: 360px;
+      max-width: 320px;
       margin: 0 auto;
-      cursor: pointer;
+      text-align: center;
     }
 
     .promo-img-container img {
       width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      max-height: 280px;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.15));
       transition: transform 0.25s ease;
       display: block;
+      margin: auto;
     }
 
-    .promo-img-container img:hover { transform: scale(1.02); }
+    .promo-img-container img:hover { transform: scale(1.03); }
 
     .promo-info { flex: 2; min-width: 280px; }
 
     .promo-info h3 {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 900;
       color: var(--primary);
       margin-bottom: 6px;
     }
 
     .promo-slogan {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 800;
       color: var(--navy);
       margin-bottom: 12px;
@@ -248,7 +300,7 @@
       text-decoration: none;
       color: var(--dark);
       font-weight: 800;
-      font-size: 13px;
+      font-size: 14px;
       transition: all 0.2s;
     }
 
@@ -323,15 +375,15 @@
 
     #deliveryMap {
       width: 100%;
-      height: 340px;
+      height: 350px;
       z-index: 10;
     }
 
-    /* ICONO HOMBRECITO CON CANASTA */
+    /* ICONO ALBERT EN EL MAPA */
     .custom-gps-marker {
       position: relative;
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -339,10 +391,10 @@
 
     .gps-radar-pulse {
       position: absolute;
-      width: 60px;
-      height: 60px;
+      width: 62px;
+      height: 62px;
       border-radius: 50%;
-      background: rgba(218, 41, 28, 0.28);
+      background: rgba(218, 41, 28, 0.35);
       animation: radarPulse 2s ease-out infinite;
       z-index: 1;
     }
@@ -352,25 +404,29 @@
       100% { transform: scale(1.9); opacity: 0; }
     }
 
-    .walker-badge-circle {
+    .albert-map-circle {
       position: relative;
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #da291c 0%, #b81d13 100%);
-      border: 2.5px solid #ffffff;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 21px;
+      border: 2.5px solid #ffffff;
+      background: #fff;
+      overflow: hidden;
       box-shadow: 0 4px 12px rgba(218, 41, 28, 0.45);
       z-index: 2;
     }
 
-    .basket-mini-icon {
+    .albert-map-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .basket-pin-badge {
       position: absolute;
-      bottom: -4px;
-      right: -4px;
+      bottom: -2px;
+      right: -2px;
       background: #ffc72c;
       border: 1.5px solid #ffffff;
       border-radius: 50%;
@@ -381,17 +437,12 @@
       align-items: center;
       justify-content: center;
       z-index: 3;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     }
 
-    .custom-gps-marker.offline .walker-badge-circle {
-      background: #64748b;
+    .custom-gps-marker.offline .albert-map-circle {
       filter: grayscale(0.85);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .custom-gps-marker.offline .basket-mini-icon {
-      background: #94a3b8;
+      border-color: #94a3b8;
     }
 
     .custom-gps-marker.offline .gps-radar-pulse { display: none; }
@@ -520,7 +571,7 @@
     .btn-add:hover { background: var(--primary-dark); }
     .btn-add:disabled { background: #94a3b8; cursor: not-allowed; }
 
-    /* BOTÓN FLOTANTE CANASTA */
+    /* BOTÓN FLOTANTE CON ALBERT */
     .chat-bubble-container {
       position: fixed;
       bottom: 24px;
@@ -557,14 +608,21 @@
       position: relative;
       width: 64px;
       height: 64px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      background: #ffffff;
       border-radius: 50%;
       box-shadow: 0 6px 20px rgba(218, 41, 28, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid #ffffff;
-      font-size: 28px;
+      border: 2.5px solid var(--primary);
+      overflow: hidden;
+    }
+
+    .chat-bubble-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
     }
 
     .chat-badge {
@@ -582,6 +640,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 10;
     }
 
     /* CARRITO MODAL */
@@ -614,13 +673,28 @@
     }
 
     .cart-modal-header {
-      padding: 16px 20px;
+      padding: 14px 20px;
       background: var(--primary);
       color: #fff;
       border-radius: 20px 20px 0 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    .cart-header-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-header-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 1.5px solid #fff;
     }
 
     .btn-close-cart {
@@ -723,7 +797,7 @@
       margin-left: 8px;
     }
 
-    /* FORMAS DE PAGO */
+    /* PAGO */
     .grid-payments {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -814,7 +888,7 @@
       border-color: #fca5a5;
     }
 
-    /* GPS Y DATOS */
+    /* GPS */
     .geo-box {
       display: flex;
       flex-direction: column;
@@ -898,23 +972,9 @@
 
     .btn-order-wsp:hover { background: #1eb857; }
 
-    /* LIGHTBOX */
-    .lightbox-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
-      z-index: 3000;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-    }
-
-    .lightbox-overlay img { max-width: 95%; max-height: 90vh; border-radius: 12px; }
-
     @media (max-width: 650px) {
       .nav-container { justify-content: center; }
-      .brand { justify-content: center; }
+      .brand-section { justify-content: center; }
       .map-header { flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -924,13 +984,25 @@
   <!-- HEADER -->
   <header>
     <div class="nav-container">
-      <a href="#" class="brand">
-        <div class="brand-icon">🧑‍🍳🧺</div>
-        <div class="brand-text">
-          <h1>EL CASERITO</h1>
-          <span>Hamburguesas & Sánguches de Pollo y Carne • Cusco</span>
-        </div>
-      </a>
+      <div class="brand-section">
+        <!-- MARCA ALBERT'S SANDWICHES -->
+        <a href="#" class="brand">
+          <img src="FB_IMG_1791694120487.jpg" alt="Albert's Sandwiches" class="brand-avatar" onerror="this.src='albert.png'">
+          <div class="brand-text">
+            <h1>Albert's Sandwiches</h1>
+            <span>Los Mejores Sandwiches del Cusco</span>
+          </div>
+        </a>
+
+        <!-- BADGE LA CHUSPA TECH CON ENLACE DIRECTO -->
+        <a href="https://lachuspaanuncios.com/" target="_blank" rel="noopener noreferrer" class="chuspa-nav-badge" title="Visitar La Chuspa Anuncios">
+          <img src="1000313582.png" alt="La Chuspa Anuncios" class="chuspa-nav-img" onerror="this.src='CHUSPITA-circulo.png'">
+          <div class="chuspa-nav-info">
+            <span class="chuspa-nav-title">La Chuspa Tech</span>
+            <span class="chuspa-nav-sub">by La Chuspa Anuncios</span>
+          </div>
+        </a>
+      </div>
 
       <div class="nav-actions">
         <a href="#menu" class="nav-cta">Ver Carta 🥪</a>
@@ -941,55 +1013,56 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-container">
-      <span class="badge-hero">🧺 Calientitos y al Paso directos a tu puerta</span>
-      <h2>¡Hamburguesas y Sánguches con Sabor Casero!</h2>
-      <p>Sánguches de pollo deshilachado, hamburguesas caseras de carne y cremas artesanales en tu punto exacto.</p>
+      <span class="badge-hero">🥪 ¡Los Mejores Sandwiches del Cusco!</span>
+      <h2>¡Directo de la Canasta a tu Puerta!</h2>
+      <p>Sándwiches de pollo, carne, huevo, triples y café calientito con reparto por todo Cusco.</p>
       
       <div class="hero-features">
-        <div class="feature-pill">🚶‍♂️ Repartidor con Canasta en Ruta</div>
-        <div class="feature-pill">🍗 Pollo & Carne Jugosa</div>
-        <div class="feature-pill">💵 Yape, Plin y Efectivo con Vuelto</div>
+        <div class="feature-pill">🚶‍♂️ Reparto con Canasta en Ruta</div>
+        <div class="feature-pill">☕ Café y Termos Calientes</div>
+        <div class="feature-pill">💵 Yape, Plin y Efectivo</div>
       </div>
     </div>
   </section>
 
-  <!-- PROMO DESTACADA -->
+  <!-- PROMO CON FOTO DE ALBERT -->
   <section class="promo-section">
     <div class="promo-card">
-      <div class="promo-img-container" onclick="abrirLightboxPromo()">
-        <img id="imgPromoOficial" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&auto=format&fit=crop&q=80" alt="Promo Hamburguesas y Sánguches">
+      <div class="promo-img-container">
+        <img id="imgPromoOficial" src="FB_IMG_1791694120487.jpg" alt="Albert's Sandwiches Cusco" onerror="this.src='albert.png'">
       </div>
       <div class="promo-info">
-        <span class="badge-hero" style="background: var(--navy); margin-bottom:8px;">Especial de la Canasta</span>
-        <h3>Hamburguesas Caseras & Sánguches al Instante</h3>
-        <p class="promo-slogan">"Llevamos tu pedido fresco, calientito y bien envuelto estés donde estés"</p>
+        <span class="badge-hero" style="background: var(--navy); margin-bottom:8px;">Reparto Oficial</span>
+        <h3>Albert's Sandwiches Cusco</h3>
+        <p class="promo-slogan">"¡Llegando con la canasta calientita estés donde estés!"</p>
         <p style="font-size:14px; color: var(--text-muted); margin-bottom: 14px;">
-          Pide por aquí y te llegará el mensaje directo al WhatsApp de nuestro vendedor para que te busque de inmediato.
+          Pide tus sándwiches caseros favoritos con cremas artesanales y te lo entregamos de inmediato.
         </p>
 
-        <div class="popup-section-label">Teléfonos para pedidos y llamadas:</div>
+        <div class="popup-section-label">Líneas directas de pedidos:</div>
         <div class="contact-grid" id="contenedorTelefonos">
-          <!-- Renderizado dinámico desde productos.json -->
+          <a href="tel:984886488" class="contact-button"><span>📞</span> 984 886 488</a>
+          <a href="tel:947369879" class="contact-button"><span>📞</span> 947 369 879</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SEGUIMIENTO DEL VENDEDOR EN RUTA -->
+  <!-- SEGUIMIENTO DE ALBERT EN RUTA -->
   <section class="map-section">
     <div class="map-card">
       <div class="map-header">
-        <h3>🚶‍♂️ Vendedor con Canasta en Ruta - Cusco</h3>
+        <h3>🚶‍♂️ Albert en Ruta con la Canasta - Cusco</h3>
         
         <div class="gps-legend-box">
           <div class="legend-item online" id="legendOnline">
-            <span style="font-size:14px;">🚶‍♂️🧺</span>
-            <span>Caminando en Ruta</span>
+            <span style="font-size:14px;">🚶‍♂️🔥</span>
+            <span>En Ruta</span>
           </div>
           <span style="color: #cbd5e1;">|</span>
           <div class="legend-item offline activo" id="legendOffline">
             <span style="font-size:14px;">🧍💤</span>
-            <span>En Puesto / Local</span>
+            <span>Recargando Canasta</span>
           </div>
         </div>
       </div>
@@ -1003,24 +1076,19 @@
   <!-- CARTA DE PRODUCTOS -->
   <section class="section-menu" id="menu">
     <div class="menu-header">
-      <h3>Nuestra Carta de Hamburguesas y Sánguches</h3>
-      <p style="font-size: 13px; color: var(--text-muted);">Elige tus sánguches favoritos de la canasta y ordénalos aquí.</p>
+      <h3>Nuestra Carta de Sándwiches</h3>
+      <p style="font-size: 13px; color: var(--text-muted);">Selecciona tus sándwiches y haz tu pedido al instante.</p>
     </div>
     <div class="grid-burgers" id="contenedorBurgers"></div>
   </section>
 
-  <!-- LIGHTBOX -->
-  <div class="lightbox-overlay" id="lightboxModal" onclick="cerrarLightboxPromo()">
-    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&auto=format&fit=crop&q=80" alt="Promo Canasta">
-  </div>
-
-  <!-- BOTÓN FLOTANTE CANASTA -->
+  <!-- BOTÓN FLOTANTE CON FOTO DE ALBERT -->
   <div class="chat-bubble-container" onclick="abrirModalCarrito()">
     <div class="chat-bubble-label">
-      <span>🧺 Tu Canastita</span>
+      <span>🧺 Pedir a Albert</span>
     </div>
     <div class="chat-bubble-btn">
-      <span>🧺</span>
+      <img src="FB_IMG_1791694120487.jpg" alt="Albert" onerror="this.src='albert.png'">
       <div class="chat-badge" id="badgeContador">0</div>
     </div>
   </div>
@@ -1029,14 +1097,20 @@
   <div class="cart-modal-overlay" id="cartModalOverlay" onclick="cerrarSiClickAfuera(event)">
     <div class="cart-modal-card">
       <div class="cart-modal-header">
-        <h3 style="font-size:17px;">🧺 Tu Pedido al Vendedor</h3>
+        <div class="cart-header-title">
+          <img src="FB_IMG_1791694120487.jpg" class="cart-header-avatar" alt="Albert" onerror="this.src='albert.png'">
+          <div>
+            <h3 style="font-size:16px; margin:0;">Albert's Sandwiches</h3>
+            <span style="font-size:11px; opacity:0.9;">Tu Pedido Directo</span>
+          </div>
+        </div>
         <button class="btn-close-cart" onclick="cerrarModalCarrito()">&times;</button>
       </div>
 
       <div class="cart-modal-body">
         <div>
           <div class="cart-header-actions">
-            <span class="popup-section-label">Sánguches y hamburguesas elegidos:</span>
+            <span class="popup-section-label">Sándwiches elegidos:</span>
             <button type="button" class="btn-vaciar-cart" onclick="vaciarPedidoConConfirmacion()">Vaciar</button>
           </div>
           <div class="cart-items-box" id="popupItemsList"></div>
@@ -1074,9 +1148,9 @@
           <span class="popup-section-label">¿Dónde te encuentras?:</span>
           <div class="geo-box">
             <button type="button" class="btn-geo" onclick="capturarGPSCliente()">📍 Compartir mi ubicación exacta</button>
-            <span class="geo-status" id="geoStatus">Activa el GPS para que el vendedor te ubique rápido</span>
+            <span class="geo-status" id="geoStatus">Activa el GPS para que Albert llegue a tu posición</span>
           </div>
-          <input type="text" id="direccionDetalleInput" class="client-input" placeholder="Calle, esquina, tienda, piso o referencia"/>
+          <input type="text" id="direccionDetalleInput" class="client-input" placeholder="Calle, oficina, tienda, piso o referencia"/>
         </div>
 
         <div>
@@ -1091,7 +1165,7 @@
           <span class="cart-total-amount" id="cartTotalMonto">S/ 0.00</span>
         </div>
         <button class="btn-order-wsp" onclick="enviarPedidoWhatsApp()">
-          <span>Pedir al Vendedor por WhatsApp</span> 💬
+          <span>Pedir a Albert por WhatsApp</span> 💬
         </button>
       </div>
     </div>
@@ -1101,31 +1175,31 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
-    let whatsappNumero = "51969773064";
+    let whatsappNumero = "51984886488";
     let telefonos = {
-      whatsapp: "51969773064",
-      tel1: "950 727 212",
-      tel2: "984 285 500"
+      whatsapp: "51984886488",
+      tel1: "984 886 488",
+      tel2: "947 369 879"
     };
 
     let catalogo = [
       {
-        id: "burger-classic",
-        nombre: "Hamburguesa Clásica Casera",
-        tag: "La Más Pedida",
-        descripcion: "Carne de res sazonada, queso fundido, lechuga, tomate y cremas caseras.",
-        precio: 10.00,
-        disponible: true,
-        imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80"
-      },
-      {
         id: "sand-pollo",
-        nombre: "Sánguche de Pollo Deshilachado",
-        tag: "Recomendado",
-        descripcion: "Pechuga de pollo jugosa deshilachada con mayonesa casera, apio y papitas al hilo.",
+        nombre: "Sándwich de Pollo Deshilachado",
+        tag: "El Favorito",
+        descripcion: "Pechuga de pollo jugosa, apio, mayonesa artesanal y papitas al hilo.",
         precio: 8.00,
         disponible: true,
         imagen: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "burger-classic",
+        nombre: "Hamburguesa Casera Albert",
+        tag: "Especial",
+        descripcion: "Carne sazonada a la plancha, queso, lechuga, tomate y cremas de la casa.",
+        precio: 10.00,
+        disponible: true,
+        imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80"
       }
     ];
 
@@ -1154,11 +1228,11 @@
     function renderizarTelefonos() {
       const container = document.getElementById('contenedorTelefonos');
       if (!container) return;
-      const clean1 = (telefonos.tel1 || '').replace(/\D/g,'');
-      const clean2 = (telefonos.tel2 || '').replace(/\D/g,'');
+      const clean1 = (telefonos.tel1 || '984 886 488').replace(/\D/g,'');
+      const clean2 = (telefonos.tel2 || '947 369 879').replace(/\D/g,'');
       container.innerHTML = `
-        <a href="tel:${clean1}" class="contact-button"><span>📞</span> ${telefonos.tel1 || '950 727 212'}</a>
-        <a href="tel:${clean2}" class="contact-button"><span>📞</span> ${telefonos.tel2 || '984 285 500'}</a>
+        <a href="tel:${clean1}" class="contact-button"><span>📞</span> ${telefonos.tel1 || '984 886 488'}</a>
+        <a href="tel:${clean2}" class="contact-button"><span>📞</span> ${telefonos.tel2 || '947 369 879'}</a>
       `;
     }
 
@@ -1172,11 +1246,11 @@
       }).addTo(map);
 
       actualizarVisualizadorGPS([
-        { id: "rep-1", nombre: "Vendedor con Canasta", online: false, lat: cuscoLat, lng: cuscoLng }
+        { id: "rep-1", nombre: "Albert con la Canasta", online: false, lat: cuscoLat, lng: cuscoLng }
       ]);
     }
 
-    // ICONO HOMBRECITO CON CANASTA
+    // ICONO CON LA FOTO DE ALBERT EN EL MAPA
     function actualizarVisualizadorGPS(flota) {
       if (!Array.isArray(flota) || !map) return;
       let hayOnline = false;
@@ -1188,24 +1262,28 @@
         const iconoHTML = estaOnline ? `
           <div class="custom-gps-marker">
             <div class="gps-radar-pulse"></div>
-            <div class="walker-badge-circle">🚶‍♂️</div>
-            <div class="basket-mini-icon">🧺</div>
+            <div class="albert-map-circle">
+              <img src="FB_IMG_1791694120487.jpg" alt="Albert" onerror="this.src='albert.png'">
+            </div>
+            <div class="basket-pin-badge">🧺</div>
           </div>
         ` : `
           <div class="custom-gps-marker offline">
-            <div class="walker-badge-circle">🧍</div>
-            <div class="basket-mini-icon">🧺</div>
+            <div class="albert-map-circle">
+              <img src="FB_IMG_1791694120487.jpg" alt="Albert" onerror="this.src='albert.png'">
+            </div>
+            <div class="basket-pin-badge">💤</div>
           </div>
         `;
 
         const icono = L.divIcon({
-          className: 'custom-walker-icon',
+          className: 'custom-albert-icon',
           html: iconoHTML,
-          iconSize: [52, 52],
-          iconAnchor: [26, 26]
+          iconSize: [54, 54],
+          iconAnchor: [27, 27]
         });
 
-        const popupTexto = `<b>🧺 ${rep.nombre}</b><br>${estaOnline ? 'Caminando con la canasta calientita 🔥' : 'En puesto o recargando canasta 💤'}`;
+        const popupTexto = `<b>🥪 ${rep.nombre}</b><br>${estaOnline ? 'Caminando con la canasta calientita 🔥' : 'En descanso o recargando canasta 💤'}`;
 
         if (!marcadoresFlota[rep.id]) {
           marcadoresFlota[rep.id] = L.marker([rep.lat || -13.5167, rep.lng || -71.9788], { icon: icono })
@@ -1242,7 +1320,7 @@
         card.className = `card ${estaDisponible ? '' : 'agotado'}`;
         card.innerHTML = `
           <div class="card-img-wrapper">
-            <span class="card-tag">${estaDisponible ? (item.tag || 'En Canasta') : 'Agotado'}</span>
+            <span class="card-tag">${estaDisponible ? (item.tag || 'Calientito') : 'Agotado'}</span>
             <img src="${item.imagen}" alt="${item.nombre}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80'">
           </div>
           <div class="card-body">
@@ -1286,7 +1364,7 @@
     }
 
     function vaciarPedidoConConfirmacion() {
-      if (confirm("¿Vaciar tu canasta de compras?")) {
+      if (confirm("¿Vaciar tu canasta de pedidos?")) {
         for (const k in pedido) pedido[k].cantidad = 0;
         actualizarVistaPopup();
       }
@@ -1304,14 +1382,6 @@
 
     function cerrarSiClickAfuera(e) {
       if (e.target.id === 'cartModalOverlay') cerrarModalCarrito();
-    }
-
-    function abrirLightboxPromo() {
-      document.getElementById('lightboxModal').style.display = 'flex';
-    }
-
-    function cerrarLightboxPromo() {
-      document.getElementById('lightboxModal').style.display = 'none';
     }
 
     function actualizarVistaPopup() {
@@ -1348,12 +1418,12 @@
       });
 
       if (totalUnidades === 0) {
-        listContainer.innerHTML = '<div style="text-align:center; color:#94a3b8; font-size:13px; padding:12px;">Tu canasta está vacía. ¡Elige tus hamburguesas o sánguches!</div>';
+        listContainer.innerHTML = '<div style="text-align:center; color:#94a3b8; font-size:13px; padding:12px;">Tu canasta está vacía. ¡Elige tus sándwiches favoritos!</div>';
       }
 
       ultimoTotalPagar = totalMonto;
       document.getElementById('badgeContador').innerText = `${totalUnidades}`;
-      document.getElementById('cartLabelTotalConCantidad').innerText = `Total (${totalUnidades} ${totalUnidades === 1 ? 'sánguche' : 'sánguches'}):`;
+      document.getElementById('cartLabelTotalConCantidad').innerText = `Total (${totalUnidades} ${totalUnidades === 1 ? 'sándwich' : 'sándwiches'}):`;
       document.getElementById('cartTotalMonto').innerText = `S/ ${totalMonto.toFixed(2)}`;
 
       if (metodoPago === 'Efectivo') calcularVueltoEfectivo();
@@ -1389,7 +1459,7 @@
 
       if (ultimoTotalPagar <= 0) {
         box.className = "vuelto-badge-box";
-        txt.innerText = "Selecciona al menos un producto";
+        txt.innerText = "Selecciona al menos un sándwich";
         montoTxt.innerText = "";
         return;
       }
@@ -1418,7 +1488,7 @@
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           ubicacionClienteCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-          status.innerText = "✔ Ubicación fijada para que el casero te encuentre";
+          status.innerText = "✔ Ubicación fijada para que Albert te encuentre";
           status.classList.add('ready');
         },
         () => { status.innerText = "No se pudo acceder a tu ubicación."; },
@@ -1431,7 +1501,7 @@
       const seleccionados = Object.values(pedido).filter(item => item.cantidad > 0);
 
       if (seleccionados.length === 0) {
-        alert("Agrega al menos una hamburguesa o sánguche a tu canasta.");
+        alert("Agrega al menos un sándwich a tu pedido.");
         return;
       }
 
@@ -1457,18 +1527,18 @@
         }
       }
 
-      let mensaje = `*🧺 ¡HOLA CASERO! DESEO HACER UN PEDIDO:*\n\n`;
+      let mensaje = `*🥪 ¡HOLA ALBERT! DESEO HACER UN PEDIDO:*\n\n`;
       if (nombreCliente) mensaje += `*👤 Cliente:* ${nombreCliente}\n`;
       if (direccionDetalle) mensaje += `*📍 Ubicación/Ref:* ${direccionDetalle}\n`;
-      mensaje += `*🍔 Detalle del Pedido:*\n${detalleTexto}\n`;
+      mensaje += `*📦 Detalle del Pedido:*\n${detalleTexto}\n`;
       mensaje += `*💰 Total a Pagar:* S/ ${total.toFixed(2)}\n`;
       mensaje += `*💳 Forma de Pago:* ${pagoDetalle}\n`;
 
       if (ubicacionClienteCoords) {
-        mensaje += `*📌 Mi ubicación en Google Maps:* https://www.google.com/maps?q=${ubicacionClienteCoords.lat},${ubicacionClienteCoords.lng}\n`;
+        mensaje += `*📌 Ubicación exacta en Maps:* https://www.google.com/maps?q=${ubicacionClienteCoords.lat},${ubicacionClienteCoords.lng}\n`;
       }
 
-      mensaje += `\n¿Por dónde estás pasando con la canasta para encontrarnos?`;
+      mensaje += `\n¿Por qué zona estás pasando con la canasta para encontrarnos?`;
 
       const destino = (telefonos.whatsapp || whatsappNumero).replace(/\D/g,'');
       window.open(`https://wa.me/${destino}?text=${encodeURIComponent(mensaje)}`, '_blank');
@@ -1518,7 +1588,6 @@
       iniciarMapaCusco();
       actualizarVistaPopup();
       
-      // Conexión en vivo con GitHub
       cargarCatalogoDesdeGitHub();
       setInterval(cargarCatalogoDesdeGitHub, 20000);
     });
