@@ -638,12 +638,13 @@
       }
     }
 
-    // CARGA DE DATOS DESDE GITHUB
+    // CARGA DE DATOS DESDE GITHUB (CORREGIDA CON RESPALDO DE RUTA PÚBLICA DIRECTA)
     async function cargarDesdeGitHub() {
       const token = obtenerTokenSecreto();
       const headers = token ? { "Authorization": `token ${token}` } : {};
 
       try {
+        // Intento directo a la API de GitHub (Para administradores con token que desean editar)
         const res = await fetch(`https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${ARCHIVO}?ref=main&_nocache=${Date.now()}`, {
           headers: headers
         });
@@ -659,9 +660,28 @@
             if (datos.telefonos) telefonos = datos.telefonos;
             if (datos.repartidores) repartidores = datos.repartidores;
           }
+        } else {
+          // Si la API falla (Ej. Limites de consulta o sin token), usamos la misma ruta del index.html para rescatar la información pública
+          throw new Error("API Limitada, cargando por canal público");
         }
       } catch (e) {
-        console.error("Error al cargar desde GitHub:", e);
+        console.warn("Intentando cargar por canal alternativo público:", e);
+        try {
+          // Obtener los datos usando Fetch directo, exactamente como hace tu Index o tu Github Pages
+          const resPublic = await fetch(`productos.json?v=${Date.now()}`);
+          if (resPublic.ok) {
+            const datos = await resPublic.json();
+            if (Array.isArray(datos)) {
+              productos = datos;
+            } else {
+              productos = datos.productos || [];
+              if (datos.telefonos) telefonos = datos.telefonos;
+              if (datos.repartidores) repartidores = datos.repartidores;
+            }
+          }
+        } catch (errPublic) {
+          console.error("No se pudo cargar la data por ninguna vía:", errPublic);
+        }
       }
       renderizarProductos();
       cargarValoresTelefonosEnFormulario();
@@ -677,7 +697,13 @@
     // GESTIÓN DE PRODUCTOS
     function renderizarProductos() {
       const cont = document.getElementById('listaProductos');
+      if (!cont) return;
       cont.innerHTML = '';
+
+      if (productos.length === 0) {
+        cont.innerHTML = '<div style="text-align:center; padding:20px; color:var(--text-muted);">Sin productos cargados. Intenta guardar o agregar uno nuevo.</div>';
+        return;
+      }
 
       productos.forEach((p, i) => {
         const div = document.createElement('div');
@@ -760,6 +786,7 @@
     // GESTIÓN DE REPARTIDORES
     function renderizarRepartidores() {
       const cont = document.getElementById('listaRepartidores');
+      if (!cont) return;
       cont.innerHTML = '';
 
       if (repartidores.length === 0) {
