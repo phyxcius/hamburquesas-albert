@@ -3,114 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Administración | Burger Club</title>
+  <title>Panel de Control | Albert's Sandwiches Cusco</title>
   <style>
     :root {
-      --primary: #dc2626;
-      --primary-dark: #b91c1c;
+      --primary: #da291c;
+      --primary-dark: #b81d13;
       --accent: #f59e0b;
-      --dark-bg: #0b0f19;
-      --card-bg: #1e293b;
-      --border-color: #334155;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
+      --navy: #002f6c;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --radius: 12px;
+      --shadow: 0 4px 15px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     }
 
     body {
-      background: var(--dark-bg);
+      background: var(--bg);
       color: var(--text);
-      padding: 18px;
+      padding: 20px 16px;
       max-width: 860px;
       margin: auto;
       line-height: 1.5;
     }
 
+    /* HEADER */
     .header-admin {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .brand-title-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .admin-avatar-mini {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2px solid var(--primary);
+      box-shadow: 0 2px 8px rgba(218, 41, 28, 0.2);
+      background: #fff;
     }
 
     h2 {
-      color: var(--accent);
+      color: var(--primary);
+      font-size: 21px;
+      font-weight: 900;
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 22px;
-      font-weight: 900;
     }
 
+    /* TABS */
     .dashboard-tabs {
       display: flex;
       gap: 8px;
-      margin: 16px 0;
+      margin: 18px 0;
       border-bottom: 2px solid var(--border-color);
-      padding-bottom: 8px;
+      padding-bottom: 10px;
       overflow-x: auto;
     }
 
     .tab-btn {
-      background: none;
-      border: none;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
       font-weight: 800;
       font-size: 13px;
       padding: 9px 16px;
       color: var(--text-muted);
       cursor: pointer;
-      border-radius: 8px;
+      border-radius: 10px;
       white-space: nowrap;
       transition: all 0.2s;
     }
 
-    .tab-btn.active {
-      background: rgba(220, 38, 38, 0.2);
-      color: #fca5a5;
-      border: 1px solid var(--primary);
+    .tab-btn:hover {
+      background: #f1f5f9;
+      color: var(--navy);
     }
 
+    .tab-btn.active {
+      background: #fef2f2;
+      color: var(--primary);
+      border-color: #fca5a5;
+      box-shadow: 0 2px 6px rgba(218, 41, 28, 0.12);
+    }
+
+    /* TARJETAS */
     .card {
       background: var(--card-bg);
-      padding: 16px;
-      border-radius: 12px;
+      padding: 18px;
+      border-radius: var(--radius);
       border: 1px solid var(--border-color);
       margin-bottom: 14px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      box-shadow: var(--shadow);
     }
 
     label {
       font-size: 11px;
       font-weight: 800;
-      color: var(--text-muted);
+      color: var(--navy);
       display: block;
-      margin-top: 8px;
+      margin-top: 10px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
     input, textarea, select {
       width: 100%;
-      padding: 10px;
+      padding: 10px 12px;
       margin-top: 4px;
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      background: #0f172a;
+      background: #f8fafc;
       color: var(--text);
       font-size: 14px;
+      transition: all 0.2s;
     }
 
     input:focus, select:focus, textarea:focus {
       outline: none;
-      border-color: var(--accent);
+      background: #ffffff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(218, 41, 28, 0.12);
     }
 
+    /* BOTONES */
     .btn {
       padding: 10px 14px;
       border: none;
@@ -130,12 +165,13 @@
       width: 100%;
       font-size: 15px;
       padding: 14px;
-      margin-top: 10px;
-      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3);
+      margin-top: 12px;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(218, 41, 28, 0.25);
     }
 
-    .btn-save:hover { filter: brightness(1.1); }
-    .btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
+    .btn-save:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .btn-save:disabled { opacity: 0.65; cursor: not-allowed; }
 
     .btn-add {
       background: #16a34a;
@@ -144,22 +180,26 @@
       width: 100%;
       font-size: 14px;
       padding: 12px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(22, 163, 74, 0.2);
     }
+    .btn-add:hover { background: #15803d; }
 
     .btn-del {
-      background: rgba(220, 38, 38, 0.2);
-      color: #f87171;
-      border: 1px solid rgba(220, 38, 38, 0.4);
-      margin-top: 10px;
+      background: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      margin-top: 12px;
       font-size: 12px;
     }
+    .btn-del:hover { background: #fca5a5; color: #7f1d1d; }
 
     .admin-img-preview-box {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-top: 6px;
-      background: #0f172a;
+      background: #f8fafc;
       padding: 10px;
       border-radius: 8px;
       border: 1px solid var(--border-color);
@@ -171,13 +211,13 @@
       object-fit: cover;
       border-radius: 8px;
       border: 1px solid var(--border-color);
-      background: #1e293b;
+      background: #ffffff;
     }
 
     /* ACORDEÓN PROTEGIDO PARA TOKEN */
     .token-accordion-wrapper {
-      background: #0f172a;
-      border: 1.5px dashed var(--accent);
+      background: #fffbeb;
+      border: 1.5px dashed #f59e0b;
       border-radius: 10px;
       margin-bottom: 16px;
       overflow: hidden;
@@ -193,32 +233,35 @@
       align-items: center;
       cursor: pointer;
       font-weight: 800;
-      color: var(--accent);
+      color: #b45309;
       font-size: 13px;
     }
+
+    .token-accordion-trigger:hover { background: #fef3c7; }
 
     .token-accordion-content {
       display: none;
       padding: 14px 16px;
-      background: var(--card-bg);
-      border-top: 1px solid var(--border-color);
+      background: #ffffff;
+      border-top: 1px solid #fef08a;
     }
 
-    /* TARJETAS MOTORIZADOS */
+    /* TARJETAS VENDEDOR / REPARTIDOR */
     .repartidor-card {
       background: var(--card-bg);
       border: 1.5px solid var(--border-color);
-      border-radius: 12px;
-      padding: 14px;
+      border-radius: var(--radius);
+      padding: 14px 16px;
       margin-bottom: 12px;
       display: flex;
       flex-direction: column;
       gap: 10px;
+      box-shadow: var(--shadow);
     }
 
     .repartidor-card.activo {
-      border-color: #22c55e;
-      background: rgba(34, 197, 94, 0.08);
+      border-color: #86efac;
+      background: #f0fdf4;
     }
 
     .repartidor-header {
@@ -233,29 +276,31 @@
       font-size: 11px;
       font-weight: 800;
       padding: 4px 10px;
-      border-radius: 12px;
-      background: #334155;
+      border-radius: 14px;
+      background: #f1f5f9;
       color: var(--text-muted);
+      border: 1px solid var(--border-color);
     }
 
     .badge-status.online {
-      background: rgba(34, 197, 94, 0.2);
-      color: #4ade80;
-      border: 1px solid #22c55e;
+      background: #dcfce7;
+      color: #15803d;
+      border-color: #86efac;
     }
 
     .btn-toggle-gps {
-      background: #22c55e;
+      background: #16a34a;
       color: #fff;
       border: none;
-      padding: 8px 14px;
-      border-radius: 6px;
+      padding: 9px 14px;
+      border-radius: 8px;
       font-weight: bold;
       font-size: 12px;
       cursor: pointer;
     }
-
+    .btn-toggle-gps:hover { background: #15803d; }
     .btn-toggle-gps.off { background: #dc2626; }
+    .btn-toggle-gps.off:hover { background: #b91c1c; }
 
     /* LOGIN */
     .login-container {
@@ -267,24 +312,37 @@
 
     .login-card {
       background: var(--card-bg);
-      padding: 28px 24px;
+      padding: 30px 26px;
       border-radius: 16px;
       border: 1px solid var(--border-color);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       width: 100%;
       max-width: 380px;
+      text-align: center;
+    }
+
+    .login-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top center;
+      border: 2.5px solid var(--primary);
+      margin-bottom: 10px;
+      box-shadow: 0 4px 12px rgba(218, 41, 28, 0.25);
     }
 
     .btn-logout {
-      background: rgba(220, 38, 38, 0.15);
-      color: #f87171;
-      border: 1px solid rgba(220, 38, 38, 0.3);
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
       padding: 6px 14px;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 12px;
       font-weight: bold;
       cursor: pointer;
     }
+    .btn-logout:hover { background: #fee2e2; }
 
     /* TABLA REPORTES */
     .custom-table {
@@ -293,23 +351,25 @@
       font-size: 13px;
       text-align: left;
       margin-top: 10px;
+      background: #fff;
     }
 
     .custom-table th, .custom-table td {
       border: 1px solid var(--border-color);
-      padding: 10px;
+      padding: 10px 12px;
     }
 
     .custom-table th {
-      background: #0f172a;
-      color: var(--accent);
+      background: #f8fafc;
+      color: var(--navy);
+      font-weight: 800;
     }
 
     .btn-print {
-      background: #2563eb;
+      background: var(--navy);
       color: #fff;
-      padding: 8px 14px;
-      border-radius: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
       border: none;
       font-weight: bold;
       cursor: pointer;
@@ -328,18 +388,18 @@
   <!-- PANTALLA LOGIN -->
   <div id="pantallaLogin" class="login-container">
     <div class="login-card">
-      <div style="text-align:center; font-size:42px; margin-bottom:8px;">🍔</div>
-      <h3 style="color:#fff; text-align:center; font-size:20px; font-weight:800; margin-bottom:4px;">Burger Club Admin</h3>
-      <p style="font-size:12px; color:var(--text-muted); text-align:center; margin-bottom:18px;">Panel de Cocina, Precios & Despacho</p>
+      <img src="FB_IMG_1791694120487.jpg" alt="Albert" class="login-avatar" onerror="this.src='albert.png'">
+      <h3 style="color:var(--primary); font-size:20px; font-weight:900; margin-bottom:2px;">Albert's Sandwiches</h3>
+      <p style="font-size:12px; color:var(--text-muted); margin-bottom:18px;">Panel de Control y Reparto en Canasta</p>
       
-      <form onsubmit="verificarLoginAdmin(event)">
+      <form onsubmit="verificarLoginAdmin(event)" style="text-align:left;">
         <label>Usuario</label>
         <input type="text" id="loginUsuario" placeholder="admin" required autofocus>
         
         <label>Contraseña</label>
         <input type="password" id="loginPassword" placeholder="••••••••" required>
         
-        <button type="submit" class="btn btn-save" style="margin-top:16px;">Iniciar Sesión</button>
+        <button type="submit" class="btn btn-save" style="margin-top:16px;">Ingresar al Panel</button>
       </form>
     </div>
   </div>
@@ -348,43 +408,51 @@
   <div id="panelAdminPrincipal" style="display: none;">
 
     <div class="header-admin no-print">
-      <h2>🍔 Administración Burger Club</h2>
-      <button class="btn-logout" onclick="cerrarSesionAdmin()">🚪 Cerrar Sesión</button>
+      <div class="brand-title-box">
+        <img src="FB_IMG_1791694120487.jpg" alt="Albert" class="admin-avatar-mini" onerror="this.src='albert.png'">
+        <div>
+          <h2>Albert's Sandwiches</h2>
+          <span style="font-size:12px; color:var(--navy); font-weight:700;">Panel de Administración & Despacho</span>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="cerrarSesionAdmin()">🚪 Salir</button>
     </div>
-    <p style="font-size: 13px; color: var(--text-muted);" class="no-print">Actualiza la carta de hamburguesas, números de atención y posición de los motorizados.</p>
+    <p style="font-size: 13px; color: var(--text-muted); margin-top:4px;" class="no-print">
+      Actualiza los sándwiches, precios, teléfonos de pedido y la ubicación GPS de la canasta.
+    </p>
 
     <!-- ACORDEÓN PROTEGIDO PARA GITHUB TOKEN -->
-    <div class="token-accordion-wrapper no-print">
+    <div class="token-accordion-wrapper no-print" style="margin-top:12px;">
       <button class="token-accordion-trigger" type="button" onclick="alternarAcordeonToken()">
-        <span>🔐 Token Personal de GitHub (Acceso Desarrollador)</span>
+        <span>🔐 Token de GitHub (Acceso Desarrollador)</span>
         <span id="accordionIcon">🔒 Desplegar</span>
       </button>
 
       <div class="token-accordion-content" id="contenidoAcordeonToken">
         <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">
-          Ingresa tu Personal Access Token (Classic o Fine-Grained) con permisos de lectura y escritura en el repositorio.
+          Ingresa tu Personal Access Token con permisos para actualizar la tienda en GitHub.
         </p>
         <label for="ghTokenInput">Token de GitHub (ghp_... o github_pat_...):</label>
         <input type="password" id="ghTokenInput" placeholder="Pega tu token aquí">
         <div style="display:flex; gap:8px; margin-top:10px;">
           <button class="btn" style="background:#16a34a; color:#fff; font-size:12px;" onclick="guardarTokenManual()">💾 Guardar Llave</button>
-          <button class="btn" style="background:rgba(220,38,38,0.2); color:#f87171; font-size:12px;" onclick="borrarTokenManual()">🗑️ Limpiar Llave</button>
+          <button class="btn" style="background:#fee2e2; color:#b91c1c; font-size:12px;" onclick="borrarTokenManual()">🗑️ Limpiar Llave</button>
         </div>
       </div>
     </div>
 
     <!-- TABS -->
     <div class="dashboard-tabs no-print">
-      <button class="tab-btn active" id="tabBtnProductos" onclick="cambiarTab('productos')">🍔 Carta & Precios</button>
-      <button class="tab-btn" id="tabBtnTelefonos" onclick="cambiarTab('telefonos')">📞 WhatsApp & Pedidos</button>
-      <button class="tab-btn" id="tabBtnGPS" onclick="cambiarTab('gps')">🛵 Motorizados GPS</button>
-      <button class="tab-btn" id="tabBtnReportes" onclick="cambiarTab('reportes')">📋 Comandas & Ventas</button>
+      <button class="tab-btn active" id="tabBtnProductos" onclick="cambiarTab('productos')">🥪 Carta de Sándwiches</button>
+      <button class="tab-btn" id="tabBtnTelefonos" onclick="cambiarTab('telefonos')">📞 Teléfonos & WhatsApp</button>
+      <button class="tab-btn" id="tabBtnGPS" onclick="cambiarTab('gps')">🧺 Albert en Ruta (GPS)</button>
+      <button class="tab-btn" id="tabBtnReportes" onclick="cambiarTab('reportes')">📋 Reportes de Pedidos</button>
     </div>
 
-    <!-- PESTAÑA 1: HAMBURGUESAS -->
+    <!-- PESTAÑA 1: SÁNDWICHES -->
     <div id="seccionProductos">
-      <button class="btn btn-add no-print" onclick="agregarNuevoProducto()">➕ Agregar Hamburguesa o Combo</button>
-      <div id="listaProductos">Cargando carta gastronómica...</div>
+      <button class="btn btn-add no-print" onclick="agregarNuevoProducto()">➕ Agregar Nuevo Sándwich</button>
+      <div id="listaProductos">Cargando carta de sándwiches...</div>
       <button class="btn btn-save no-print" id="btnPublicar" onclick="sincronizarConGitHub()">🚀 Guardar y Publicar en GitHub</button>
       <div id="statusMsg" style="text-align:center; margin-top:8px; font-weight:bold;"></div>
     </div>
@@ -392,36 +460,36 @@
     <!-- PESTAÑA 2: TELÉFONOS -->
     <div id="seccionTelefonos" style="display: none;">
       <div class="card">
-        <h3 style="color:var(--accent); font-size:16px; margin-bottom:12px;">📞 Canales de Atención & WhatsApp</h3>
+        <h3 style="color:var(--primary); font-size:16px; margin-bottom:12px;">📞 Números de Pedido y Contacto de Albert</h3>
         
-        <label>WhatsApp de Pedidos (con código de país, ej: 51969773064):</label>
-        <input type="text" id="telWhatsApp" placeholder="51969773064">
+        <label>WhatsApp Principal de Pedidos (con código de país, ej: 51984886488):</label>
+        <input type="text" id="telWhatsApp" placeholder="51984886488">
 
-        <label>Línea Rápida 1 (Llamadas / Delivery):</label>
-        <input type="text" id="telFijo1" placeholder="950 727 212">
+        <label>Teléfono 1 (Llamadas Directas):</label>
+        <input type="text" id="telFijo1" placeholder="984 886 488">
 
-        <label>Línea Rápida 2 (Cocina / Despacho):</label>
-        <input type="text" id="telFijo2" placeholder="984 285 500">
+        <label>Teléfono 2 (Línea Alterna / Apoyo):</label>
+        <input type="text" id="telFijo2" placeholder="947 369 879">
 
-        <button class="btn btn-save" onclick="sincronizarConGitHub()" style="margin-top:16px;">💾 Guardar Canales en GitHub</button>
+        <button class="btn btn-save" onclick="sincronizarConGitHub()" style="margin-top:16px;">💾 Guardar Teléfonos en GitHub</button>
       </div>
     </div>
 
-    <!-- PESTAÑA 3: MOTORIZADOS GPS -->
+    <!-- PESTAÑA 3: MOTORIZADOS / GPS ALBERT -->
     <div id="seccionGPS" style="display: none;">
-      <button class="btn btn-add" onclick="agregarNuevoRepartidor()">➕ Agregar Motorizado a la Flota</button>
+      <button class="btn btn-add" onclick="agregarNuevoRepartidor()">➕ Agregar Persona a la Flota</button>
       <p style="font-size:12px; color:var(--text-muted); margin-bottom:14px;">
-        💡 Cada motorizado puede abrir este panel desde su celular, buscar su nombre y conectar su ubicación en vivo.
+        💡 Albert puede abrir este panel desde su celular, ubicar su nombre y activar su GPS en tiempo real para que los clientes vean por dónde camina la canasta.
       </p>
-      <div id="listaRepartidores">Cargando motorizados...</div>
-      <button class="btn btn-save" onclick="sincronizarConGitHub()">💾 Guardar Estado de Motorizados en GitHub</button>
+      <div id="listaRepartidores">Cargando ubicación...</div>
+      <button class="btn btn-save" onclick="sincronizarConGitHub()">💾 Guardar Estado en GitHub</button>
     </div>
 
-    <!-- PESTAÑA 4: COMANDAS & REPORTES -->
+    <!-- PESTAÑA 4: REPORTES -->
     <div id="seccionReportes" style="display: none;">
       <div id="areaImpresion">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <h3>📋 Historial de Comandas & Entregas</h3>
+          <h3 style="color:var(--navy);">📋 Registro de Entregas & Ventas</h3>
           <button class="btn-print no-print" onclick="window.print()">🖨️ Imprimir Hoja</button>
         </div>
         <table class="custom-table">
@@ -429,7 +497,7 @@
             <tr>
               <th>Hora</th>
               <th>Cliente</th>
-              <th>Hamburguesas / Platos</th>
+              <th>Sándwiches</th>
               <th>Total</th>
               <th>Pago</th>
             </tr>
@@ -443,23 +511,23 @@
 
   <script>
     const USUARIO = "phyxcius";
-    const REPOSITORIO = "hamburquesas-albert";
+    const REPOSITORIO = "hamburguesas-albert";
     const ARCHIVO = "productos.json";
     
     // CÓDIGOS DE SEGURIDAD
     const CODIGO_CREADOR_TOKEN = "42423549";
-    const STORAGE_KEY_SECRETA = "burger_vault_secret_token";
-    const STORAGE_KEY_AUTH = "burger_admin_sesion_activa";
+    const STORAGE_KEY_SECRETA = "albert_vault_secret_token";
+    const STORAGE_KEY_AUTH = "albert_admin_sesion_activa";
 
     let productos = [];
     let telefonos = {
-      whatsapp: "51969773064",
-      tel1: "950 727 212",
-      tel2: "984 285 500"
+      whatsapp: "51984886488",
+      tel1: "984 886 488",
+      tel2: "947 369 879"
     };
 
     let repartidores = [
-      { id: "moto-1", nombre: "Moto 1 - Delivery Centro", online: false, lat: -13.5167, lng: -71.9788 }
+      { id: "rep-1", nombre: "Albert con la Canasta", online: false, lat: -13.5167, lng: -71.9788 }
     ];
 
     let watchIdGPS = null;
@@ -533,7 +601,7 @@
       const t = document.getElementById('ghTokenInput').value.trim();
       if (!t) return alert("Por favor ingresa un token válido.");
       localStorage.setItem(STORAGE_KEY_SECRETA, t);
-      alert("✔ Token guardado correctamente en este dispositivo.");
+      alert("✔ Token guardado correctamente.");
       cargarDesdeGitHub();
     }
 
@@ -601,12 +669,12 @@
     }
 
     function cargarValoresTelefonosEnFormulario() {
-      document.getElementById('telWhatsApp').value = telefonos.whatsapp || "51969773064";
-      document.getElementById('telFijo1').value = telefonos.tel1 || "950 727 212";
-      document.getElementById('telFijo2').value = telefonos.tel2 || "984 285 500";
+      document.getElementById('telWhatsApp').value = telefonos.whatsapp || "51984886488";
+      document.getElementById('telFijo1').value = telefonos.tel1 || "984 886 488";
+      document.getElementById('telFijo2').value = telefonos.tel2 || "947 369 879";
     }
 
-    // GESTIÓN DE PRODUCTOS / HAMBURGUESAS
+    // GESTIÓN DE PRODUCTOS
     function renderizarProductos() {
       const cont = document.getElementById('listaProductos');
       cont.innerHTML = '';
@@ -617,12 +685,12 @@
         div.innerHTML = `
           <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
             <div style="flex:2;">
-              <label>Nombre de la Hamburguesa / Combo:</label>
+              <label>Nombre del Sándwich:</label>
               <input type="text" value="${p.nombre}" onchange="productos[${i}].nombre = this.value">
             </div>
             <div style="flex:1;">
               <label>Etiqueta / Badge:</label>
-              <input type="text" value="${p.tag || 'Artesanal'}" onchange="productos[${i}].tag = this.value">
+              <input type="text" value="${p.tag || 'En Canasta'}" onchange="productos[${i}].tag = this.value">
             </div>
           </div>
 
@@ -632,27 +700,27 @@
               <input type="number" step="0.5" value="${p.precio}" onchange="productos[${i}].precio = parseFloat(this.value) || 0">
             </div>
             <div style="flex:1;">
-              <label>Disponibilidad en Cocina:</label>
+              <label>Disponibilidad:</label>
               <select onchange="productos[${i}].disponible = (this.value === 'true')">
-                <option value="true" ${p.disponible !== false ? 'selected' : ''}>🟢 Disponible</option>
-                <option value="false" ${p.disponible === false ? 'selected' : ''}>🔴 Agotado / Sin Stock</option>
+                <option value="true" ${p.disponible !== false ? 'selected' : ''}>🟢 Disponible (En Canasta)</option>
+                <option value="false" ${p.disponible === false ? 'selected' : ''}>🔴 Agotado</option>
               </select>
             </div>
           </div>
 
-          <label>Ingredientes y Descripción:</label>
+          <label>Descripción / Ingredientes:</label>
           <input type="text" value="${p.descripcion || ''}" onchange="productos[${i}].descripcion = this.value">
 
-          <label>Fotografía del Plato:</label>
+          <label>Foto del Sándwich:</label>
           <div class="admin-img-preview-box">
-            <img id="prev-${i}" class="admin-thumb" src="${p.imagen}" onerror="this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80'">
+            <img id="prev-${i}" class="admin-thumb" src="${p.imagen}" onerror="this.src='https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&auto=format&fit=crop&q=80'">
             <div style="flex:1;">
               <input type="file" accept="image/*" onchange="subirImagen(event, ${i})" style="font-size:12px;">
               <input type="text" value="${p.imagen}" placeholder="o URL externa de la foto" onchange="productos[${i}].imagen = this.value; document.getElementById('prev-${i}').src = this.value;" style="margin-top:4px;">
             </div>
           </div>
 
-          <button class="btn btn-del" onclick="eliminarProducto(${i})">🗑️ Eliminar Producto</button>
+          <button class="btn btn-del" onclick="eliminarProducto(${i})">🗑️ Eliminar Sándwich</button>
         `;
         cont.appendChild(div);
       });
@@ -671,13 +739,13 @@
 
     function agregarNuevoProducto() {
       productos.push({
-        id: "burger-" + Date.now(),
-        nombre: "Nueva Hamburguesa Especial",
-        tag: "Recomendado",
-        descripcion: "Carne Angus, queso fundido, lechuga crocante y salsa de la casa.",
-        precio: 25.00,
+        id: "sand-" + Date.now(),
+        nombre: "Nuevo Sándwich Casero",
+        tag: "Recién Salido",
+        descripcion: "Pan fresco, relleno calientito y salsas de la casa.",
+        precio: 8.00,
         disponible: true,
-        imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80"
+        imagen: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600&auto=format&fit=crop&q=80"
       });
       renderizarProductos();
     }
@@ -689,13 +757,13 @@
       }
     }
 
-    // GESTIÓN DE MOTORIZADOS
+    // GESTIÓN DE REPARTIDORES
     function renderizarRepartidores() {
       const cont = document.getElementById('listaRepartidores');
       cont.innerHTML = '';
 
       if (repartidores.length === 0) {
-        cont.innerHTML = '<p style="color:var(--text-muted); font-size:13px;">No hay motorizados registrados.</p>';
+        cont.innerHTML = '<p style="color:var(--text-muted); font-size:13px;">No hay personas registradas.</p>';
         return;
       }
 
@@ -709,12 +777,12 @@
               <input type="text" value="${rep.nombre}" onchange="repartidores[${i}].nombre = this.value" style="font-weight:bold; font-size:14px; max-width:280px; display:inline-block;">
             </div>
             <span class="badge-status ${estaOnline ? 'online' : ''}">
-              ${estaOnline ? 'Online 🛵💨 En Ruta' : 'Offline 💤 En Local'}
+              ${estaOnline ? 'Online 🚶‍♂️🔥 En Ruta' : 'Offline 🧍💤 En Descanso'}
             </span>
           </div>
           
           <div style="font-size:11px; color:var(--text-muted);">
-            Última posición GPS: Lat ${rep.lat ? rep.lat.toFixed(4) : '--'}, Lng ${rep.lng ? rep.lng.toFixed(4) : '--'}
+            Últimas coordenadas: Lat ${rep.lat ? rep.lat.toFixed(4) : '--'}, Lng ${rep.lng ? rep.lng.toFixed(4) : '--'}
           </div>
 
           <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
@@ -730,10 +798,10 @@
     }
 
     function agregarNuevoRepartidor() {
-      const nombre = prompt("Nombre o identificación del motorizado (ej. Moto 2 - Juan):");
+      const nombre = prompt("Nombre o identificación de la persona (ej. Albert - Canasta 1):");
       if (!nombre) return;
       repartidores.push({
-        id: "moto-" + Date.now(),
+        id: "rep-" + Date.now(),
         nombre: nombre.trim(),
         online: false,
         lat: -13.5167,
@@ -743,7 +811,7 @@
     }
 
     function eliminarRepartidor(i) {
-      if (confirm(`¿Eliminar a "${repartidores[i].nombre}" de la flota?`)) {
+      if (confirm(`¿Eliminar a "${repartidores[i].nombre}"?`)) {
         if (repartidorActivoId === repartidores[i].id && watchIdGPS) {
           navigator.geolocation.clearWatch(watchIdGPS);
         }
@@ -769,7 +837,7 @@
           }, null, { enableHighAccuracy: true });
 
           renderizarRepartidores();
-          alert(`✔ GPS conectado para "${repartidores[index].nombre}". Sincronizando con GitHub...`);
+          alert(`✔ GPS activado para "${repartidores[index].nombre}". Sincronizando con GitHub...`);
           await sincronizarConGitHub();
         },
         (err) => { alert("No se pudo obtener GPS: " + err.message); },
@@ -827,7 +895,7 @@
       }
 
       const payload = {
-        message: "Actualización de carta, teléfonos y flota Burger Club",
+        message: "Actualización de carta, teléfonos y flota Albert's Sandwiches",
         content: btoa(unescape(encodeURIComponent(JSON.stringify(objetoCompleto, null, 2)))),
         branch: "main"
       };
@@ -849,13 +917,13 @@
         }
 
         if (msg) {
-          msg.style.color = "#4ade80";
+          msg.style.color = "#15803d";
           msg.innerText = "✔ ¡Carta y datos actualizados en GitHub!";
         }
         alert("✔ ¡Guardado exitoso! Estará en vivo en pocos segundos.");
       } catch (err) {
         if (msg) {
-          msg.style.color = "#f87171";
+          msg.style.color = "#b91c1c";
           msg.innerText = "Error: " + err.message;
         }
         alert("Error de GitHub: " + err.message);
@@ -869,12 +937,12 @@
 
     // REPORTE DE VENTAS
     function renderizarReporte() {
-      const ventas = JSON.parse(localStorage.getItem('burger_ventas')) || [];
+      const ventas = JSON.parse(localStorage.getItem('albert_ventas')) || [];
       const tbody = document.getElementById('tablaVentasBody');
       tbody.innerHTML = '';
 
       if (ventas.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:14px; color:var(--text-muted);">No hay comandas registradas en este turno.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:14px; color:var(--text-muted);">No hay pedidos registrados en este turno.</td></tr>';
         return;
       }
 
@@ -884,7 +952,7 @@
           <td>${v.fecha}</td>
           <td>${v.cliente || 'Particular'}</td>
           <td>${v.productos}</td>
-          <td><strong style="color:var(--accent);">S/ ${parseFloat(v.total).toFixed(2)}</strong></td>
+          <td><strong style="color:var(--primary);">S/ ${parseFloat(v.total).toFixed(2)}</strong></td>
           <td>${v.pago}</td>
         `;
         tbody.appendChild(tr);
