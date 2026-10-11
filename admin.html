@@ -1,43 +1,183 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Administración | LeoGas Cusco</title>
+  <title>Panel de Administración | Burger Club</title>
   <style>
-    body { font-family: system-ui, -apple-system, sans-serif; background: #f8fafc; color: #1e1b4b; padding: 18px; max-width: 820px; margin: auto; }
-    
+    :root {
+      --primary: #dc2626;
+      --primary-dark: #b91c1c;
+      --accent: #f59e0b;
+      --dark-bg: #0b0f19;
+      --card-bg: #1e293b;
+      --border-color: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: var(--dark-bg);
+      color: var(--text);
+      padding: 18px;
+      max-width: 860px;
+      margin: auto;
+      line-height: 1.5;
+    }
+
     .header-admin {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 8px;
     }
-    
-    h2 { color: #6b21a8; margin: 0; }
-    
-    .dashboard-tabs { display: flex; gap: 8px; margin: 16px 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; overflow-x: auto; }
-    .tab-btn { background: none; border: none; font-weight: 800; font-size: 13px; padding: 8px 14px; color: #64748b; cursor: pointer; border-radius: 8px; white-space: nowrap; }
-    .tab-btn.active { background: #f3e8ff; color: #581c87; }
 
-    .card { background: #fff; padding: 16px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
-    
-    label { font-size: 11px; font-weight: 800; color: #64748b; display: block; margin-top: 8px; text-transform: uppercase; }
-    input, textarea, select { width: 100%; padding: 9px; margin-top: 4px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
-    
-    .btn { padding: 10px 14px; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; }
-    .btn-save { background: #6b21a8; color: white; width: 100%; font-size: 16px; padding: 14px; margin-top: 10px; }
-    .btn-add { background: #16a34a; color: white; margin-bottom: 14px; width: 100%; font-size: 14px; }
-    .btn-del { background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; margin-top: 10px; font-size: 12px; }
-    
-    .admin-img-preview-box { display: flex; align-items: center; gap: 12px; margin-top: 6px; background: #faf5ff; padding: 10px; border-radius: 8px; border: 1px solid #e9d5ff; }
-    .admin-thumb { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #cbd5e1; background: #fff; }
+    h2 {
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 22px;
+      font-weight: 900;
+    }
 
-    /* ACORDEÓN PROTEGIDO PARA TOKEN GITHUB */
+    .dashboard-tabs {
+      display: flex;
+      gap: 8px;
+      margin: 16px 0;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 8px;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 9px 16px;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      background: rgba(220, 38, 38, 0.2);
+      color: #fca5a5;
+      border: 1px solid var(--primary);
+    }
+
+    .card {
+      background: var(--card-bg);
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+
+    label {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 4px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: #0f172a;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .btn {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-save {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      width: 100%;
+      font-size: 15px;
+      padding: 14px;
+      margin-top: 10px;
+      box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3);
+    }
+
+    .btn-save:hover { filter: brightness(1.1); }
+    .btn-save:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .btn-add {
+      background: #16a34a;
+      color: white;
+      margin-bottom: 14px;
+      width: 100%;
+      font-size: 14px;
+      padding: 12px;
+    }
+
+    .btn-del {
+      background: rgba(220, 38, 38, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(220, 38, 38, 0.4);
+      margin-top: 10px;
+      font-size: 12px;
+    }
+
+    .admin-img-preview-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 6px;
+      background: #0f172a;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .admin-thumb {
+      width: 64px;
+      height: 64px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #1e293b;
+    }
+
+    /* ACORDEÓN PROTEGIDO PARA TOKEN */
     .token-accordion-wrapper {
-      background: #fdf4ff;
-      border: 1.5px dashed #c084fc;
+      background: #0f172a;
+      border: 1.5px dashed var(--accent);
       border-radius: 10px;
       margin-bottom: 16px;
       overflow: hidden;
@@ -53,25 +193,21 @@
       align-items: center;
       cursor: pointer;
       font-weight: 800;
-      color: #6b21a8;
+      color: var(--accent);
       font-size: 13px;
-    }
-
-    .token-accordion-trigger:hover {
-      background: #fae8ff;
     }
 
     .token-accordion-content {
       display: none;
       padding: 14px 16px;
-      background: #fff;
-      border-top: 1px solid #e9d5ff;
+      background: var(--card-bg);
+      border-top: 1px solid var(--border-color);
     }
 
-    /* TARJETAS MULTI-REPARTIDOR */
+    /* TARJETAS MOTORIZADOS */
     .repartidor-card {
-      background: #ffffff;
-      border: 1.5px solid #e2e8f0;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-color);
       border-radius: 12px;
       padding: 14px;
       margin-bottom: 12px;
@@ -79,14 +215,37 @@
       flex-direction: column;
       gap: 10px;
     }
-    .repartidor-card.activo { border-color: #86efac; background: #f0fdf4; }
-    .repartidor-header { display: flex; justify-content: space-between; align-items: center; }
-    .badge-status { font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 12px; background: #e2e8f0; color: #64748b; }
-    .badge-status.online { background: #dcfce7; color: #15803d; }
-    .repartidor-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-    
+
+    .repartidor-card.activo {
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.08);
+    }
+
+    .repartidor-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge-status {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: #334155;
+      color: var(--text-muted);
+    }
+
+    .badge-status.online {
+      background: rgba(34, 197, 94, 0.2);
+      color: #4ade80;
+      border: 1px solid #22c55e;
+    }
+
     .btn-toggle-gps {
-      background: #16a34a;
+      background: #22c55e;
       color: #fff;
       border: none;
       padding: 8px 14px;
@@ -95,9 +254,10 @@
       font-size: 12px;
       cursor: pointer;
     }
+
     .btn-toggle-gps.off { background: #dc2626; }
 
-    /* PANTALLA LOGIN */
+    /* LOGIN */
     .login-container {
       display: flex;
       justify-content: center;
@@ -106,20 +266,20 @@
     }
 
     .login-card {
-      background: #fff;
-      padding: 24px 28px;
+      background: var(--card-bg);
+      padding: 28px 24px;
       border-radius: 16px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       width: 100%;
       max-width: 380px;
     }
 
     .btn-logout {
-      background: #f1f5f9;
-      color: #dc2626;
-      border: 1px solid #fecaca;
-      padding: 6px 12px;
+      background: rgba(220, 38, 38, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(220, 38, 38, 0.3);
+      padding: 6px 14px;
       border-radius: 6px;
       font-size: 12px;
       font-weight: bold;
@@ -127,15 +287,38 @@
     }
 
     /* TABLA REPORTES */
-    .custom-table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; margin-top: 10px; }
-    .custom-table th, .custom-table td { border: 1px solid #e2e8f0; padding: 8px 10px; }
-    .custom-table th { background: #f1f5f9; color: #334155; }
-    .btn-print { background: #2563eb; color: #fff; padding: 8px 14px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; }
+    .custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+      margin-top: 10px;
+    }
+
+    .custom-table th, .custom-table td {
+      border: 1px solid var(--border-color);
+      padding: 10px;
+    }
+
+    .custom-table th {
+      background: #0f172a;
+      color: var(--accent);
+    }
+
+    .btn-print {
+      background: #2563eb;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
     @media print {
       body * { visibility: hidden; }
       #areaImpresion, #areaImpresion * { visibility: visible; }
-      #areaImpresion { position: absolute; left: 0; top: 0; width: 100%; }
+      #areaImpresion { position: absolute; left: 0; top: 0; width: 100%; background: #fff; color: #000; }
       .no-print { display: none !important; }
     }
   </style>
@@ -145,9 +328,9 @@
   <!-- PANTALLA LOGIN -->
   <div id="pantallaLogin" class="login-container">
     <div class="login-card">
-      <div style="text-align:center; font-size:38px; margin-bottom:6px;">🦁</div>
-      <h3 style="color:#6b21a8; text-align:center; margin-bottom:4px;">Acceso Administrador</h3>
-      <p style="font-size:12px; color:#64748b; text-align:center; margin-bottom:16px;">LeoGas Cusco • Sistema de Control</p>
+      <div style="text-align:center; font-size:42px; margin-bottom:8px;">🍔</div>
+      <h3 style="color:#fff; text-align:center; font-size:20px; font-weight:800; margin-bottom:4px;">Burger Club Admin</h3>
+      <p style="font-size:12px; color:var(--text-muted); text-align:center; margin-bottom:18px;">Panel de Cocina, Precios & Despacho</p>
       
       <form onsubmit="verificarLoginAdmin(event)">
         <label>Usuario</label>
@@ -156,21 +339,21 @@
         <label>Contraseña</label>
         <input type="password" id="loginPassword" placeholder="••••••••" required>
         
-        <button type="submit" class="btn btn-save" style="margin-top:16px;">Ingresar al Panel</button>
+        <button type="submit" class="btn btn-save" style="margin-top:16px;">Iniciar Sesión</button>
       </form>
     </div>
   </div>
 
-  <!-- PANEL PRINCIPAL (SE MUESTRA TRAS LOGIN) -->
+  <!-- PANEL PRINCIPAL -->
   <div id="panelAdminPrincipal" style="display: none;">
 
     <div class="header-admin no-print">
-      <h2>🦁 Panel de Administración LeoGas</h2>
-      <button class="btn-logout" onclick="cerrarSesionAdmin()">🚪 Salir</button>
+      <h2>🍔 Administración Burger Club</h2>
+      <button class="btn-logout" onclick="cerrarSesionAdmin()">🚪 Cerrar Sesión</button>
     </div>
-    <p style="font-size: 13px; color: #64748b;" class="no-print">Administra tus productos, teléfonos, GPS y ventas.</p>
+    <p style="font-size: 13px; color: var(--text-muted);" class="no-print">Actualiza la carta de hamburguesas, números de atención y posición de los motorizados.</p>
 
-    <!-- ACORDEÓN PROTEGIDO CON CÓDIGO MAESTRO -->
+    <!-- ACORDEÓN PROTEGIDO PARA GITHUB TOKEN -->
     <div class="token-accordion-wrapper no-print">
       <button class="token-accordion-trigger" type="button" onclick="alternarAcordeonToken()">
         <span>🔐 Token Personal de GitHub (Acceso Desarrollador)</span>
@@ -178,29 +361,30 @@
       </button>
 
       <div class="token-accordion-content" id="contenidoAcordeonToken">
-        <p style="font-size:11px; color:#64748b; margin-bottom:8px;">
-          Solo tú tienes autorización para cambiar la llave de actualización del repositorio.
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">
+          Ingresa tu Personal Access Token (Classic o Fine-Grained) con permisos de lectura y escritura en el repositorio.
         </p>
-        <label for="ghTokenInput">Token Personal de GitHub (ghp_... o github_pat_...):</label>
-        <input type="password" id="ghTokenInput" placeholder="Pega el token aquí">
-        <div style="display:flex; gap:8px; margin-top:8px;">
-          <button class="btn" style="background:#6b21a8; color:#fff; font-size:12px;" onclick="guardarTokenManual()">💾 Guardar Llave</button>
-          <button class="btn" style="background:#fee2e2; color:#dc2626; font-size:12px;" onclick="borrarTokenManual()">🗑️ Limpiar Llave</button>
+        <label for="ghTokenInput">Token de GitHub (ghp_... o github_pat_...):</label>
+        <input type="password" id="ghTokenInput" placeholder="Pega tu token aquí">
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button class="btn" style="background:#16a34a; color:#fff; font-size:12px;" onclick="guardarTokenManual()">💾 Guardar Llave</button>
+          <button class="btn" style="background:rgba(220,38,38,0.2); color:#f87171; font-size:12px;" onclick="borrarTokenManual()">🗑️ Limpiar Llave</button>
         </div>
       </div>
     </div>
 
+    <!-- TABS -->
     <div class="dashboard-tabs no-print">
-      <button class="tab-btn active" id="tabBtnProductos" onclick="cambiarTab('productos')">📝 Balones y Precios</button>
-      <button class="tab-btn" id="tabBtnTelefonos" onclick="cambiarTab('telefonos')">📞 Teléfonos y WhatsApp</button>
-      <button class="tab-btn" id="tabBtnGPS" onclick="cambiarTab('gps')">📡 Flota GPS Repartidores</button>
-      <button class="tab-btn" id="tabBtnReportes" onclick="cambiarTab('reportes')">📊 Reporte Contable & Ventas</button>
+      <button class="tab-btn active" id="tabBtnProductos" onclick="cambiarTab('productos')">🍔 Carta & Precios</button>
+      <button class="tab-btn" id="tabBtnTelefonos" onclick="cambiarTab('telefonos')">📞 WhatsApp & Pedidos</button>
+      <button class="tab-btn" id="tabBtnGPS" onclick="cambiarTab('gps')">🛵 Motorizados GPS</button>
+      <button class="tab-btn" id="tabBtnReportes" onclick="cambiarTab('reportes')">📋 Comandas & Ventas</button>
     </div>
 
-    <!-- PESTAÑA 1: BALONES -->
+    <!-- PESTAÑA 1: HAMBURGUESAS -->
     <div id="seccionProductos">
-      <button class="btn btn-add no-print" onclick="agregarNuevoProducto()">➕ Agregar Nuevo Balón</button>
-      <div id="listaProductos">Cargando catálogo...</div>
+      <button class="btn btn-add no-print" onclick="agregarNuevoProducto()">➕ Agregar Hamburguesa o Combo</button>
+      <div id="listaProductos">Cargando carta gastronómica...</div>
       <button class="btn btn-save no-print" id="btnPublicar" onclick="sincronizarConGitHub()">🚀 Guardar y Publicar en GitHub</button>
       <div id="statusMsg" style="text-align:center; margin-top:8px; font-weight:bold;"></div>
     </div>
@@ -208,47 +392,44 @@
     <!-- PESTAÑA 2: TELÉFONOS -->
     <div id="seccionTelefonos" style="display: none;">
       <div class="card">
-        <h3 style="color:var(--primary); font-size:16px; margin-bottom:12px;">📞 Edición de Teléfonos del Volante y Pedidos</h3>
+        <h3 style="color:var(--accent); font-size:16px; margin-bottom:12px;">📞 Canales de Atención & WhatsApp</h3>
         
-        <label>Número WhatsApp para Pedidos (con código de país, ej: 51969773064):</label>
+        <label>WhatsApp de Pedidos (con código de país, ej: 51969773064):</label>
         <input type="text" id="telWhatsApp" placeholder="51969773064">
 
-        <label>Teléfono 1 (Llamada Rápida 1):</label>
+        <label>Línea Rápida 1 (Llamadas / Delivery):</label>
         <input type="text" id="telFijo1" placeholder="950 727 212">
 
-        <label>Teléfono 2 (Llamada Rápida 2):</label>
+        <label>Línea Rápida 2 (Cocina / Despacho):</label>
         <input type="text" id="telFijo2" placeholder="984 285 500">
 
-        <label>Teléfono 3 (Fijo o Central Cusco):</label>
-        <input type="text" id="telFijo3" placeholder="(084) 501111">
-
-        <button class="btn btn-save" onclick="sincronizarConGitHub()" style="margin-top:16px;">💾 Guardar Teléfonos en GitHub</button>
+        <button class="btn btn-save" onclick="sincronizarConGitHub()" style="margin-top:16px;">💾 Guardar Canales en GitHub</button>
       </div>
     </div>
 
-    <!-- PESTAÑA 3: MULTI-REPARTIDORES GPS -->
+    <!-- PESTAÑA 3: MOTORIZADOS GPS -->
     <div id="seccionGPS" style="display: none;">
-      <button class="btn btn-add" onclick="agregarNuevoRepartidor()">➕ Agregar Nuevo Repartidor a la Flota</button>
-      <p style="font-size:12px; color:#64748b; margin-bottom:14px;">
-        💡 Cada repartidor entra a este panel desde su celular, ubica su nombre y activa su GPS.
+      <button class="btn btn-add" onclick="agregarNuevoRepartidor()">➕ Agregar Motorizado a la Flota</button>
+      <p style="font-size:12px; color:var(--text-muted); margin-bottom:14px;">
+        💡 Cada motorizado puede abrir este panel desde su celular, buscar su nombre y conectar su ubicación en vivo.
       </p>
-      <div id="listaRepartidores">Cargando lista de repartidores...</div>
-      <button class="btn btn-save" onclick="sincronizarConGitHub()">💾 Guardar Cambios de Flota en GitHub</button>
+      <div id="listaRepartidores">Cargando motorizados...</div>
+      <button class="btn btn-save" onclick="sincronizarConGitHub()">💾 Guardar Estado de Motorizados en GitHub</button>
     </div>
 
-    <!-- PESTAÑA 4: REPORTES -->
+    <!-- PESTAÑA 4: COMANDAS & REPORTES -->
     <div id="seccionReportes" style="display: none;">
       <div id="areaImpresion">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
-          <h3>📋 Reporte de Entregas Realizadas</h3>
-          <button class="btn-print no-print" onclick="window.print()">🖨️ Imprimir Reporte</button>
+          <h3>📋 Historial de Comandas & Entregas</h3>
+          <button class="btn-print no-print" onclick="window.print()">🖨️ Imprimir Hoja</button>
         </div>
         <table class="custom-table">
           <thead>
             <tr>
-              <th>Fecha y Hora</th>
+              <th>Hora</th>
               <th>Cliente</th>
-              <th>Detalle</th>
+              <th>Hamburguesas / Platos</th>
               <th>Total</th>
               <th>Pago</th>
             </tr>
@@ -267,26 +448,25 @@
     
     // CÓDIGOS DE SEGURIDAD
     const CODIGO_CREADOR_TOKEN = "42423549";
-    const STORAGE_KEY_SECRETA = "leogas_vault_secret_token";
-    const STORAGE_KEY_AUTH = "leogas_admin_sesion_activa";
+    const STORAGE_KEY_SECRETA = "burger_vault_secret_token";
+    const STORAGE_KEY_AUTH = "burger_admin_sesion_activa";
 
     let productos = [];
     let telefonos = {
       whatsapp: "51969773064",
       tel1: "950 727 212",
-      tel2: "984 285 500",
-      tel3: "(084) 501111"
+      tel2: "984 285 500"
     };
 
     let repartidores = [
-      { id: "rep-1", nombre: "Repartidor 1 (Moto Centro)", online: false, lat: -13.5167, lng: -71.9788 }
+      { id: "moto-1", nombre: "Moto 1 - Delivery Centro", online: false, lat: -13.5167, lng: -71.9788 }
     ];
 
     let watchIdGPS = null;
     let repartidorActivoId = null;
     let tokenDesbloqueado = false;
 
-    // LOGIN INICIAL
+    // LOGIN
     function verificarLoginAdmin(e) {
       e.preventDefault();
       const u = document.getElementById('loginUsuario').value.trim();
@@ -313,7 +493,7 @@
       document.getElementById('loginPassword').value = '';
     }
 
-    // ACORDEÓN PROTEGIDO CON CÓDIGO MAESTRO DEL CREADOR
+    // ACORDEÓN PROTEGIDO
     function alternarAcordeonToken() {
       const contenido = document.getElementById('contenidoAcordeonToken');
       const icono = document.getElementById('accordionIcon');
@@ -325,7 +505,7 @@
       }
 
       if (!tokenDesbloqueado) {
-        const pass = prompt("🔐 ACCESO CREADOR DEL SISTEMA:\n\nIngresa el código de seguridad para abrir el Token de GitHub:");
+        const pass = prompt("🔐 CÓDIGO MAESTRO:\n\nIngresa la clave para acceder al Token de GitHub:");
         if (pass === CODIGO_CREADOR_TOKEN) {
           tokenDesbloqueado = true;
           abrirAcordeonToken();
@@ -353,12 +533,12 @@
       const t = document.getElementById('ghTokenInput').value.trim();
       if (!t) return alert("Por favor ingresa un token válido.");
       localStorage.setItem(STORAGE_KEY_SECRETA, t);
-      alert("✔ Llave de GitHub guardada correctamente en este navegador.");
+      alert("✔ Token guardado correctamente en este dispositivo.");
       cargarDesdeGitHub();
     }
 
     function borrarTokenManual() {
-      if (confirm("¿Deseas eliminar el token guardado en este equipo?")) {
+      if (confirm("¿Deseas eliminar el token guardado?")) {
         localStorage.removeItem(STORAGE_KEY_SECRETA);
         document.getElementById('ghTokenInput').value = '';
         alert("Token eliminado.");
@@ -424,10 +604,9 @@
       document.getElementById('telWhatsApp').value = telefonos.whatsapp || "51969773064";
       document.getElementById('telFijo1').value = telefonos.tel1 || "950 727 212";
       document.getElementById('telFijo2').value = telefonos.tel2 || "984 285 500";
-      document.getElementById('telFijo3').value = telefonos.tel3 || "(084) 501111";
     }
 
-    // GESTIÓN DE PRODUCTOS
+    // GESTIÓN DE PRODUCTOS / HAMBURGUESAS
     function renderizarProductos() {
       const cont = document.getElementById('listaProductos');
       cont.innerHTML = '';
@@ -436,8 +615,16 @@
         const div = document.createElement('div');
         div.className = 'card';
         div.innerHTML = `
-          <label>Nombre:</label>
-          <input type="text" value="${p.nombre}" onchange="productos[${i}].nombre = this.value">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+            <div style="flex:2;">
+              <label>Nombre de la Hamburguesa / Combo:</label>
+              <input type="text" value="${p.nombre}" onchange="productos[${i}].nombre = this.value">
+            </div>
+            <div style="flex:1;">
+              <label>Etiqueta / Badge:</label>
+              <input type="text" value="${p.tag || 'Artesanal'}" onchange="productos[${i}].tag = this.value">
+            </div>
+          </div>
 
           <div style="display:flex; gap:10px;">
             <div style="flex:1;">
@@ -445,23 +632,23 @@
               <input type="number" step="0.5" value="${p.precio}" onchange="productos[${i}].precio = parseFloat(this.value) || 0">
             </div>
             <div style="flex:1;">
-              <label>Disponibilidad:</label>
+              <label>Disponibilidad en Cocina:</label>
               <select onchange="productos[${i}].disponible = (this.value === 'true')">
                 <option value="true" ${p.disponible !== false ? 'selected' : ''}>🟢 Disponible</option>
-                <option value="false" ${p.disponible === false ? 'selected' : ''}>🔴 Agotado</option>
+                <option value="false" ${p.disponible === false ? 'selected' : ''}>🔴 Agotado / Sin Stock</option>
               </select>
             </div>
           </div>
 
-          <label>Descripción:</label>
+          <label>Ingredientes y Descripción:</label>
           <input type="text" value="${p.descripcion || ''}" onchange="productos[${i}].descripcion = this.value">
 
-          <label>Imagen del Balón:</label>
+          <label>Fotografía del Plato:</label>
           <div class="admin-img-preview-box">
-            <img id="prev-${i}" class="admin-thumb" src="${p.imagen}" onerror="this.src='1791513590376.jpg'">
+            <img id="prev-${i}" class="admin-thumb" src="${p.imagen}" onerror="this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80'">
             <div style="flex:1;">
               <input type="file" accept="image/*" onchange="subirImagen(event, ${i})" style="font-size:12px;">
-              <input type="text" value="${p.imagen}" placeholder="o escribe nombre de archivo" onchange="productos[${i}].imagen = this.value; document.getElementById('prev-${i}').src = this.value;" style="margin-top:4px;">
+              <input type="text" value="${p.imagen}" placeholder="o URL externa de la foto" onchange="productos[${i}].imagen = this.value; document.getElementById('prev-${i}').src = this.value;" style="margin-top:4px;">
             </div>
           </div>
 
@@ -484,31 +671,31 @@
 
     function agregarNuevoProducto() {
       productos.push({
-        id: "gas-" + Date.now(),
-        nombre: "Nuevo Balón de Gas",
-        tag: "Sellado",
-        descripcion: "Balón con precinto de garantía y peso exacto.",
-        precio: 50.00,
+        id: "burger-" + Date.now(),
+        nombre: "Nueva Hamburguesa Especial",
+        tag: "Recomendado",
+        descripcion: "Carne Angus, queso fundido, lechuga crocante y salsa de la casa.",
+        precio: 25.00,
         disponible: true,
-        imagen: "1791513590376.jpg"
+        imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80"
       });
       renderizarProductos();
     }
 
     function eliminarProducto(i) {
-      if (confirm(`¿Eliminar "${productos[i].nombre}"?`)) {
+      if (confirm(`¿Deseas eliminar "${productos[i].nombre}"?`)) {
         productos.splice(i, 1);
         renderizarProductos();
       }
     }
 
-    // GESTIÓN DE REPARTIDORES
+    // GESTIÓN DE MOTORIZADOS
     function renderizarRepartidores() {
       const cont = document.getElementById('listaRepartidores');
       cont.innerHTML = '';
 
       if (repartidores.length === 0) {
-        cont.innerHTML = '<p style="color:#64748b; font-size:13px;">No hay repartidores registrados en la flota.</p>';
+        cont.innerHTML = '<p style="color:var(--text-muted); font-size:13px;">No hay motorizados registrados.</p>';
         return;
       }
 
@@ -522,18 +709,18 @@
               <input type="text" value="${rep.nombre}" onchange="repartidores[${i}].nombre = this.value" style="font-weight:bold; font-size:14px; max-width:280px; display:inline-block;">
             </div>
             <span class="badge-status ${estaOnline ? 'online' : ''}">
-              ${estaOnline ? 'Online 🔥 En Ruta' : 'Offline 💤 Inactivo'}
+              ${estaOnline ? 'Online 🛵💨 En Ruta' : 'Offline 💤 En Local'}
             </span>
           </div>
           
-          <div style="font-size:11px; color:#64748b;">
-            Última coordenada: Lat ${rep.lat ? rep.lat.toFixed(4) : '--'}, Lng ${rep.lng ? rep.lng.toFixed(4) : '--'}
+          <div style="font-size:11px; color:var(--text-muted);">
+            Última posición GPS: Lat ${rep.lat ? rep.lat.toFixed(4) : '--'}, Lng ${rep.lng ? rep.lng.toFixed(4) : '--'}
           </div>
 
-          <div class="repartidor-actions">
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;">
             ${estaOnline 
-              ? `<button class="btn-toggle-gps off" onclick="desconectarGPSRepartidor(${i})">⏹️ Desconectar mi GPS</button>` 
-              : `<button class="btn-toggle-gps" onclick="conectarGPSRepartidor(${i})">▶️ Conectar mi GPS desde este celular</button>`
+              ? `<button class="btn-toggle-gps off" onclick="desconectarGPSRepartidor(${i})">⏹️ Desactivar mi GPS</button>` 
+              : `<button class="btn-toggle-gps" onclick="conectarGPSRepartidor(${i})">▶️ Conectar mi GPS (Desde este móvil)</button>`
             }
             <button class="btn btn-del" style="margin-top:0; padding:8px 12px;" onclick="eliminarRepartidor(${i})">🗑️ Eliminar</button>
           </div>
@@ -543,10 +730,10 @@
     }
 
     function agregarNuevoRepartidor() {
-      const nombre = prompt("Nombre o identificación del nuevo repartidor (ej. Moto 3 - Carlos):");
+      const nombre = prompt("Nombre o identificación del motorizado (ej. Moto 2 - Juan):");
       if (!nombre) return;
       repartidores.push({
-        id: "rep-" + Date.now(),
+        id: "moto-" + Date.now(),
         nombre: nombre.trim(),
         online: false,
         lat: -13.5167,
@@ -556,7 +743,7 @@
     }
 
     function eliminarRepartidor(i) {
-      if (confirm(`¿Eliminar a "${repartidores[i].nombre}" de la lista?`)) {
+      if (confirm(`¿Eliminar a "${repartidores[i].nombre}" de la flota?`)) {
         if (repartidorActivoId === repartidores[i].id && watchIdGPS) {
           navigator.geolocation.clearWatch(watchIdGPS);
         }
@@ -566,7 +753,7 @@
     }
 
     function conectarGPSRepartidor(index) {
-      if (!navigator.geolocation) return alert("Geolocalización no disponible en este dispositivo.");
+      if (!navigator.geolocation) return alert("Geolocalización no disponible.");
 
       navigator.geolocation.getCurrentPosition(
         async (pos) => {
@@ -582,7 +769,7 @@
           }, null, { enableHighAccuracy: true });
 
           renderizarRepartidores();
-          alert(`✔ GPS activado para "${repartidores[index].nombre}". Guardando en GitHub...`);
+          alert(`✔ GPS conectado para "${repartidores[index].nombre}". Sincronizando con GitHub...`);
           await sincronizarConGitHub();
         },
         (err) => { alert("No se pudo obtener GPS: " + err.message); },
@@ -601,22 +788,21 @@
       await sincronizarConGitHub();
     }
 
-    // SINCRONIZACIÓN CORREGIDA A GITHUB (PREVIENE ERROR SHA / CONFLICTO)
+    // SINCRONIZACIÓN CON GITHUB (SIN ERRORES SHA)
     async function sincronizarConGitHub() {
       const token = obtenerTokenSecreto();
       if (!token) {
-        alert("⚠️ No tienes configurado el token de GitHub. Despliega el acordeón con tu código maestro y guarda tu token.");
+        alert("⚠️ Falta configurar el Token de GitHub. Despliega el acordeón con tu código maestro y guárdalo.");
         return;
       }
 
       const btn = document.getElementById('btnPublicar') || event?.target;
       const msg = document.getElementById('statusMsg');
-      if (btn) { btn.disabled = true; btn.innerText = "⏳ Guardando en GitHub..."; }
+      if (btn) { btn.disabled = true; btn.innerText = "⏳ Publicando en GitHub..."; }
 
       telefonos.whatsapp = document.getElementById('telWhatsApp').value.trim();
       telefonos.tel1 = document.getElementById('telFijo1').value.trim();
       telefonos.tel2 = document.getElementById('telFijo2').value.trim();
-      telefonos.tel3 = document.getElementById('telFijo3').value.trim();
 
       const objetoCompleto = {
         productos: productos,
@@ -624,7 +810,6 @@
         repartidores: repartidores
       };
 
-      // 1. OBTENER SIEMPRE EL SHA MÁS RECIENTE DIRECTO DE GITHUB (ELIMINA ERROR DE CONFLICTO)
       let shaActual = "";
       try {
         const check = await fetch(`https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${ARCHIVO}?ref=main&_t=${Date.now()}`, {
@@ -638,18 +823,16 @@
           shaActual = d.sha;
         }
       } catch (e) {
-        console.warn("No se pudo obtener SHA previo:", e);
+        console.warn("No se pudo consultar SHA previo:", e);
       }
 
-      // 2. PREPARAR EL PAQUETE CON EL SHA CORRECTO
       const payload = {
-        message: "Actualización de catálogo, teléfonos y flota LeoGas",
+        message: "Actualización de carta, teléfonos y flota Burger Club",
         content: btoa(unescape(encodeURIComponent(JSON.stringify(objetoCompleto, null, 2)))),
         branch: "main"
       };
       if (shaActual) payload.sha = shaActual;
 
-      // 3. GUARDAR EN GITHUB
       try {
         const res = await fetch(`https://api.github.com/repos/${USUARIO}/${REPOSITORIO}/contents/${ARCHIVO}`, {
           method: "PUT",
@@ -662,17 +845,17 @@
 
         if (!res.ok) {
           const err = await res.json();
-          throw new Error(err.message || "Error al actualizar");
+          throw new Error(err.message || "Error al actualizar repositorio");
         }
 
         if (msg) {
-          msg.style.color = "#15803d";
-          msg.innerText = "✔ ¡Cambios guardados en GitHub con éxito!";
+          msg.style.color = "#4ade80";
+          msg.innerText = "✔ ¡Carta y datos actualizados en GitHub!";
         }
-        alert("✔ ¡Guardado con éxito! Se verá reflejado en ~30 segundos.");
+        alert("✔ ¡Guardado exitoso! Estará en vivo en pocos segundos.");
       } catch (err) {
         if (msg) {
-          msg.style.color = "#dc2626";
+          msg.style.color = "#f87171";
           msg.innerText = "Error: " + err.message;
         }
         alert("Error de GitHub: " + err.message);
@@ -684,14 +867,14 @@
       }
     }
 
-    // REPORTES
+    // REPORTE DE VENTAS
     function renderizarReporte() {
-      const ventas = JSON.parse(localStorage.getItem('gas_ventas')) || [];
+      const ventas = JSON.parse(localStorage.getItem('burger_ventas')) || [];
       const tbody = document.getElementById('tablaVentasBody');
       tbody.innerHTML = '';
 
       if (ventas.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:12px; color:#94a3b8;">No hay ventas registradas aún.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding:14px; color:var(--text-muted);">No hay comandas registradas en este turno.</td></tr>';
         return;
       }
 
@@ -701,14 +884,13 @@
           <td>${v.fecha}</td>
           <td>${v.cliente || 'Particular'}</td>
           <td>${v.productos}</td>
-          <td><strong>S/ ${v.total.toFixed(2)}</strong></td>
+          <td><strong style="color:var(--accent);">S/ ${parseFloat(v.total).toFixed(2)}</strong></td>
           <td>${v.pago}</td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    // VERIFICAR SESIÓN ACTIVA AL INICIAR
     window.onload = () => {
       const sesionActiva = sessionStorage.getItem(STORAGE_KEY_AUTH);
       if (sesionActiva === "true") {
