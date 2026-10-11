@@ -5,22 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Burger Club | Hamburguesas Artesanales & Delivery</title>
   
-  <!-- Leaflet CSS para Mapa de Ruta -->
+  <!-- Leaflet CSS para Mapas -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   
   <style>
     :root {
-      --primary: #dc2626;
-      --primary-dark: #991b1b;
-      --accent: #f59e0b;
-      --accent-hover: #d97706;
-      --dark: #0f172a;
-      --dark-card: #1e293b;
-      --text-muted: #94a3b8;
-      --text: #f8fafc;
-      --white: #ffffff;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
-      --radius: 14px;
+      --primary: #da291c;
+      --primary-dark: #b81d13;
+      --accent: #ffc72c;
+      --accent-hover: #e5b220;
+      --navy: #002f6c;
+      --dark: #1f2937;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1f2937;
+      --text-muted: #64748b;
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+      --radius: 16px;
     }
 
     * {
@@ -31,7 +32,7 @@
     }
 
     body {
-      background-color: #0b0f19;
+      background-color: var(--bg);
       color: var(--text);
       line-height: 1.6;
       padding-bottom: 110px;
@@ -39,12 +40,12 @@
 
     /* HEADER */
     header {
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(8px);
+      background: var(--card-bg);
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid #334155;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      border-bottom: 3px solid var(--accent);
     }
 
     .nav-container {
@@ -58,22 +59,15 @@
       flex-wrap: wrap;
     }
 
-    .brand-section {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       text-decoration: none;
-      color: var(--white);
     }
 
     .brand-icon {
-      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: #fff;
       width: 44px;
       height: 44px;
@@ -82,48 +76,48 @@
       align-items: center;
       justify-content: center;
       font-size: 24px;
-      box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+      box-shadow: 0 4px 10px rgba(218, 41, 28, 0.3);
     }
 
     .brand-text h1 {
       font-size: 20px;
       font-weight: 900;
       line-height: 1.1;
-      color: #fff;
+      color: var(--primary);
       letter-spacing: 0.5px;
     }
 
     .brand-text span {
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: var(--accent);
+      letter-spacing: 1px;
+      color: var(--navy);
       font-weight: 800;
     }
 
     .nav-cta {
-      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-      color: #1e1b4b;
-      padding: 8px 20px;
+      background: var(--primary);
+      color: #fff;
+      padding: 9px 22px;
       border-radius: 30px;
       text-decoration: none;
       font-weight: 800;
       font-size: 14px;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 4px 12px rgba(218, 41, 28, 0.25);
     }
 
     .nav-cta:hover {
+      background: var(--primary-dark);
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
     }
 
     /* HERO */
     .hero {
-      background: radial-gradient(circle at center, #1e293b 0%, #0b0f19 100%);
-      padding: 42px 20px 48px;
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fef3c7 100%);
+      padding: 38px 20px 44px;
       text-align: center;
-      border-bottom: 1px solid #1e293b;
-      position: relative;
+      border-bottom: 1px solid #fed7aa;
     }
 
     .hero-container {
@@ -133,31 +127,31 @@
 
     .badge-hero {
       display: inline-block;
-      background: rgba(239, 68, 68, 0.2);
-      border: 1px solid #ef4444;
-      color: #fca5a5;
-      font-weight: 800;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 900;
       font-size: 12px;
       padding: 6px 16px;
       border-radius: 20px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       text-transform: uppercase;
       letter-spacing: 0.6px;
+      box-shadow: 0 3px 8px rgba(218, 41, 28, 0.25);
     }
 
     .hero h2 {
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 900;
-      color: #fff;
+      color: var(--dark);
       line-height: 1.2;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .hero p {
       font-size: 16px;
-      color: var(--text-muted);
-      margin-bottom: 22px;
-      font-weight: 500;
+      color: #475569;
+      margin-bottom: 18px;
+      font-weight: 600;
     }
 
     .hero-features {
@@ -171,16 +165,17 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      background: var(--dark-card);
-      border: 1px solid #334155;
+      background: #ffffff;
       padding: 8px 18px;
       border-radius: 30px;
       font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
+      font-weight: 800;
+      color: var(--navy);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid #fed7aa;
     }
 
-    /* SECCIÓN PROMO / BANNER */
+    /* PROMO / VOLANTE */
     .promo-section {
       max-width: 1200px;
       margin: 28px auto;
@@ -188,11 +183,11 @@
     }
 
     .promo-card {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      background: var(--card-bg);
       border-radius: var(--radius);
       padding: 24px;
       box-shadow: var(--shadow);
-      border: 1px solid #334155;
+      border: 2px solid #fef08a;
       display: flex;
       gap: 26px;
       align-items: center;
@@ -201,43 +196,37 @@
 
     .promo-img-container {
       flex: 1;
-      min-width: 260px;
-      max-width: 380px;
+      min-width: 250px;
+      max-width: 360px;
       margin: 0 auto;
       cursor: pointer;
     }
 
     .promo-img-container img {
       width: 100%;
-      height: 230px;
+      height: 220px;
       object-fit: cover;
       border-radius: 12px;
-      border: 1px solid #475569;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
       transition: transform 0.25s ease;
       display: block;
     }
 
-    .promo-img-container img:hover {
-      transform: scale(1.02);
-    }
+    .promo-img-container img:hover { transform: scale(1.02); }
 
-    .promo-info {
-      flex: 2;
-      min-width: 280px;
-    }
+    .promo-info { flex: 2; min-width: 280px; }
 
     .promo-info h3 {
       font-size: 24px;
       font-weight: 900;
-      color: #fff;
+      color: var(--primary);
       margin-bottom: 6px;
     }
 
     .promo-slogan {
       font-size: 15px;
-      font-weight: 700;
-      color: var(--accent);
+      font-weight: 800;
+      color: var(--navy);
       margin-bottom: 12px;
     }
 
@@ -254,21 +243,22 @@
       gap: 10px;
       padding: 10px 14px;
       border-radius: 10px;
-      background: #0f172a;
-      border: 1px solid #334155;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
       text-decoration: none;
-      color: #fff;
-      font-weight: 700;
+      color: var(--dark);
+      font-weight: 800;
       font-size: 13px;
       transition: all 0.2s;
     }
 
     .contact-button:hover {
-      background: #334155;
-      border-color: var(--accent);
+      background: #eff6ff;
+      border-color: var(--navy);
+      color: var(--navy);
     }
 
-    /* MAPA REPARTIDOR */
+    /* MAPA */
     .map-section {
       max-width: 1200px;
       margin: 20px auto 36px;
@@ -276,11 +266,11 @@
     }
 
     .map-card {
-      background: var(--dark-card);
+      background: var(--card-bg);
       border-radius: var(--radius);
       padding: 18px;
       box-shadow: var(--shadow);
-      border: 1px solid #334155;
+      border: 1px solid #e2e8f0;
     }
 
     .map-header {
@@ -295,7 +285,7 @@
     .map-header h3 {
       font-size: 18px;
       font-weight: 800;
-      color: #fff;
+      color: var(--dark);
       display: flex;
       align-items: center;
       gap: 8px;
@@ -305,8 +295,8 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #0f172a;
-      border: 1px solid #334155;
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
       padding: 6px 14px;
       border-radius: 20px;
     }
@@ -317,21 +307,18 @@
       gap: 6px;
       font-size: 12px;
       font-weight: 800;
-      opacity: 0.4;
+      opacity: 0.35;
       transition: all 0.3s ease;
     }
 
-    .legend-item.activo {
-      opacity: 1;
-    }
-
-    .legend-item.online.activo { color: #22c55e; }
-    .legend-item.offline.activo { color: #ef4444; }
+    .legend-item.activo { opacity: 1; transform: scale(1.04); }
+    .legend-item.online.activo { color: #15803d; }
+    .legend-item.offline.activo { color: #dc2626; }
 
     .map-wrapper {
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid #334155;
+      border: 1px solid #e2e8f0;
     }
 
     #deliveryMap {
@@ -340,11 +327,11 @@
       z-index: 10;
     }
 
-    /* ICONOS GPS MOTORIZADO */
+    /* ICONO MOTORIZADO */
     .custom-gps-marker {
       position: relative;
-      width: 46px;
-      height: 46px;
+      width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -352,10 +339,10 @@
 
     .gps-radar-pulse {
       position: absolute;
-      width: 54px;
-      height: 54px;
+      width: 58px;
+      height: 58px;
       border-radius: 50%;
-      background: rgba(239, 68, 68, 0.35);
+      background: rgba(218, 41, 28, 0.3);
       animation: radarPulse 2s ease-out infinite;
       z-index: 1;
     }
@@ -367,29 +354,28 @@
 
     .moto-badge-circle {
       position: relative;
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-      border: 2px solid #ffffff;
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      border: 2.5px solid #ffffff;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      font-size: 22px;
+      box-shadow: 0 4px 12px rgba(218, 41, 28, 0.4);
       z-index: 2;
     }
 
     .custom-gps-marker.offline .moto-badge-circle {
-      background: #475569;
-      filter: grayscale(1);
+      background: #64748b;
+      filter: grayscale(0.8);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
-    .custom-gps-marker.offline .gps-radar-pulse {
-      display: none;
-    }
+    .custom-gps-marker.offline .gps-radar-pulse { display: none; }
 
-    /* CATÁLOGO PRODUCTOS */
+    /* MENÚ DE PRODUCTOS */
     .section-menu {
       max-width: 1200px;
       margin: 20px auto 40px;
@@ -397,17 +383,18 @@
     }
 
     .menu-header {
-      background: var(--dark-card);
+      background: var(--card-bg);
       padding: 18px 22px;
       border-radius: var(--radius);
-      border: 1px solid #334155;
+      box-shadow: var(--shadow);
+      border: 1px solid #e2e8f0;
       margin-bottom: 24px;
     }
 
     .menu-header h3 {
       font-size: 22px;
-      font-weight: 800;
-      color: #fff;
+      font-weight: 900;
+      color: var(--primary);
     }
 
     .grid-burgers {
@@ -417,27 +404,27 @@
     }
 
     .card {
-      background: var(--dark-card);
+      background: var(--card-bg);
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      border: 1px solid #334155;
-      transition: transform 0.2s, border-color 0.2s;
+      border: 1px solid #f1f5f9;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .card:hover {
       transform: translateY(-4px);
-      border-color: #ef4444;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
     }
 
-    .card.agotado { opacity: 0.6; }
+    .card.agotado { opacity: 0.65; }
 
     .card-img-wrapper {
       position: relative;
       height: 200px;
-      background: #0f172a;
+      background: #f1f5f9;
       overflow: hidden;
     }
 
@@ -451,14 +438,14 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid var(--accent);
-      color: var(--accent);
+      background: var(--navy);
+      color: #fff;
       font-size: 11px;
       font-weight: 800;
       padding: 3px 10px;
       border-radius: 16px;
       text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
     }
 
     .card-body {
@@ -470,8 +457,8 @@
 
     .card-title {
       font-size: 18px;
-      font-weight: 800;
-      color: #fff;
+      font-weight: 900;
+      color: var(--dark);
       margin-bottom: 6px;
     }
 
@@ -488,29 +475,29 @@
       align-items: center;
       margin-top: auto;
       padding-top: 12px;
-      border-top: 1px solid #334155;
+      border-top: 1px solid #f1f5f9;
     }
 
     .price {
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 900;
-      color: var(--accent);
+      color: var(--primary);
     }
 
     .btn-add {
       background: var(--primary);
-      color: var(--white);
+      color: #fff;
       border: none;
       padding: 9px 16px;
       border-radius: 8px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       transition: background 0.2s;
     }
 
     .btn-add:hover { background: var(--primary-dark); }
-    .btn-add:disabled { background: #475569; cursor: not-allowed; }
+    .btn-add:disabled { background: #94a3b8; cursor: not-allowed; }
 
     /* BOTÓN FLOTANTE */
     .chat-bubble-container {
@@ -526,16 +513,17 @@
     }
 
     .chat-bubble-label {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      color: #0f172a;
+      background: var(--accent);
+      color: var(--dark);
       font-weight: 900;
       font-size: 14px;
       padding: 9px 16px;
       border-radius: 20px;
-      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
+      box-shadow: 0 4px 14px rgba(255, 199, 44, 0.4);
       display: flex;
       align-items: center;
       gap: 6px;
+      border: 2px solid var(--primary);
       animation: pulse 2.2s infinite;
     }
 
@@ -548,13 +536,13 @@
       position: relative;
       width: 62px;
       height: 62px;
-      background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       border-radius: 50%;
-      box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+      box-shadow: 0 6px 20px rgba(218, 41, 28, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid #f59e0b;
+      border: 2px solid #ffffff;
       font-size: 28px;
     }
 
@@ -562,9 +550,9 @@
       position: absolute;
       top: -3px;
       right: -3px;
-      background: #f59e0b;
-      color: #0f172a;
-      border: 2px solid #0f172a;
+      background: var(--navy);
+      color: #fff;
+      border: 2px solid #fff;
       font-size: 11px;
       font-weight: 900;
       min-width: 22px;
@@ -580,23 +568,22 @@
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(5px);
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
       z-index: 2000;
       justify-content: center;
       align-items: flex-end;
     }
 
     .cart-modal-card {
-      background: #1e293b;
+      background: var(--card-bg);
       width: 100%;
       max-width: 520px;
       border-radius: 20px 20px 0 0;
       max-height: 90vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
-      border: 1px solid #334155;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
       animation: slideUp 0.25s ease-out;
     }
 
@@ -607,19 +594,18 @@
 
     .cart-modal-header {
       padding: 16px 20px;
-      background: #0f172a;
+      background: var(--primary);
       color: #fff;
       border-radius: 20px 20px 0 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #334155;
     }
 
     .btn-close-cart {
       background: none;
       border: none;
-      color: var(--text-muted);
+      color: #fff;
       font-size: 24px;
       cursor: pointer;
     }
@@ -650,7 +636,7 @@
     .btn-vaciar-cart {
       background: none;
       border: none;
-      color: #ef4444;
+      color: var(--primary);
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
@@ -669,25 +655,26 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #0f172a;
+      background: #f8fafc;
       padding: 10px 12px;
       border-radius: 10px;
-      border: 1px solid #334155;
+      border: 1px solid #e2e8f0;
     }
 
     .cart-item-row.item-activo {
-      border-color: #ef4444;
+      border-color: #fca5a5;
+      background: #fff5f5;
     }
 
     .cart-item-info { flex: 1; }
-    .cart-item-title { font-size: 14px; font-weight: 700; color: #fff; }
+    .cart-item-title { font-size: 14px; font-weight: 800; color: var(--dark); }
     .cart-item-sub { font-size: 12px; color: var(--text-muted); }
 
     .cart-controls { display: flex; align-items: center; gap: 8px; }
 
     .btn-qty {
-      background: #334155;
-      color: #fff;
+      background: #e2e8f0;
+      color: var(--dark);
       border: none;
       width: 26px;
       height: 26px;
@@ -700,8 +687,8 @@
 
     .cart-item-price {
       font-size: 14px;
-      font-weight: 800;
-      color: var(--accent);
+      font-weight: 900;
+      color: var(--primary);
       min-width: 65px;
       text-align: right;
     }
@@ -711,11 +698,11 @@
       border: none;
       cursor: pointer;
       font-size: 16px;
-      color: #64748b;
+      color: #94a3b8;
       margin-left: 8px;
     }
 
-    /* SELECCIÓN DE PAGO */
+    /* FORMAS DE PAGO */
     .grid-payments {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -724,26 +711,27 @@
     }
 
     .btn-pay-option {
-      background: #0f172a;
-      border: 1px solid #334155;
-      color: #fff;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: var(--dark);
       padding: 9px 4px;
       border-radius: 8px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       text-align: center;
       transition: all 0.2s;
     }
 
     .btn-pay-option.active {
-      background: #ef4444;
-      border-color: #ef4444;
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
     }
 
     .cash-box-drawer {
-      background: #0f172a;
-      border: 1px dashed #475569;
+      background: #fffbeb;
+      border: 1.5px dashed #f59e0b;
       border-radius: 10px;
       padding: 12px 14px;
       margin-top: 10px;
@@ -761,9 +749,9 @@
       padding: 8px 12px;
       font-size: 16px;
       font-weight: 800;
-      border: 1px solid #475569;
-      background: #1e293b;
-      color: #fff;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      color: var(--dark);
       border-radius: 8px;
     }
 
@@ -775,11 +763,11 @@
     }
 
     .btn-quick-cash {
-      background: #1e293b;
-      border: 1px solid #334155;
-      color: #cbd5e1;
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      color: var(--dark);
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
       padding: 5px 10px;
       border-radius: 6px;
       cursor: pointer;
@@ -794,15 +782,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(34, 197, 94, 0.15);
-      color: #4ade80;
-      border: 1px solid rgba(34, 197, 94, 0.3);
+      background: #dcfce7;
+      color: #15803d;
+      border: 1px solid #86efac;
     }
 
     .vuelto-badge-box.alerta {
-      background: rgba(239, 68, 68, 0.15);
-      color: #f87171;
-      border-color: rgba(239, 68, 68, 0.3);
+      background: #fee2e2;
+      color: #b91c1c;
+      border-color: #fca5a5;
     }
 
     /* GPS Y DATOS */
@@ -810,21 +798,21 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      background: #0f172a;
-      border: 1px solid #334155;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       padding: 12px;
       border-radius: 10px;
       margin-top: 6px;
     }
 
     .btn-geo {
-      background: #334155;
+      background: var(--navy);
       color: #fff;
-      border: 1px solid #475569;
-      padding: 9px 14px;
+      border: none;
+      padding: 10px 14px;
       border-radius: 8px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -832,32 +820,30 @@
       gap: 8px;
     }
 
-    .btn-geo:hover { background: #475569; }
-
     .geo-status {
       font-size: 11px;
       color: var(--text-muted);
       text-align: center;
     }
 
-    .geo-status.ready { color: #4ade80; font-weight: bold; }
+    .geo-status.ready { color: #15803d; font-weight: bold; }
 
     .client-input {
       width: 100%;
       padding: 10px 14px;
-      border: 1px solid #334155;
-      background: #0f172a;
-      color: #fff;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+      color: var(--dark);
       border-radius: 8px;
       font-size: 14px;
       margin-top: 6px;
     }
 
-    /* FOOTER CARRITO */
+    /* FOOTER MODAL */
     .cart-modal-footer {
       padding: 16px 20px;
-      background: #0f172a;
-      border-top: 1px solid #334155;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -868,13 +854,13 @@
       justify-content: space-between;
       align-items: center;
       font-size: 15px;
-      font-weight: 800;
+      font-weight: 900;
     }
 
-    .cart-total-amount { color: var(--accent); font-size: 22px; font-weight: 900; }
+    .cart-total-amount { color: var(--primary); font-size: 22px; font-weight: 900; }
 
     .btn-order-wsp {
-      background: #22c55e;
+      background: #25d366;
       color: #fff;
       padding: 14px;
       border-radius: 10px;
@@ -889,14 +875,14 @@
       transition: background 0.2s;
     }
 
-    .btn-order-wsp:hover { background: #16a34a; }
+    .btn-order-wsp:hover { background: #1eb857; }
 
     /* LIGHTBOX */
     .lightbox-overlay {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.85);
       z-index: 3000;
       justify-content: center;
       align-items: center;
@@ -907,7 +893,7 @@
 
     @media (max-width: 650px) {
       .nav-container { justify-content: center; }
-      .brand-section { justify-content: center; }
+      .brand { justify-content: center; }
       .map-header { flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -917,15 +903,13 @@
   <!-- HEADER -->
   <header>
     <div class="nav-container">
-      <div class="brand-section">
-        <a href="#" class="brand">
-          <div class="brand-icon">🍔</div>
-          <div class="brand-text">
-            <h1>BURGER CLUB</h1>
-            <span>Smash & Artesanal • Delivery Cusco</span>
-          </div>
-        </a>
-      </div>
+      <a href="#" class="brand">
+        <div class="brand-icon">🍔</div>
+        <div class="brand-text">
+          <h1>BURGER CLUB</h1>
+          <span>Smash & Artesanal • Delivery Cusco</span>
+        </div>
+      </a>
 
       <div class="nav-actions">
         <a href="#menu" class="nav-cta">Ver Carta 🔥</a>
@@ -942,8 +926,8 @@
       
       <div class="hero-features">
         <div class="feature-pill">🛵 Delivery Rápido</div>
-        <div class="feature-pill">🥓 Tocino Ahumado & Queso Cheddar Real</div>
-        <div class="feature-pill">💳 Yape, Plin, Tarjeta o Efectivo</div>
+        <div class="feature-pill">🥓 Tocino Ahumado & Cheddar Real</div>
+        <div class="feature-pill">💵 Yape, Plin y Efectivo con Vuelto</div>
       </div>
     </div>
   </section>
@@ -955,7 +939,7 @@
         <img id="imgPromoOficial" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&auto=format&fit=crop&q=80" alt="Promo Burger Club">
       </div>
       <div class="promo-info">
-        <span class="badge-hero" style="background: rgba(245, 158, 11, 0.2); border-color: #f59e0b; color: #f59e0b;">Combo Destacado</span>
+        <span class="badge-hero" style="background: var(--navy); margin-bottom:8px;">Combo Destacado</span>
         <h3>Promo Brutal: Burger Doble + Papas Rústicas</h3>
         <p class="promo-slogan">"Sabor auténtico con salsas de la casa y papas nativas crocantes"</p>
         <p style="font-size:14px; color: var(--text-muted); margin-bottom: 14px;">
@@ -964,7 +948,7 @@
 
         <div class="popup-section-label">Líneas de Atención & Pedidos:</div>
         <div class="contact-grid" id="contenedorTelefonos">
-          <!-- Renderizado de teléfonos -->
+          <!-- Renderizado dinámico desde productos.json -->
         </div>
       </div>
     </div>
@@ -981,7 +965,7 @@
             <span style="font-size:14px;">🛵💨</span>
             <span>En Ruta</span>
           </div>
-          <span style="color: #334155;">|</span>
+          <span style="color: #cbd5e1;">|</span>
           <div class="legend-item offline activo" id="legendOffline">
             <span style="font-size:14px;">🛵💤</span>
             <span>En Local</span>
@@ -999,7 +983,7 @@
   <section class="section-menu" id="menu">
     <div class="menu-header">
       <h3>Nuestra Carta</h3>
-      <p style="font-size: 13px; color: var(--text-muted);">Arma tu pedido agregando tus favoritas al carrito.</p>
+      <p style="font-size: 13px; color: var(--text-muted);">Elige tus productos y arma tu pedido al instante.</p>
     </div>
     <div class="grid-burgers" id="contenedorBurgers"></div>
   </section>
@@ -1047,9 +1031,9 @@
           </div>
 
           <div class="cash-box-drawer" id="cajaEfectivoDesplegable">
-            <div style="font-size: 12px; font-weight: 700; color: var(--accent);">💵 ¿Con cuánto en efectivo pagarás?</div>
+            <div style="font-size: 12px; font-weight: 800; color: #b45309;">💵 ¿Con cuánto en efectivo pagarás?</div>
             <div class="cash-input-row">
-              <span style="font-weight: 800; font-size: 15px; color: var(--accent);">S/</span>
+              <span style="font-weight: 800; font-size: 15px; color: #b45309;">S/</span>
               <input type="number" id="montoEfectivoIngresado" class="cash-input" placeholder="Ej. 50" min="0" step="5" oninput="calcularVueltoEfectivo()"/>
             </div>
             <div class="cash-quick-btns">
@@ -1105,48 +1089,12 @@
     let catalogo = [
       {
         id: "burger-classic",
-        nombre: "Classic Cheese Burger",
-        tag: "La Clásica",
-        descripcion: "150g Carne Angus, doble queso cheddar fundido, lechuga, tomate y salsa secreta en pan brioche.",
-        precio: 22.00,
+        nombre: "Hamburguesa Clásica Artesanal",
+        tag: "La Más Pedida",
+        descripcion: "Carne de 150g, queso cheddar fundido, lechuga, tomate y papas fritas.",
+        precio: 15.00,
         disponible: true,
         imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80"
-      },
-      {
-        id: "burger-bacon",
-        nombre: "Bacon Monster BBQ",
-        tag: "Más Pedida",
-        descripcion: "Doble carne Angus, abundante tocino ahumado crocante, cebolla caramelizada y salsa BBQ artesanal.",
-        precio: 28.00,
-        disponible: true,
-        imagen: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600&auto=format&fit=crop&q=80"
-      },
-      {
-        id: "burger-smash",
-        nombre: "Smash Burger Trufada",
-        tag: "Artesanal",
-        descripcion: "Costra crujiente de carne smash, queso gouda, champiñones salteados y mayonesa trufada de la casa.",
-        precio: 26.00,
-        disponible: true,
-        imagen: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&auto=format&fit=crop&q=80"
-      },
-      {
-        id: "papas-rusticas",
-        nombre: "Papas Rústicas Nativas",
-        tag: "Guarnición",
-        descripcion: "Papas nativas cusqueñas con hierbas andinas, dip de queso y crema de rocoto suave.",
-        precio: 10.00,
-        disponible: true,
-        imagen: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80"
-      },
-      {
-        id: "gaseosa-combo",
-        nombre: "Inca Kola / Coca Cola 500ml",
-        tag: "Bebida",
-        descripcion: "Helada y lista para acompañar tu hamburguesa.",
-        precio: 5.00,
-        disponible: true,
-        imagen: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&auto=format&fit=crop&q=80"
       }
     ];
 
@@ -1174,11 +1122,12 @@
 
     function renderizarTelefonos() {
       const container = document.getElementById('contenedorTelefonos');
-      const clean1 = telefonos.tel1.replace(/\D/g,'');
-      const clean2 = telefonos.tel2.replace(/\D/g,'');
+      if (!container) return;
+      const clean1 = (telefonos.tel1 || '').replace(/\D/g,'');
+      const clean2 = (telefonos.tel2 || '').replace(/\D/g,'');
       container.innerHTML = `
-        <a href="tel:${clean1}" class="contact-button"><span>📞</span> ${telefonos.tel1}</a>
-        <a href="tel:${clean2}" class="contact-button"><span>📞</span> ${telefonos.tel2}</a>
+        <a href="tel:${clean1}" class="contact-button"><span>📞</span> ${telefonos.tel1 || '950 727 212'}</a>
+        <a href="tel:${clean2}" class="contact-button"><span>📞</span> ${telefonos.tel2 || '984 285 500'}</a>
       `;
     }
 
@@ -1192,12 +1141,12 @@
       }).addTo(map);
 
       actualizarVisualizadorGPS([
-        { id: "moto-1", nombre: "Motorizado 1", online: true, lat: -13.5180, lng: -71.9750 }
+        { id: "moto-1", nombre: "Motorizado 1", online: false, lat: cuscoLat, lng: cuscoLng }
       ]);
     }
 
     function actualizarVisualizadorGPS(flota) {
-      if (!Array.isArray(flota)) return;
+      if (!Array.isArray(flota) || !map) return;
       let hayOnline = false;
 
       flota.forEach(rep => {
@@ -1218,8 +1167,8 @@
         const icono = L.divIcon({
           className: 'custom-moto-icon',
           html: iconoHTML,
-          iconSize: [46, 46],
-          iconAnchor: [23, 23]
+          iconSize: [48, 48],
+          iconAnchor: [24, 24]
         });
 
         const popupTexto = `<b>🛵 ${rep.nombre}</b><br>${estaOnline ? 'En Ruta de Entrega 🔥' : 'En Sede Principal 💤'}`;
@@ -1237,17 +1186,20 @@
 
       const legOnline = document.getElementById('legendOnline');
       const legOffline = document.getElementById('legendOffline');
-      if (hayOnline) {
-        legOnline.classList.add('activo');
-        legOffline.classList.remove('activo');
-      } else {
-        legOnline.classList.remove('activo');
-        legOffline.classList.add('activo');
+      if (legOnline && legOffline) {
+        if (hayOnline) {
+          legOnline.classList.add('activo');
+          legOffline.classList.remove('activo');
+        } else {
+          legOnline.classList.remove('activo');
+          legOffline.classList.add('activo');
+        }
       }
     }
 
     function renderizarMenu() {
       const contenedor = document.getElementById('contenedorBurgers');
+      if (!contenedor) return;
       contenedor.innerHTML = '';
 
       catalogo.forEach(item => {
@@ -1256,12 +1208,12 @@
         card.className = `card ${estaDisponible ? '' : 'agotado'}`;
         card.innerHTML = `
           <div class="card-img-wrapper">
-            <span class="card-tag">${estaDisponible ? item.tag : 'Agotado'}</span>
-            <img src="${item.imagen}" alt="${item.nombre}" loading="lazy">
+            <span class="card-tag">${estaDisponible ? (item.tag || 'Artesanal') : 'Agotado'}</span>
+            <img src="${item.imagen}" alt="${item.nombre}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80'">
           </div>
           <div class="card-body">
             <h4 class="card-title">${item.nombre}</h4>
-            <p class="card-desc">${item.descripcion}</p>
+            <p class="card-desc">${item.descripcion || ''}</p>
             <div class="card-footer">
               <span class="price">S/ ${parseFloat(item.precio).toFixed(2)}</span>
               <button class="btn-add" ${estaDisponible ? '' : 'disabled'} onclick="agregarAlPedido('${item.id}')">
@@ -1332,6 +1284,7 @@
       let totalUnidades = 0;
       let totalMonto = 0;
       const listContainer = document.getElementById('popupItemsList');
+      if (!listContainer) return;
       listContainer.innerHTML = '';
 
       catalogo.forEach(catItem => {
@@ -1494,12 +1447,46 @@
       cerrarModalCarrito();
     }
 
+    // SINCRONIZACIÓN CON PRODUCTOS.JSON EN TIEMPO REAL
+    async function cargarCatalogoDesdeGitHub() {
+      try {
+        const res = await fetch('productos.json?v=' + Date.now());
+        if (res.ok) {
+          const datos = await res.json();
+          if (Array.isArray(datos)) {
+            catalogo = datos;
+          } else {
+            if (datos.productos && datos.productos.length > 0) {
+              catalogo = datos.productos;
+            }
+            if (datos.telefonos) {
+              telefonos = datos.telefonos;
+              whatsappNumero = telefonos.whatsapp || whatsappNumero;
+              renderizarTelefonos();
+            }
+            if (datos.repartidores) {
+              actualizarVisualizadorGPS(datos.repartidores);
+            }
+          }
+          sincronizarEstructuraPedido();
+          renderizarMenu();
+          actualizarVistaPopup();
+        }
+      } catch (err) {
+        console.warn("Cargando catálogo base:", err);
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       renderizarTelefonos();
       sincronizarEstructuraPedido();
       renderizarMenu();
       iniciarMapaCusco();
       actualizarVistaPopup();
+      
+      // Conexión con productos.json
+      cargarCatalogoDesdeGitHub();
+      setInterval(cargarCatalogoDesdeGitHub, 20000);
     });
   </script>
 </body>
