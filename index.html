@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LeoGas Cusco | Balones de Gas a Domicilio</title>
+  <title>Burger Club | Hamburguesas Artesanales & Delivery</title>
   
-  <!-- Leaflet CSS para Mapas -->
+  <!-- Leaflet CSS para Mapa de Ruta -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   
   <style>
     :root {
-      --primary: #6b21a8;
-      --primary-dark: #581c87;
+      --primary: #dc2626;
+      --primary-dark: #991b1b;
       --accent: #f59e0b;
       --accent-hover: #d97706;
-      --dark: #1e1b4b;
-      --text: #334155;
+      --dark: #0f172a;
+      --dark-card: #1e293b;
+      --text-muted: #94a3b8;
+      --text: #f8fafc;
       --white: #ffffff;
-      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
       --radius: 14px;
     }
 
@@ -29,25 +31,26 @@
     }
 
     body {
-      background-color: #fafaf9;
+      background-color: #0b0f19;
       color: var(--text);
       line-height: 1.6;
-      padding-bottom: 100px;
+      padding-bottom: 110px;
     }
 
     /* HEADER */
     header {
-      background: var(--white);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(8px);
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      border-bottom: 1px solid #334155;
     }
 
     .nav-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 10px 18px;
+      padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -58,7 +61,7 @@
     .brand-section {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .brand {
@@ -66,140 +69,95 @@
       align-items: center;
       gap: 10px;
       text-decoration: none;
-      color: var(--dark);
+      color: var(--white);
     }
 
     .brand-icon {
-      background: var(--primary);
-      color: var(--accent);
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
+      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+      color: #fff;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      font-size: 22px;
-      box-shadow: 0 3px 6px rgba(107, 33, 168, 0.25);
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
     }
 
     .brand-text h1 {
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 900;
       line-height: 1.1;
-      color: var(--primary);
+      color: #fff;
       letter-spacing: 0.5px;
     }
 
     .brand-text span {
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--dark);
-      font-weight: 700;
-    }
-
-    /* LOGO LA CHUSPA EN LA CABECERA */
-    .chuspa-nav-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #fefce8;
-      border: 1.5px solid #eab308;
-      padding: 5px 12px 5px 6px;
-      border-radius: 26px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 2px 6px rgba(234, 179, 8, 0.2);
-    }
-
-    .chuspa-nav-badge:hover {
-      transform: scale(1.04);
-      background: #ffffff;
-      box-shadow: 0 4px 10px rgba(107, 33, 168, 0.25);
-    }
-
-    .chuspa-nav-img {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1.5px solid #ca8a04;
-      background: #fff;
-    }
-
-    .chuspa-nav-info {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.15;
-    }
-
-    .chuspa-nav-title {
-      font-size: 12px;
-      font-weight: 900;
-      color: var(--primary);
-    }
-
-    .chuspa-nav-sub {
-      font-size: 9.5px;
-      font-weight: 700;
-      color: #b45309;
+      letter-spacing: 1.2px;
+      color: var(--accent);
+      font-weight: 800;
     }
 
     .nav-cta {
-      background: var(--primary);
-      color: var(--white);
-      padding: 8px 18px;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+      color: #1e1b4b;
+      padding: 8px 20px;
       border-radius: 30px;
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 14px;
-      transition: background 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .nav-cta:hover {
-      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
     }
 
     /* HERO */
     .hero {
-      background: linear-gradient(135deg, #fef08a 0%, #fde047 50%, #facc15 100%);
-      padding: 38px 20px 44px;
+      background: radial-gradient(circle at center, #1e293b 0%, #0b0f19 100%);
+      padding: 42px 20px 48px;
       text-align: center;
-      border-bottom: 2px solid #eab308;
+      border-bottom: 1px solid #1e293b;
+      position: relative;
     }
 
     .hero-container {
-      max-width: 800px;
+      max-width: 820px;
       margin: 0 auto;
     }
 
     .badge-hero {
       display: inline-block;
-      background: var(--primary);
-      color: #fff;
+      background: rgba(239, 68, 68, 0.2);
+      border: 1px solid #ef4444;
+      color: #fca5a5;
       font-weight: 800;
       font-size: 12px;
-      padding: 5px 14px;
+      padding: 6px 16px;
       border-radius: 20px;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
     }
 
     .hero h2 {
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 900;
-      color: var(--dark);
+      color: #fff;
       line-height: 1.2;
       margin-bottom: 12px;
     }
 
     .hero p {
       font-size: 16px;
-      color: #475569;
-      margin-bottom: 18px;
-      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      font-weight: 500;
     }
 
     .hero-features {
@@ -213,75 +171,81 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      background: var(--white);
-      padding: 7px 16px;
+      background: var(--dark-card);
+      border: 1px solid #334155;
+      padding: 8px 18px;
       border-radius: 30px;
       font-size: 13px;
       font-weight: 700;
-      color: var(--dark);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      color: var(--text);
     }
 
-    /* VOLANTE */
-    .flyer-section {
+    /* SECCIÓN PROMO / BANNER */
+    .promo-section {
       max-width: 1200px;
-      margin: 26px auto;
+      margin: 28px auto;
       padding: 0 20px;
     }
 
-    .flyer-card {
-      background: var(--white);
+    .promo-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       border-radius: var(--radius);
-      padding: 22px;
+      padding: 24px;
       box-shadow: var(--shadow);
-      border: 2px solid #fde047;
+      border: 1px solid #334155;
       display: flex;
       gap: 26px;
       align-items: center;
       flex-wrap: wrap;
     }
 
-    .flyer-img-container {
+    .promo-img-container {
       flex: 1;
-      min-width: 250px;
-      max-width: 360px;
+      min-width: 260px;
+      max-width: 380px;
       margin: 0 auto;
       cursor: pointer;
     }
 
-    .flyer-img-container img {
+    .promo-img-container img {
       width: 100%;
-      height: auto;
+      height: 230px;
+      object-fit: cover;
       border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      border: 1px solid #475569;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
       transition: transform 0.25s ease;
       display: block;
     }
 
-    .flyer-info {
+    .promo-img-container img:hover {
+      transform: scale(1.02);
+    }
+
+    .promo-info {
       flex: 2;
       min-width: 280px;
     }
 
-    .flyer-info h3 {
-      font-size: 23px;
+    .promo-info h3 {
+      font-size: 24px;
       font-weight: 900;
-      color: var(--primary);
+      color: #fff;
       margin-bottom: 6px;
     }
 
-    .flyer-slogan {
+    .promo-slogan {
       font-size: 15px;
       font-weight: 700;
-      color: #c2410c;
+      color: var(--accent);
       margin-bottom: 12px;
     }
 
-    .flyer-contact-grid {
+    .contact-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 10px;
-      margin-bottom: 14px;
+      margin-top: 14px;
     }
 
     .contact-button {
@@ -290,21 +254,21 @@
       gap: 10px;
       padding: 10px 14px;
       border-radius: 10px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background: #0f172a;
+      border: 1px solid #334155;
       text-decoration: none;
-      color: var(--dark);
-      font-weight: 800;
-      font-size: 14px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 13px;
       transition: all 0.2s;
     }
 
     .contact-button:hover {
-      background: #eef2ff;
-      border-color: #818cf8;
+      background: #334155;
+      border-color: var(--accent);
     }
 
-    /* MAPA Y LEYENDA */
+    /* MAPA REPARTIDOR */
     .map-section {
       max-width: 1200px;
       margin: 20px auto 36px;
@@ -312,18 +276,18 @@
     }
 
     .map-card {
-      background: var(--white);
+      background: var(--dark-card);
       border-radius: var(--radius);
-      padding: 16px;
+      padding: 18px;
       box-shadow: var(--shadow);
-      border: 1px solid #e2e8f0;
+      border: 1px solid #334155;
     }
 
     .map-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       flex-wrap: wrap;
       gap: 12px;
     }
@@ -331,70 +295,56 @@
     .map-header h3 {
       font-size: 18px;
       font-weight: 800;
-      color: var(--dark);
+      color: #fff;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
-    /* LEYENDA ONLINE / OFFLINE DINÁMICA */
     .gps-legend-box {
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #f8fafc;
-      border: 1px solid #cbd5e1;
+      background: #0f172a;
+      border: 1px solid #334155;
       padding: 6px 14px;
       border-radius: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
 
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
       font-size: 12px;
       font-weight: 800;
-      opacity: 0.35;
+      opacity: 0.4;
       transition: all 0.3s ease;
     }
 
     .legend-item.activo {
       opacity: 1;
-      transform: scale(1.05);
     }
 
-    .legend-item.online.activo {
-      color: #15803d;
-    }
-
-    .legend-item.offline.activo {
-      color: #dc2626;
-    }
-
-    .legend-divider {
-      color: #cbd5e1;
-      font-size: 12px;
-    }
+    .legend-item.online.activo { color: #22c55e; }
+    .legend-item.offline.activo { color: #ef4444; }
 
     .map-wrapper {
-      position: relative;
-      border-radius: 10px;
+      border-radius: 12px;
       overflow: hidden;
+      border: 1px solid #334155;
     }
 
-    #cuscoMap {
+    #deliveryMap {
       width: 100%;
-      height: 350px;
-      border-radius: 10px;
+      height: 340px;
       z-index: 10;
     }
 
-    /* MARCADORES GPS DEL REPARTIDOR */
+    /* ICONOS GPS MOTORIZADO */
     .custom-gps-marker {
       position: relative;
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -402,67 +352,44 @@
 
     .gps-radar-pulse {
       position: absolute;
-      width: 58px;
-      height: 58px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
-      background: rgba(107, 33, 168, 0.28);
+      background: rgba(239, 68, 68, 0.35);
       animation: radarPulse 2s ease-out infinite;
       z-index: 1;
-      pointer-events: none;
     }
 
     @keyframes radarPulse {
       0% { transform: scale(0.6); opacity: 0.9; }
-      70% { transform: scale(1.6); opacity: 0.15; }
-      100% { transform: scale(1.9); opacity: 0; }
+      100% { transform: scale(1.8); opacity: 0; }
     }
 
-    .lion-badge-circle {
+    .moto-badge-circle {
       position: relative;
-      width: 42px;
-      height: 42px;
-      background: linear-gradient(135deg, #7e22ce 0%, #4c1d95 100%);
-      border: 2.5px solid #ffffff;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+      border: 2px solid #ffffff;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 23px;
-      box-shadow: 0 4px 12px rgba(107, 33, 168, 0.55);
+      font-size: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
       z-index: 2;
-      transition: all 0.3s ease;
     }
 
-    .custom-gps-marker.offline .lion-badge-circle {
-      background: #64748b;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      filter: grayscale(0.7);
+    .custom-gps-marker.offline .moto-badge-circle {
+      background: #475569;
+      filter: grayscale(1);
     }
 
-    .custom-gps-marker.offline .gps-radar-pulse,
-    .custom-gps-marker.offline .fire-flame-emitter {
+    .custom-gps-marker.offline .gps-radar-pulse {
       display: none;
     }
 
-    .fire-flame-emitter {
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 17px;
-      z-index: 3;
-      filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.95)) drop-shadow(0 0 10px rgba(239, 68, 68, 0.8));
-      animation: flameFlicker 0.75s ease-in-out infinite alternate;
-      pointer-events: none;
-    }
-
-    @keyframes flameFlicker {
-      0% { transform: translateX(-50%) translateY(0) scale(0.9) rotate(-3deg); filter: drop-shadow(0 0 4px #f59e0b) drop-shadow(0 0 7px #ea580c); }
-      50% { transform: translateX(-48%) translateY(-2.5px) scale(1.15) rotate(2deg); filter: drop-shadow(0 0 8px #facc15) drop-shadow(0 0 12px #dc2626); }
-      100% { transform: translateX(-52%) translateY(-4px) scale(1.05) rotate(-2deg); filter: drop-shadow(0 0 6px #f59e0b) drop-shadow(0 0 10px #b91c1c); }
-    }
-
-    /* PRODUCTOS */
+    /* CATÁLOGO PRODUCTOS */
     .section-menu {
       max-width: 1200px;
       margin: 20px auto 40px;
@@ -470,44 +397,47 @@
     }
 
     .menu-header {
-      background: var(--white);
-      padding: 16px 20px;
+      background: var(--dark-card);
+      padding: 18px 22px;
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      border: 1px solid #334155;
       margin-bottom: 24px;
     }
 
     .menu-header h3 {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 800;
-      color: var(--dark);
+      color: #fff;
     }
 
-    .grid-empanadas {
+    .grid-burgers {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 22px;
     }
 
     .card {
-      background: var(--white);
+      background: var(--dark-card);
       border-radius: var(--radius);
       overflow: hidden;
       box-shadow: var(--shadow);
       display: flex;
       flex-direction: column;
-      border: 1px solid #f1f5f9;
-      transition: transform 0.2s;
-      position: relative;
+      border: 1px solid #334155;
+      transition: transform 0.2s, border-color 0.2s;
     }
 
-    .card:hover { transform: translateY(-4px); }
-    .card.agotado { opacity: 0.65; }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #ef4444;
+    }
+
+    .card.agotado { opacity: 0.6; }
 
     .card-img-wrapper {
       position: relative;
       height: 200px;
-      background: #e2e8f0;
+      background: #0f172a;
       overflow: hidden;
     }
 
@@ -521,13 +451,14 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: rgba(107, 33, 168, 0.9);
-      backdrop-filter: blur(4px);
-      color: var(--white);
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--accent);
+      color: var(--accent);
       font-size: 11px;
-      font-weight: 700;
-      padding: 3px 8px;
+      font-weight: 800;
+      padding: 3px 10px;
       border-radius: 16px;
+      text-transform: uppercase;
     }
 
     .card-body {
@@ -538,15 +469,15 @@
     }
 
     .card-title {
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 800;
-      color: var(--dark);
+      color: #fff;
       margin-bottom: 6px;
     }
 
     .card-desc {
       font-size: 13px;
-      color: #64748b;
+      color: var(--text-muted);
       margin-bottom: 14px;
       flex: 1;
     }
@@ -557,28 +488,29 @@
       align-items: center;
       margin-top: auto;
       padding-top: 12px;
-      border-top: 1px solid #f3f4f6;
+      border-top: 1px solid #334155;
     }
 
     .price {
-      font-size: 19px;
+      font-size: 20px;
       font-weight: 900;
-      color: var(--primary);
+      color: var(--accent);
     }
 
     .btn-add {
       background: var(--primary);
       color: var(--white);
       border: none;
-      padding: 8px 14px;
+      padding: 9px 16px;
       border-radius: 8px;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
+      transition: background 0.2s;
     }
 
     .btn-add:hover { background: var(--primary-dark); }
-    .btn-add:disabled { background: #94a3b8; cursor: not-allowed; }
+    .btn-add:disabled { background: #475569; cursor: not-allowed; }
 
     /* BOTÓN FLOTANTE */
     .chat-bubble-container {
@@ -594,79 +526,77 @@
     }
 
     .chat-bubble-label {
-      background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
-      color: var(--primary-dark);
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #0f172a;
       font-weight: 900;
       font-size: 14px;
-      padding: 8px 14px;
+      padding: 9px 16px;
       border-radius: 20px;
-      box-shadow: 0 4px 14px rgba(107, 33, 168, 0.25);
-      border: 2px solid var(--primary);
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.3);
       display: flex;
       align-items: center;
       gap: 6px;
-      animation: pulseLabel 2.5s infinite;
+      animation: pulse 2.2s infinite;
     }
 
-    @keyframes pulseLabel {
+    @keyframes pulse {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
+      50% { transform: scale(1.05); }
     }
 
     .chat-bubble-btn {
       position: relative;
       width: 62px;
       height: 62px;
-      background: linear-gradient(135deg, #7e22ce 0%, #581c87 100%);
+      background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
       border-radius: 50%;
-      box-shadow: 0 6px 20px rgba(107, 33, 168, 0.45);
+      box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid #facc15;
+      border: 2px solid #f59e0b;
+      font-size: 28px;
     }
-
-    .chat-bubble-lion-icon { font-size: 32px; line-height: 1; }
 
     .chat-badge {
       position: absolute;
       top: -3px;
       right: -3px;
-      background-color: #ef4444;
-      color: var(--white);
-      border: 2px solid var(--white);
+      background: #f59e0b;
+      color: #0f172a;
+      border: 2px solid #0f172a;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       min-width: 22px;
       height: 22px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
-    /* CARRITO */
+    /* CARRITO MODAL */
     .cart-modal-overlay {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(4px);
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(5px);
       z-index: 2000;
       justify-content: center;
       align-items: flex-end;
     }
 
     .cart-modal-card {
-      background: var(--white);
+      background: #1e293b;
       width: 100%;
-      max-width: 500px;
+      max-width: 520px;
       border-radius: 20px 20px 0 0;
       max-height: 90vh;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 -10px 30px rgba(0,0,0,0.25);
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+      border: 1px solid #334155;
       animation: slideUp 0.25s ease-out;
     }
 
@@ -677,36 +607,51 @@
 
     .cart-modal-header {
       padding: 16px 20px;
-      background: var(--primary);
-      color: var(--white);
+      background: #0f172a;
+      color: #fff;
       border-radius: 20px 20px 0 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-bottom: 1px solid #334155;
     }
 
-    .btn-close-cart { background: none; border: none; color: var(--white); font-size: 24px; cursor: pointer; }
+    .btn-close-cart {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 24px;
+      cursor: pointer;
+    }
 
     .cart-modal-body {
-      padding: 16px 20px;
+      padding: 18px 20px;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
     }
 
     .cart-header-actions {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+    }
+
+    .popup-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 0.6px;
     }
 
     .btn-vaciar-cart {
       background: none;
       border: none;
-      color: #dc2626;
-      font-size: 11px;
+      color: #ef4444;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       text-decoration: underline;
@@ -716,7 +661,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      max-height: 180px;
+      max-height: 200px;
       overflow-y: auto;
     }
 
@@ -724,170 +669,162 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #f8fafc;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid #e2e8f0;
+      background: #0f172a;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #334155;
     }
 
-    .cart-item-row.item-activo { background: #faf5ff; border-color: #d8b4fe; }
-    .cart-item-row.item-bloqueado { background: #fef2f2; border-color: #fecaca; opacity: 0.75; }
+    .cart-item-row.item-activo {
+      border-color: #ef4444;
+    }
 
     .cart-item-info { flex: 1; }
-    .cart-item-title { font-size: 13px; font-weight: 700; color: var(--dark); }
-    .cart-item-sub { font-size: 11px; color: #64748b; }
+    .cart-item-title { font-size: 14px; font-weight: 700; color: #fff; }
+    .cart-item-sub { font-size: 12px; color: var(--text-muted); }
 
-    .cart-controls { display: flex; align-items: center; gap: 6px; }
+    .cart-controls { display: flex; align-items: center; gap: 8px; }
 
     .btn-qty {
-      background: #e2e8f0;
+      background: #334155;
+      color: #fff;
       border: none;
-      width: 24px;
-      height: 24px;
-      border-radius: 5px;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .btn-qty:disabled { background: #f1f5f9; color: #cbd5e1; cursor: not-allowed; }
+    .btn-qty:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    .cart-item-price-wrapper { display: flex; align-items: center; gap: 8px; margin-left: 10px; }
-    .cart-item-price { font-size: 13px; font-weight: 800; color: var(--primary); min-width: 55px; text-align: right; }
-    .btn-trash-item { background: none; border: none; cursor: pointer; font-size: 15px; color: #94a3b8; }
-
-    .popup-section-label {
-      font-size: 11px;
-      text-transform: uppercase;
+    .cart-item-price {
+      font-size: 14px;
       font-weight: 800;
-      color: #64748b;
-      letter-spacing: 0.5px;
+      color: var(--accent);
+      min-width: 65px;
+      text-align: right;
     }
 
-    .grid-payments { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+    .btn-trash-item {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: #64748b;
+      margin-left: 8px;
+    }
+
+    /* SELECCIÓN DE PAGO */
+    .grid-payments {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
 
     .btn-pay-option {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      color: var(--dark);
-      padding: 7px 4px;
-      border-radius: 6px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 9px 4px;
+      border-radius: 8px;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
       text-align: center;
+      transition: all 0.2s;
     }
 
-    .btn-pay-option.active { background: var(--primary); border-color: var(--primary-dark); color: var(--white); }
+    .btn-pay-option.active {
+      background: #ef4444;
+      border-color: #ef4444;
+    }
 
     .cash-box-drawer {
-      display: block;
-      background: #fdf4ff;
-      border: 2px dashed #d8b4fe;
+      background: #0f172a;
+      border: 1px dashed #475569;
       border-radius: 10px;
       padding: 12px 14px;
-      margin-top: 8px;
+      margin-top: 10px;
     }
 
-    .cash-input-row { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+    .cash-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
 
     .cash-input {
       flex: 1;
       padding: 8px 12px;
       font-size: 16px;
       font-weight: 800;
-      border: 1px solid #c084fc;
+      border: 1px solid #475569;
+      background: #1e293b;
+      color: #fff;
       border-radius: 8px;
-      color: var(--primary-dark);
-      background: #fff;
     }
 
-    .cash-quick-btns { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    .cash-quick-btns {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
 
     .btn-quick-cash {
-      background: #fff;
-      border: 1px solid #d8b4fe;
-      color: var(--primary-dark);
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #cbd5e1;
       font-size: 11px;
-      font-weight: 800;
-      padding: 4px 8px;
+      font-weight: 700;
+      padding: 5px 10px;
       border-radius: 6px;
       cursor: pointer;
     }
 
     .vuelto-badge-box {
       margin-top: 10px;
-      padding: 8px 10px;
+      padding: 8px 12px;
       border-radius: 8px;
       font-size: 13px;
       font-weight: 800;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #dcfce7;
-      color: #15803d;
-      border: 1px solid #86efac;
+      background: rgba(34, 197, 94, 0.15);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
     }
 
-    .vuelto-badge-box.alerta { background: #fee2e2; color: #b91c1c; border-color: #fca5a5; }
+    .vuelto-badge-box.alerta {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
 
+    /* GPS Y DATOS */
     .geo-box {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      background: #faf5ff;
-      border: 1px solid #e9d5ff;
-      padding: 10px 12px;
-      border-radius: 8px;
+      background: #0f172a;
+      border: 1px solid #334155;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 6px;
     }
 
     .btn-geo {
-      background: var(--primary);
+      background: #334155;
       color: #fff;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-size: 12px;
+      border: 1px solid #475569;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 13px;
       font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .geo-status { font-size: 11px; color: #64748b; text-align: center; }
-    .geo-status.ready { color: #15803d; font-weight: bold; }
-
-    .client-name-box { display: flex; flex-direction: column; gap: 4px; }
-    .client-name-input { width: 100%; padding: 9px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 14px; }
-
-    .cart-modal-footer {
-      padding: 14px 20px;
-      background: #f8fafc;
-      border-top: 1px solid #e2e8f0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .cart-total-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 15px;
-      font-weight: 900;
-    }
-
-    .cart-total-amount { color: var(--primary); font-size: 19px; }
-
-    .btn-order-wsp {
-      background: #25d366;
-      color: var(--white);
-      padding: 12px;
-      border-radius: 10px;
-      font-weight: 800;
-      font-size: 14px;
-      border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -895,11 +832,71 @@
       gap: 8px;
     }
 
+    .btn-geo:hover { background: #475569; }
+
+    .geo-status {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .geo-status.ready { color: #4ade80; font-weight: bold; }
+
+    .client-input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+
+    /* FOOTER CARRITO */
+    .cart-modal-footer {
+      padding: 16px 20px;
+      background: #0f172a;
+      border-top: 1px solid #334155;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .cart-total-amount { color: var(--accent); font-size: 22px; font-weight: 900; }
+
+    .btn-order-wsp {
+      background: #22c55e;
+      color: #fff;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 900;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+
+    .btn-order-wsp:hover { background: #16a34a; }
+
+    /* LIGHTBOX */
     .lightbox-overlay {
       display: none;
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.85);
+      background: rgba(0, 0, 0, 0.9);
       z-index: 3000;
       justify-content: center;
       align-items: center;
@@ -910,7 +907,7 @@
 
     @media (max-width: 650px) {
       .nav-container { justify-content: center; }
-      .brand-section { flex-wrap: wrap; justify-content: center; }
+      .brand-section { justify-content: center; }
       .map-header { flex-direction: column; align-items: flex-start; }
     }
   </style>
@@ -922,25 +919,16 @@
     <div class="nav-container">
       <div class="brand-section">
         <a href="#" class="brand">
-          <div class="brand-icon">🦁</div>
+          <div class="brand-icon">🍔</div>
           <div class="brand-text">
-            <h1>LeoGas Cusco</h1>
-            <span>Llamagas • El Moradito Rendidor</span>
-          </div>
-        </a>
-
-        <!-- LOGO LA CHUSPA TECH AL COSTADO -->
-        <a href="https://lachuspaanuncios.com/" target="_blank" rel="noopener noreferrer" class="chuspa-nav-badge" title="Visitar La Chuspa Anuncios">
-          <img src="CHUSPITA-circulo.png" alt="La Chuspa Anuncios" class="chuspa-nav-img" onerror="this.src='https://lachuspaanuncios.com/wp-content/uploads/2023/10/cropped-logo-la-chuspa.png'">
-          <div class="chuspa-nav-info">
-            <span class="chuspa-nav-title">La Chuspa Tech</span>
-            <span class="chuspa-nav-sub">by La Chuspa Anuncios</span>
+            <h1>BURGER CLUB</h1>
+            <span>Smash & Artesanal • Delivery Cusco</span>
           </div>
         </a>
       </div>
 
       <div class="nav-actions">
-        <a href="#menu" class="nav-cta">Pedir Gas</a>
+        <a href="#menu" class="nav-cta">Ver Carta 🔥</a>
       </div>
     </div>
   </header>
@@ -948,88 +936,86 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-container">
-      <span class="badge-hero">Mayor seguridad con LeoGas tu distribuidora de confianza</span>
-      <h2>¡Solo la seguridad hace la diferencia!</h2>
-      <p>Pide tu balón de gas en Cusco al instante. Escanea el código o llámanos directamente.</p>
+      <span class="badge-hero">🔥 Carne 100% Angus & Pan Brioche Artesanal</span>
+      <h2>¡Las Hamburguesas Más Brutales de Cusco!</h2>
+      <p>Pídelas calientes y jugosas directo a tu puerta en minutos con seguimiento en tiempo real.</p>
       
       <div class="hero-features">
-        <div class="feature-pill">📍 Rastreo en Vivo</div>
-        <div class="feature-pill">⚖️ Balón Sellado 10kg</div>
-        <div class="feature-pill">💵 Yape, Plin y Efectivo con Vuelto</div>
+        <div class="feature-pill">🛵 Delivery Rápido</div>
+        <div class="feature-pill">🥓 Tocino Ahumado & Queso Cheddar Real</div>
+        <div class="feature-pill">💳 Yape, Plin, Tarjeta o Efectivo</div>
       </div>
     </div>
   </section>
 
-  <!-- VOLANTE -->
-  <section class="flyer-section">
-    <div class="flyer-card">
-      <div class="flyer-img-container" onclick="abrirLightboxFlyer()">
-        <img id="imgFlyerOficial" src="1791513590376.jpg" alt="Volante Oficial LeoGas Cusco" onerror="this.src='1791513590376.jpg'">
-        <div class="flyer-hint">🔍 Toca para ampliar el volante</div>
+  <!-- PROMO DESTACADA -->
+  <section class="promo-section">
+    <div class="promo-card">
+      <div class="promo-img-container" onclick="abrirLightboxPromo()">
+        <img id="imgPromoOficial" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700&auto=format&fit=crop&q=80" alt="Promo Burger Club">
       </div>
-      <div class="flyer-info">
-        <span class="badge-hero" style="background:#f59e0b; color:#1e1b4b; margin-bottom:8px;">Distribuidor Oficial</span>
-        <h3>LeoGas Cusco — Llamagas</h3>
-        <p class="flyer-slogan">"Ordena tu Pedido aquí y te lo traemos en minutos"</p>
-        <p style="font-size:14px; color:#64748b; margin-bottom:16px;">
-          Tu balón moradito de 10 kg con regulador inteligente, válvula garantizada y entrega express en todo Cusco.
+      <div class="promo-info">
+        <span class="badge-hero" style="background: rgba(245, 158, 11, 0.2); border-color: #f59e0b; color: #f59e0b;">Combo Destacado</span>
+        <h3>Promo Brutal: Burger Doble + Papas Rústicas</h3>
+        <p class="promo-slogan">"Sabor auténtico con salsas de la casa y papas nativas crocantes"</p>
+        <p style="font-size:14px; color: var(--text-muted); margin-bottom: 14px;">
+          Pide por aquí y recibe el mensaje formateado directamente a nuestra cocina para despacho express.
         </p>
 
-        <div class="popup-section-label" style="margin-bottom:8px;">Teléfonos de Pedido Inmediato:</div>
-        <div class="flyer-contact-grid" id="contenedorTelefonosFlyer">
-          <!-- Renderizado dinámico desde productos.json -->
+        <div class="popup-section-label">Líneas de Atención & Pedidos:</div>
+        <div class="contact-grid" id="contenedorTelefonos">
+          <!-- Renderizado de teléfonos -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- MAPA CUSCO CON LEYENDA DINÁMICA -->
+  <!-- SEGUIMIENTO DE REPARTIDORES -->
   <section class="map-section">
     <div class="map-card">
       <div class="map-header">
-        <h3>📍 Repartidor en Ruta LeoGas - Cusco</h3>
+        <h3>🛵 Repartidores en Ruta - Cusco</h3>
         
-        <!-- LEYENDA CENTRALIZADA DEL ESTADO DEL LEONCITO -->
-        <div class="gps-legend-box" id="legendBoxGPS">
+        <div class="gps-legend-box">
           <div class="legend-item online" id="legendOnline">
-            <span style="font-size:15px;">🦁🔥</span>
-            <span>Online</span>
+            <span style="font-size:14px;">🛵💨</span>
+            <span>En Ruta</span>
           </div>
-          <span class="legend-divider">|</span>
+          <span style="color: #334155;">|</span>
           <div class="legend-item offline activo" id="legendOffline">
-            <span style="font-size:15px;">🦁💤</span>
-            <span>Offline</span>
+            <span style="font-size:14px;">🛵💤</span>
+            <span>En Local</span>
           </div>
         </div>
       </div>
 
       <div class="map-wrapper">
-        <div id="cuscoMap"></div>
+        <div id="deliveryMap"></div>
       </div>
     </div>
   </section>
 
-  <!-- PRODUCTOS -->
+  <!-- CARTA DE HAMBURGUESAS -->
   <section class="section-menu" id="menu">
     <div class="menu-header">
-      <h3>Elige tu Balón de Gas</h3>
-      <p style="font-size: 13px; color: #64748b;">Selecciona tu balón de 10 kg e indícanos tu dirección exacta.</p>
+      <h3>Nuestra Carta</h3>
+      <p style="font-size: 13px; color: var(--text-muted);">Arma tu pedido agregando tus favoritas al carrito.</p>
     </div>
-    <div class="grid-empanadas" id="contenedorEmpanadas"></div>
+    <div class="grid-burgers" id="contenedorBurgers"></div>
   </section>
 
   <!-- LIGHTBOX -->
-  <div class="lightbox-overlay" id="lightboxModal" onclick="cerrarLightboxFlyer()">
-    <img src="1791513590376.jpg" alt="Volante Completo LeoGas">
+  <div class="lightbox-overlay" id="lightboxModal" onclick="cerrarLightboxPromo()">
+    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1200&auto=format&fit=crop&q=80" alt="Promo Full">
   </div>
 
-  <!-- BOTÓN FLOTANTE PEDIDOS -->
-  <div class="chat-bubble-container" id="btnFlotanteContenedor" onclick="abrirModalCarrito()">
+  <!-- BOTÓN FLOTANTE PEDIDO -->
+  <div class="chat-bubble-container" onclick="abrirModalCarrito()">
     <div class="chat-bubble-label">
-      <span>🔥 Pedidos</span>
+      <span>🍔 Tu Pedido</span>
     </div>
-    <div class="chat-bubble-btn" id="btnGlobitoChat">
-      <span class="chat-bubble-lion-icon">🦁</span>
+    <div class="chat-bubble-btn">
+      <span>🛍️</span>
       <div class="chat-badge" id="badgeContador">0</div>
     </div>
   </div>
@@ -1038,68 +1024,68 @@
   <div class="cart-modal-overlay" id="cartModalOverlay" onclick="cerrarSiClickAfuera(event)">
     <div class="cart-modal-card">
       <div class="cart-modal-header">
-        <h3>🦁 Pedido LeoGas Cusco</h3>
+        <h3 style="font-size:17px;">🛒 Resumen de tu Pedido</h3>
         <button class="btn-close-cart" onclick="cerrarModalCarrito()">&times;</button>
       </div>
 
       <div class="cart-modal-body">
         <div>
           <div class="cart-header-actions">
-            <span class="popup-section-label">Balones seleccionados:</span>
-            <button type="button" class="btn-vaciar-cart" onclick="vaciarPedidoConConfirmacion()">🗑️ Vaciar pedido</button>
+            <span class="popup-section-label">Platos seleccionados:</span>
+            <button type="button" class="btn-vaciar-cart" onclick="vaciarPedidoConConfirmacion()">Vaciar</button>
           </div>
           <div class="cart-items-box" id="popupItemsList"></div>
         </div>
 
         <div>
-          <div class="popup-section-label" style="margin-bottom:6px;">Forma de Pago:</div>
+          <span class="popup-section-label">Método de Pago:</span>
           <div class="grid-payments">
-            <button type="button" class="btn-pay-option active" id="btnPayEfectivo" onclick="elegirPago('Efectivo', this)">💵 Efectivo</button>
+            <button type="button" class="btn-pay-option active" onclick="elegirPago('Efectivo', this)">💵 Efectivo</button>
             <button type="button" class="btn-pay-option" onclick="elegirPago('Yape', this)">🟣 Yape</button>
             <button type="button" class="btn-pay-option" onclick="elegirPago('Plin', this)">🔵 Plin</button>
-            <button type="button" class="btn-pay-option" onclick="elegirPago('Transferencia', this)">🏦 Transf.</button>
+            <button type="button" class="btn-pay-option" onclick="elegirPago('Tarjeta POS', this)">💳 POS</button>
           </div>
 
           <div class="cash-box-drawer" id="cajaEfectivoDesplegable">
-            <div style="font-size: 12px; font-weight: 800; color: var(--primary);">💵 ¿Con cuánto en efectivo pagarás?</div>
+            <div style="font-size: 12px; font-weight: 700; color: var(--accent);">💵 ¿Con cuánto en efectivo pagarás?</div>
             <div class="cash-input-row">
-              <span style="font-weight: 800; font-size: 14px; color: var(--primary);">S/</span>
-              <input type="number" id="montoEfectivoIngresado" class="cash-input" placeholder="Ej. 100" min="0" step="5" oninput="calcularVueltoEfectivo()"/>
+              <span style="font-weight: 800; font-size: 15px; color: var(--accent);">S/</span>
+              <input type="number" id="montoEfectivoIngresado" class="cash-input" placeholder="Ej. 50" min="0" step="5" oninput="calcularVueltoEfectivo()"/>
             </div>
             <div class="cash-quick-btns">
-              <button type="button" class="btn-quick-cash" onclick="setMontoEfectivoRapido('exacto')">Pagar Exacto</button>
+              <button type="button" class="btn-quick-cash" onclick="setMontoEfectivoRapido('exacto')">Pago Exacto</button>
               <button type="button" class="btn-quick-cash" onclick="setMontoEfectivoRapido(50)">S/ 50</button>
               <button type="button" class="btn-quick-cash" onclick="setMontoEfectivoRapido(100)">S/ 100</button>
-              <button type="button" class="btn-quick-cash" onclick="setMontoEfectivoRapido(200)">S/ 200</button>
             </div>
             <div class="vuelto-badge-box" id="cajaRespuestaVuelto">
-              <span id="textoDetalleVuelto">Ingresa con cuánto pagarás para calcular el vuelto</span>
-              <span id="montoCalculadoVuelto" style="font-size: 15px;"></span>
+              <span id="textoDetalleVuelto">Ingresa el monto para calcular el vuelto</span>
+              <span id="montoCalculadoVuelto"></span>
             </div>
           </div>
         </div>
 
         <div>
-          <div class="popup-section-label" style="margin-bottom:6px;">Dirección de Entrega:</div>
+          <span class="popup-section-label">Dirección o Referencia:</span>
           <div class="geo-box">
-            <button type="button" class="btn-geo" onclick="capturarGPSCliente()">📍 Activar mi ubicación exacta</button>
-            <span class="geo-status" id="geoStatus">Envía tus coordenadas para llevar el balón hasta tu casa</span>
+            <button type="button" class="btn-geo" onclick="capturarGPSCliente()">📍 Compartir mi ubicación exacta</button>
+            <span class="geo-status" id="geoStatus">Activa el GPS para calcular tu ruta de entrega rápida</span>
           </div>
+          <input type="text" id="direccionDetalleInput" class="client-input" placeholder="Calle, número de casa, piso, depto o referencia"/>
         </div>
 
-        <div class="client-name-box">
-          <label class="popup-section-label" for="nombreClienteInput">¿Por quién preguntamos? (Nombre o referencia):</label>
-          <input type="text" id="nombreClienteInput" class="client-name-input" placeholder="Ej: Sra. Carmen / Familia Quispe"/>
+        <div>
+          <label class="popup-section-label" for="nombreClienteInput">Tu Nombre:</label>
+          <input type="text" id="nombreClienteInput" class="client-input" placeholder="Ej: Edwin Oblitas"/>
         </div>
       </div>
 
       <div class="cart-modal-footer">
         <div class="cart-total-row">
-          <span id="cartLabelTotalConCantidad">Total a pagar (0 balones):</span>
+          <span id="cartLabelTotalConCantidad">Total (0 items):</span>
           <span class="cart-total-amount" id="cartTotalMonto">S/ 0.00</span>
         </div>
         <button class="btn-order-wsp" onclick="enviarPedidoWhatsApp()">
-          <span>Pedir a LeoGas por WhatsApp</span> 💬
+          <span>Enviar Pedido a WhatsApp</span> 💬
         </button>
       </div>
     </div>
@@ -1113,13 +1099,55 @@
     let telefonos = {
       whatsapp: "51969773064",
       tel1: "950 727 212",
-      tel2: "984 285 500",
-      tel3: "(084) 501111"
+      tel2: "984 285 500"
     };
 
     let catalogo = [
-      { id: "gas-1", nombre: "Balón LeoGas 10kg Normal o Regular", tag: "El Moradito Rendidor", descripcion: "Balón sellado Llamagas de 10kg con precinto de seguridad.", precio: 50.00, disponible: true, imagen: "1791513590376.jpg" },
-      { id: "gas-2", nombre: "Balón Gas Premium 10kg", tag: "Máximo Rendimiento", descripcion: "GLP de alta pureza con válvula anti-fugas.", precio: 55.00, disponible: true, imagen: "1791513590376.jpg" }
+      {
+        id: "burger-classic",
+        nombre: "Classic Cheese Burger",
+        tag: "La Clásica",
+        descripcion: "150g Carne Angus, doble queso cheddar fundido, lechuga, tomate y salsa secreta en pan brioche.",
+        precio: 22.00,
+        disponible: true,
+        imagen: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "burger-bacon",
+        nombre: "Bacon Monster BBQ",
+        tag: "Más Pedida",
+        descripcion: "Doble carne Angus, abundante tocino ahumado crocante, cebolla caramelizada y salsa BBQ artesanal.",
+        precio: 28.00,
+        disponible: true,
+        imagen: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=600&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "burger-smash",
+        nombre: "Smash Burger Trufada",
+        tag: "Artesanal",
+        descripcion: "Costra crujiente de carne smash, queso gouda, champiñones salteados y mayonesa trufada de la casa.",
+        precio: 26.00,
+        disponible: true,
+        imagen: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "papas-rusticas",
+        nombre: "Papas Rústicas Nativas",
+        tag: "Guarnición",
+        descripcion: "Papas nativas cusqueñas con hierbas andinas, dip de queso y crema de rocoto suave.",
+        precio: 10.00,
+        disponible: true,
+        imagen: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&auto=format&fit=crop&q=80"
+      },
+      {
+        id: "gaseosa-combo",
+        nombre: "Inca Kola / Coca Cola 500ml",
+        tag: "Bebida",
+        descripcion: "Helada y lista para acompañar tu hamburguesa.",
+        precio: 5.00,
+        disponible: true,
+        imagen: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=600&auto=format&fit=crop&q=80"
+      }
     ];
 
     const pedido = {};
@@ -1142,69 +1170,59 @@
     let ubicacionClienteCoords = null;
     let ultimoTotalPagar = 0;
     let map = null;
-
-    // ALMACENAMIENTO DE MARCADORES MULTI-REPARTIDOR
     let marcadoresFlota = {};
 
-    function renderizarTelefonosFlyer() {
-      const container = document.getElementById('contenedorTelefonosFlyer');
+    function renderizarTelefonos() {
+      const container = document.getElementById('contenedorTelefonos');
       const clean1 = telefonos.tel1.replace(/\D/g,'');
       const clean2 = telefonos.tel2.replace(/\D/g,'');
-      const clean3 = telefonos.tel3.replace(/\D/g,'');
-
       container.innerHTML = `
         <a href="tel:${clean1}" class="contact-button"><span>📞</span> ${telefonos.tel1}</a>
         <a href="tel:${clean2}" class="contact-button"><span>📞</span> ${telefonos.tel2}</a>
-        <a href="tel:${clean3}" class="contact-button"><span>☎️</span> ${telefonos.tel3}</a>
       `;
     }
 
-    // INICIALIZACIÓN DEL MAPA
     function iniciarMapaCusco() {
       const cuscoLat = -13.5167;
       const cuscoLng = -71.9788;
-      map = L.map('cuscoMap').setView([cuscoLat, cuscoLng], 14);
+      map = L.map('deliveryMap').setView([cuscoLat, cuscoLng], 14);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap'
       }).addTo(map);
 
-      // Flota inicial temporal hasta que cargue productos.json
       actualizarVisualizadorGPS([
-        { id: "rep-1", nombre: "Repartidor 1", online: false, lat: cuscoLat, lng: cuscoLng }
+        { id: "moto-1", nombre: "Motorizado 1", online: true, lat: -13.5180, lng: -71.9750 }
       ]);
     }
 
-    // FUNCIÓN CENTRALIZADA: DIBUJA A TODOS LOS REPARTIDORES DE LA FLOTA
-    function actualizarVisualizadorGPS(flotaRepartidores) {
-      if (!Array.isArray(flotaRepartidores)) return;
+    function actualizarVisualizadorGPS(flota) {
+      if (!Array.isArray(flota)) return;
+      let hayOnline = false;
 
-      let hayAlgunoOnline = false;
-
-      flotaRepartidores.forEach(rep => {
+      flota.forEach(rep => {
         const estaOnline = (rep.online === true);
-        if (estaOnline) hayAlgunoOnline = true;
+        if (estaOnline) hayOnline = true;
 
         const iconoHTML = estaOnline ? `
           <div class="custom-gps-marker">
             <div class="gps-radar-pulse"></div>
-            <div class="fire-flame-emitter">🔥</div>
-            <div class="lion-badge-circle">🦁</div>
+            <div class="moto-badge-circle">🛵</div>
           </div>
         ` : `
           <div class="custom-gps-marker offline">
-            <div class="lion-badge-circle">🦁</div>
+            <div class="moto-badge-circle">🛵</div>
           </div>
         `;
 
         const icono = L.divIcon({
-          className: 'custom-gps-container',
+          className: 'custom-moto-icon',
           html: iconoHTML,
-          iconSize: [48, 48],
-          iconAnchor: [24, 24]
+          iconSize: [46, 46],
+          iconAnchor: [23, 23]
         });
 
-        const popupTexto = `<b>🦁 ${rep.nombre}</b><br>${estaOnline ? 'En Ruta Activo 🔥 (Online)' : 'Fuera de Ruta 💤 (Offline)'}`;
+        const popupTexto = `<b>🛵 ${rep.nombre}</b><br>${estaOnline ? 'En Ruta de Entrega 🔥' : 'En Sede Principal 💤'}`;
 
         if (!marcadoresFlota[rep.id]) {
           marcadoresFlota[rep.id] = L.marker([rep.lat || -13.5167, rep.lng || -71.9788], { icon: icono })
@@ -1217,10 +1235,9 @@
         }
       });
 
-      // Leyenda superior activa Online si al menos uno está en ruta
       const legOnline = document.getElementById('legendOnline');
       const legOffline = document.getElementById('legendOffline');
-      if (hayAlgunoOnline) {
+      if (hayOnline) {
         legOnline.classList.add('activo');
         legOffline.classList.remove('activo');
       } else {
@@ -1230,7 +1247,7 @@
     }
 
     function renderizarMenu() {
-      const contenedor = document.getElementById('contenedorEmpanadas');
+      const contenedor = document.getElementById('contenedorBurgers');
       contenedor.innerHTML = '';
 
       catalogo.forEach(item => {
@@ -1239,10 +1256,8 @@
         card.className = `card ${estaDisponible ? '' : 'agotado'}`;
         card.innerHTML = `
           <div class="card-img-wrapper">
-            <span class="card-tag" style="background:${estaDisponible ? 'rgba(107, 33, 168, 0.9)' : '#dc2626'}">
-              ${estaDisponible ? (item.tag || 'Sellado') : 'Agotado'}
-            </span>
-            <img src="${item.imagen}" alt="${item.nombre}" onerror="this.src='1791513590376.jpg'">
+            <span class="card-tag">${estaDisponible ? item.tag : 'Agotado'}</span>
+            <img src="${item.imagen}" alt="${item.nombre}" loading="lazy">
           </div>
           <div class="card-body">
             <h4 class="card-title">${item.nombre}</h4>
@@ -1250,7 +1265,7 @@
             <div class="card-footer">
               <span class="price">S/ ${parseFloat(item.precio).toFixed(2)}</span>
               <button class="btn-add" ${estaDisponible ? '' : 'disabled'} onclick="agregarAlPedido('${item.id}')">
-                ${estaDisponible ? '+ Pedir Balón' : 'Agotado'}
+                ${estaDisponible ? '+ Agregar' : 'Sin Stock'}
               </button>
             </div>
           </div>
@@ -1262,10 +1277,7 @@
     function agregarAlPedido(id) {
       sincronizarEstructuraPedido();
       const itemCatalogo = catalogo.find(c => c.id === id);
-      if (itemCatalogo && itemCatalogo.disponible === false) {
-        alert("Este producto se encuentra agotado temporalmente.");
-        return;
-      }
+      if (itemCatalogo && itemCatalogo.disponible === false) return;
       if (pedido[id]) {
         pedido[id].cantidad += 1;
         actualizarVistaPopup();
@@ -1274,11 +1286,6 @@
 
     function cambiarCantidad(id, delta) {
       if (pedido[id]) {
-        const itemCatalogo = catalogo.find(c => c.id === id);
-        if (delta > 0 && itemCatalogo && itemCatalogo.disponible === false) {
-          alert("Este producto no tiene stock disponible.");
-          return;
-        }
         pedido[id].cantidad += delta;
         if (pedido[id].cantidad < 0) pedido[id].cantidad = 0;
         actualizarVistaPopup();
@@ -1293,7 +1300,7 @@
     }
 
     function vaciarPedidoConConfirmacion() {
-      if (confirm("¿Deseas reiniciar tu pedido?")) {
+      if (confirm("¿Vaciar tu pedido actual?")) {
         for (const k in pedido) pedido[k].cantidad = 0;
         actualizarVistaPopup();
       }
@@ -1313,15 +1320,14 @@
       if (e.target.id === 'cartModalOverlay') cerrarModalCarrito();
     }
 
-    function abrirLightboxFlyer() {
+    function abrirLightboxPromo() {
       document.getElementById('lightboxModal').style.display = 'flex';
     }
 
-    function cerrarLightboxFlyer() {
+    function cerrarLightboxPromo() {
       document.getElementById('lightboxModal').style.display = 'none';
     }
 
-    // BLOQUEO EN EL CARRITO SI NO HAY STOCK
     function actualizarVistaPopup() {
       let totalUnidades = 0;
       let totalMonto = 0;
@@ -1329,51 +1335,38 @@
       listContainer.innerHTML = '';
 
       catalogo.forEach(catItem => {
-        const item = pedido[catItem.id] || { 
-          id: catItem.id, 
-          nombre: catItem.nombre, 
-          precio: catItem.precio, 
-          cantidad: 0, 
-          disponible: catItem.disponible !== false 
-        };
-
-        const estaDisponible = (catItem.disponible !== false);
-
-        if (!estaDisponible) {
-          item.cantidad = 0;
-        }
-
+        const item = pedido[catItem.id] || { id: catItem.id, nombre: catItem.nombre, precio: catItem.precio, cantidad: 0 };
         const subtotal = item.cantidad * item.precio;
         totalUnidades += item.cantidad;
         totalMonto += subtotal;
 
-        const row = document.createElement('div');
-        row.className = `cart-item-row ${!estaDisponible ? 'item-bloqueado' : (item.cantidad > 0 ? 'item-activo' : '')}`;
-        row.innerHTML = `
-          <div class="cart-item-info">
-            <div class="cart-item-title">
-              ${item.nombre} 
-              ${!estaDisponible ? '<span style="color:#dc2626; font-size:11px; font-weight:800;">(Agotado)</span>' : ''}
+        if (item.cantidad > 0) {
+          const row = document.createElement('div');
+          row.className = 'cart-item-row item-activo';
+          row.innerHTML = `
+            <div class="cart-item-info">
+              <div class="cart-item-title">${item.nombre}</div>
+              <div class="cart-item-sub">S/ ${item.precio.toFixed(2)} c/u</div>
             </div>
-            <div class="cart-item-sub">S/ ${item.precio.toFixed(2)} c/u</div>
-          </div>
-          <div class="cart-controls">
-            <button class="btn-qty" onclick="cambiarCantidad('${item.id}', -1)" ${(!estaDisponible || item.cantidad === 0) ? 'disabled' : ''}>-</button>
-            <span style="font-weight:bold; font-size:13px; min-width:18px; text-align:center;">${item.cantidad}</span>
-            <button class="btn-qty" onclick="cambiarCantidad('${item.id}', 1)" ${!estaDisponible ? 'disabled' : ''}>+</button>
-          </div>
-          <div class="cart-item-price-wrapper">
+            <div class="cart-controls">
+              <button class="btn-qty" onclick="cambiarCantidad('${item.id}', -1)">-</button>
+              <span style="font-weight:bold; font-size:13px; min-width:18px; text-align:center;">${item.cantidad}</span>
+              <button class="btn-qty" onclick="cambiarCantidad('${item.id}', 1)">+</button>
+            </div>
             <div class="cart-item-price">S/ ${subtotal.toFixed(2)}</div>
-            <button type="button" class="btn-trash-item" title="Eliminar" onclick="anularProducto('${item.id}')">🗑️</button>
-          </div>
-        `;
-        listContainer.appendChild(row);
+            <button type="button" class="btn-trash-item" onclick="anularProducto('${item.id}')">🗑️</button>
+          `;
+          listContainer.appendChild(row);
+        }
       });
+
+      if (totalUnidades === 0) {
+        listContainer.innerHTML = '<div style="text-align:center; color:#94a3b8; font-size:13px; padding:12px;">Tu carrito está vacío. ¡Elige tus hamburguesas favoritas!</div>';
+      }
 
       ultimoTotalPagar = totalMonto;
       document.getElementById('badgeContador').innerText = `${totalUnidades}`;
-      const textoCantidad = `${totalUnidades} ${totalUnidades === 1 ? 'balón seleccionado' : 'balones seleccionados'}`;
-      document.getElementById('cartLabelTotalConCantidad').innerText = `Total a pagar (${textoCantidad}):`;
+      document.getElementById('cartLabelTotalConCantidad').innerText = `Total (${totalUnidades} ${totalUnidades === 1 ? 'producto' : 'productos'}):`;
       document.getElementById('cartTotalMonto').innerText = `S/ ${totalMonto.toFixed(2)}`;
 
       if (metodoPago === 'Efectivo') calcularVueltoEfectivo();
@@ -1402,14 +1395,14 @@
 
       if (isNaN(pagaCon) || pagaCon <= 0) {
         box.className = "vuelto-badge-box";
-        txt.innerText = "Ingresa con cuánto pagarás para calcular el vuelto";
+        txt.innerText = "Ingresa el monto con el que pagarás";
         montoTxt.innerText = "";
         return;
       }
 
       if (ultimoTotalPagar <= 0) {
         box.className = "vuelto-badge-box";
-        txt.innerText = "Selecciona al menos un balón disponible con stock";
+        txt.innerText = "Selecciona al menos una hamburguesa";
         montoTxt.innerText = "";
         return;
       }
@@ -1417,7 +1410,7 @@
       const vuelto = pagaCon - ultimoTotalPagar;
       if (vuelto < 0) {
         box.className = "vuelto-badge-box alerta";
-        txt.innerText = `⚠️ Falta dinero (Faltan S/ ${Math.abs(vuelto).toFixed(2)})`;
+        txt.innerText = `⚠️ Monto insuficiente (Faltan S/ ${Math.abs(vuelto).toFixed(2)})`;
         montoTxt.innerText = "";
       } else if (vuelto === 0) {
         box.className = "vuelto-badge-box";
@@ -1425,41 +1418,42 @@
         montoTxt.innerText = "S/ 0.00";
       } else {
         box.className = "vuelto-badge-box";
-        txt.innerText = "💵 Vuelto a entregar:";
+        txt.innerText = "💵 Vuelto:";
         montoTxt.innerText = `S/ ${vuelto.toFixed(2)}`;
       }
     }
 
     function capturarGPSCliente() {
       const status = document.getElementById('geoStatus');
-      if (!navigator.geolocation) return status.innerText = "GPS no disponible.";
-      status.innerText = "Obteniendo ubicación...";
+      if (!navigator.geolocation) return status.innerText = "GPS no compatible.";
+      status.innerText = "Obteniendo coordenadas...";
 
       navigator.geolocation.getCurrentPosition(
         (pos) => {
           ubicacionClienteCoords = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-          status.innerText = "✔ Ubicación registrada para entrega";
+          status.innerText = "✔ Ubicación fijada correctamente";
           status.classList.add('ready');
         },
-        () => { status.innerText = "No se pudo obtener GPS."; },
+        () => { status.innerText = "No se pudo acceder a tu ubicación."; },
         { enableHighAccuracy: true }
       );
     }
 
     function enviarPedidoWhatsApp() {
       sincronizarEstructuraPedido();
-      const productosSeleccionados = Object.values(pedido).filter(item => item.cantidad > 0 && item.disponible !== false);
+      const seleccionados = Object.values(pedido).filter(item => item.cantidad > 0);
 
-      if (productosSeleccionados.length === 0) {
-        alert("Por favor selecciona al menos un balón disponible para realizar tu pedido.");
+      if (seleccionados.length === 0) {
+        alert("Agrega al menos una hamburguesa a tu pedido.");
         return;
       }
 
       const nombreCliente = document.getElementById('nombreClienteInput').value.trim();
+      const direccionDetalle = document.getElementById('direccionDetalleInput').value.trim();
+
       let total = 0;
       let detalleTexto = "";
-
-      productosSeleccionados.forEach(item => {
+      seleccionados.forEach(item => {
         const sub = item.cantidad * item.precio;
         detalleTexto += `• ${item.cantidad}x ${item.nombre} (S/ ${sub.toFixed(2)})\n`;
         total += sub;
@@ -1472,70 +1466,40 @@
           const vuelto = inputEfectivo - total;
           pagoDetalle = vuelto > 0 
             ? `Efectivo (Paga con S/ ${inputEfectivo.toFixed(2)} | Vuelto: S/ ${vuelto.toFixed(2)})`
-            : `Efectivo (Exacto S/ ${inputEfectivo.toFixed(2)})`;
+            : `Efectivo (Monto Exacto S/ ${inputEfectivo.toFixed(2)})`;
         }
       }
 
-      let mensaje = `*¡Hola LeoGas Cusco! Deseo hacer un pedido de gas:*\n\n`;
+      let mensaje = `*🍔 ¡HOLA BURGER CLUB! DESEO REALIZAR UN PEDIDO:*\n\n`;
       if (nombreCliente) mensaje += `*👤 Cliente:* ${nombreCliente}\n`;
-      mensaje += `*Detalle:*\n${detalleTexto}\n`;
-      mensaje += `*Total a pagar:* S/ ${total.toFixed(2)}\n`;
-      mensaje += `*Paga con:* ${pagoDetalle}\n`;
+      if (direccionDetalle) mensaje += `*🏠 Dirección/Ref:* ${direccionDetalle}\n`;
+      mensaje += `*📦 Detalle del Pedido:*\n${detalleTexto}\n`;
+      mensaje += `*💰 Total a Pagar:* S/ ${total.toFixed(2)}\n`;
+      mensaje += `*💳 Forma de Pago:* ${pagoDetalle}\n`;
 
       if (ubicacionClienteCoords) {
-        mensaje += `*Ubicación GPS:* https://www.google.com/maps?q=${ubicacionClienteCoords.lat},${ubicacionClienteCoords.lng}\n`;
+        mensaje += `*📍 GPS de Entrega:* https://www.google.com/maps?q=${ubicacionClienteCoords.lat},${ubicacionClienteCoords.lng}\n`;
       }
 
-      mensaje += `\n¿Me confirman tiempo estimado de entrega?`;
+      mensaje += `\n¿Cuánto tiempo aprox demorará en llegar?`;
 
-      const numDestino = (telefonos.whatsapp || whatsappNumero).replace(/\D/g,'');
-      window.open(`https://wa.me/${numDestino}?text=${encodeURIComponent(mensaje)}`, '_blank');
+      const destino = (telefonos.whatsapp || whatsappNumero).replace(/\D/g,'');
+      window.open(`https://wa.me/${destino}?text=${encodeURIComponent(mensaje)}`, '_blank');
 
       for (const k in pedido) pedido[k].cantidad = 0;
       document.getElementById('montoEfectivoIngresado').value = '';
       document.getElementById('nombreClienteInput').value = '';
+      document.getElementById('direccionDetalleInput').value = '';
       actualizarVistaPopup();
       cerrarModalCarrito();
     }
 
-    // CARGA DE DATOS Y RASTREO MULTI-REPARTIDOR
-    async function cargarCatalogoDesdeGitHub() {
-      try {
-        const res = await fetch('productos.json?v=' + Date.now());
-        if (res.ok) {
-          const datos = await res.json();
-          if (Array.isArray(datos)) {
-            catalogo = datos;
-          } else {
-            catalogo = datos.productos || catalogo;
-            if (datos.telefonos) {
-              telefonos = datos.telefonos;
-              whatsappNumero = telefonos.whatsapp;
-              renderizarTelefonosFlyer();
-            }
-            // Sincroniza la flota de repartidores en tiempo real
-            if (datos.repartidores) {
-              actualizarVisualizadorGPS(datos.repartidores);
-            }
-          }
-          sincronizarEstructuraPedido();
-          renderizarMenu();
-          actualizarVistaPopup();
-        }
-      } catch (err) {
-        console.log("Error al cargar productos.json:", err);
-      }
-    }
-
     window.addEventListener('DOMContentLoaded', () => {
-      renderizarTelefonosFlyer();
+      renderizarTelefonos();
       sincronizarEstructuraPedido();
       renderizarMenu();
       iniciarMapaCusco();
       actualizarVistaPopup();
-      cargarCatalogoDesdeGitHub();
-      // Sondeo periódico cada 20 segundos para reflejar cambios de repartidores
-      setInterval(cargarCatalogoDesdeGitHub, 20000);
     });
   </script>
 </body>
